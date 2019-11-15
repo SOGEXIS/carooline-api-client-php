@@ -66,6 +66,21 @@ $token = $result->getToken();
 // Setting token for subscequent requests
 $config->setAccessToken($token);
 
+$partnersApi = new Carooline\Api\PartnersApi(
+    $client,
+    $config
+);
+$result = $partnersApi->partnersIdGet(21285);
+// Print Partner
+print_r($result)
+// Update Partner
+$body = new Carooline\Model\PartnerUpdateRequest(['email' => 'test@test.test']);
+$result = $partnersApi->partnersIdPut(
+    21285,
+    $body
+);
+print_r($result);
+
 $apiInstance = new Carooline\Api\OrdersApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
