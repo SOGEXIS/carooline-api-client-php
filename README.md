@@ -49,7 +49,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 $client = new GuzzleHttp\Client();
 $config = new Carooline\Configuration();
-$config->setHost('https://sfpr-pre-prod.carooline.com/api');
+$config->setHost('https://dev1.carooline.com/api');
 
 // Authenticate to get new Token
 $authApi = new Carooline\Api\AuthApi(
@@ -156,6 +156,8 @@ try {
 
 ## Documentation for API Endpoints
 
+### Commons and Authentication
+
 All URIs are relative to *https://dev1.carooline.com/api/commons*
 
 Class | Method | HTTP request | Description
@@ -163,12 +165,14 @@ Class | Method | HTTP request | Description
 *AuthApi* | [**authLoginPost**](docs/Api/AuthApi.md#authloginpost) | **POST** /auth/login | 
 *UserApi* | [**userMeGet**](docs/Api/UserApi.md#usermeget) | **GET** /user/me | Get info about your user
 
-## Documentation For Models
+#### Documentation For Models
 
  - [LoginRequest](docs/Model/LoginRequest.md)
  - [LoginResponse](docs/Model/LoginResponse.md)
  - [MeResponse](docs/Model/MeResponse.md)
 
+
+### Catalog 
 
 All URIs are relative to *https://dev1.carooline.com/api/catalog*
 
@@ -183,7 +187,7 @@ Class | Method | HTTP request | Description
 *ProductsApi* | [**productsIdGet**](docs/Api/ProductsApi.md#productsidget) | **GET** /products/{id} | Get Products&#x27;s informations
 *ProductsApi* | [**productsIdPut**](docs/Api/ProductsApi.md#productsidput) | **PUT** /products/{id} | Update product informations
 
-## Documentation For Models
+#### Documentation For Models
 
  - [GetAllAvailabilitiesRequest](docs/Model/GetAllAvailabilitiesRequest.md)
  - [GetAllAvailabilitiesResponse](docs/Model/GetAllAvailabilitiesResponse.md)
@@ -198,6 +202,8 @@ Class | Method | HTTP request | Description
  - [ProductSearchResponse](docs/Model/ProductSearchResponse.md)
  - [ProductUpdateRequest](docs/Model/ProductUpdateRequest.md)
 
+
+### Sale Orders
 
 All URIs are relative to *http://dev1.carooline.com/api/sale*
 
@@ -225,7 +231,7 @@ Class | Method | HTTP request | Description
 *PaymentTransactionsApi* | [**paymentTransactionsIdGet**](docs/Api/PaymentTransactionsApi.md#paymenttransactionsidget) | **GET** /payment_transactions/{id} | Get Payment Transactions
 *PaymentTransactionsApi* | [**paymentTransactionsIdPut**](docs/Api/PaymentTransactionsApi.md#paymenttransactionsidput) | **PUT** /payment_transactions/{id} | Update PaymentTransaction informations
 
-## Documentation For Models
+#### Documentation For Models
 
  - [Order](docs/Model/Order.md)
  - [OrderCarrier](docs/Model/OrderCarrier.md)
@@ -280,5 +286,3 @@ $config->setAccessToken($token);
 ## Author
 
 Philippe L'ATTENTION - SOGEXIS
-
-
