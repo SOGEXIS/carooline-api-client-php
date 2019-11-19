@@ -331,7 +331,10 @@ class VehicleTypeApi
                 $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
             }
         }
-
+        // this endpoint requires BearerToken
+        if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
@@ -593,7 +596,10 @@ class VehicleTypeApi
                 $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
             }
         }
-
+        // this endpoint requires BearerToken
+        if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
