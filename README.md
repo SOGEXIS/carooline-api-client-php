@@ -268,6 +268,35 @@ Class | Method | HTTP request | Description
  - [PaymentTransactionSearchResponse](docs/Model/PaymentTransactionSearchResponse.md)
  - [PaymentTransactionUpdateRequest](docs/Model/PaymentTransactionUpdateRequest.md)
 
+
+### Vehicles
+
+ All URIs are relative to *https://dev1.carooline.com/api/vehicles*
+
+ Class | Method | HTTP request | Description
+ ------------ | ------------- | ------------- | -------------
+ *VehicleFindApi* | [**vehicleFindManufacturerGet**](docs/Api/VehicleFindApi.md#vehiclefindmanufacturerget) | **GET** /vehicle_find/manufacturer | Searh manufacturer by name
+ *VehicleFindApi* | [**vehicleFindManufacturerManufacturerIdModelGet**](docs/Api/VehicleFindApi.md#vehiclefindmanufacturermanufactureridmodelget) | **GET** /vehicle_find/manufacturer/{manufacturer_id}/model | Searh model by name
+ *VehicleFindApi* | [**vehicleFindManufacturerManufacturerIdModelModelIdTypeGet**](docs/Api/VehicleFindApi.md#vehiclefindmanufacturermanufactureridmodelmodelidtypeget) | **GET** /vehicle_find/manufacturer/{manufacturer_id}/model/{model_id}/type | Searh Type by name
+ *VehicleManufacturerApi* | [**vehicleManufacturerGet**](docs/Api/VehicleManufacturerApi.md#vehiclemanufacturerget) | **GET** /vehicle_manufacturer | Searh manufacturer by name
+ *VehicleManufacturerApi* | [**vehicleManufacturerIdGet**](docs/Api/VehicleManufacturerApi.md#vehiclemanufactureridget) | **GET** /vehicle_manufacturer/{id} | Get manufacturer&#x27;s informations
+ *VehicleModelApi* | [**vehicleModelGet**](docs/Api/VehicleModelApi.md#vehiclemodelget) | **GET** /vehicle_model | Searh model by name
+ *VehicleModelApi* | [**vehicleModelIdGet**](docs/Api/VehicleModelApi.md#vehiclemodelidget) | **GET** /vehicle_model/{id} | Get model&#x27;s informations
+ *VehicleTypeApi* | [**vehicleTypeGet**](docs/Api/VehicleTypeApi.md#vehicletypeget) | **GET** /vehicle_type | Searh type by name
+ *VehicleTypeApi* | [**vehicleTypeIdGet**](docs/Api/VehicleTypeApi.md#vehicletypeidget) | **GET** /vehicle_type/{id} | Get type&#x27;s informations
+
+ #### Documentation For Models
+
+  - [FindVehicleManufacturerModelSearchResponse](docs/Model/FindVehicleManufacturerModelSearchResponse.md)
+  - [FindVehicleManufacturerModelTypeSearchResponse](docs/Model/FindVehicleManufacturerModelTypeSearchResponse.md)
+  - [FindVehicleManufacturerSearchResponse](docs/Model/FindVehicleManufacturerSearchResponse.md)
+  - [VehicleManufacturer](docs/Model/VehicleManufacturer.md)
+  - [VehicleManufacturerSearchResponse](docs/Model/VehicleManufacturerSearchResponse.md)
+  - [VehicleModel](docs/Model/VehicleModel.md)
+  - [VehicleModelSearchResponse](docs/Model/VehicleModelSearchResponse.md)
+  - [VehicleType](docs/Model/VehicleType.md)
+  - [VehicleTypeSearchResponse](docs/Model/VehicleTypeSearchResponse.md)
+
 ## Documentation For Authorization
 ```php
 <?php
