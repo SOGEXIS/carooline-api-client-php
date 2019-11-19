@@ -56,11 +56,11 @@ class VehicleType implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'model_id' => 'string',
+        'model_id' => 'int',
 'output_hp' => 'int',
 'date_to' => 'string',
 'active' => 'bool',
-'manufacturer_id' => 'string',
+'manufacturer_id' => 'int',
 'manufacturer' => 'string',
 'name' => 'string',
 'date_from' => 'string',
@@ -262,7 +262,7 @@ class VehicleType implements ModelInterface, ArrayAccess
     /**
      * Gets model_id
      *
-     * @return string
+     * @return int
      */
     public function getModelId()
     {
@@ -272,7 +272,7 @@ class VehicleType implements ModelInterface, ArrayAccess
     /**
      * Sets model_id
      *
-     * @param string $model_id model_id
+     * @param int $model_id model_id
      *
      * @return $this
      */
@@ -358,7 +358,7 @@ class VehicleType implements ModelInterface, ArrayAccess
     /**
      * Gets manufacturer_id
      *
-     * @return string
+     * @return int
      */
     public function getManufacturerId()
     {
@@ -368,7 +368,7 @@ class VehicleType implements ModelInterface, ArrayAccess
     /**
      * Sets manufacturer_id
      *
-     * @param string $manufacturer_id manufacturer_id
+     * @param int $manufacturer_id manufacturer_id
      *
      * @return $this
      */
