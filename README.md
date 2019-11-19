@@ -297,6 +297,66 @@ Class | Method | HTTP request | Description
   - [VehicleType](docs/Model/VehicleType.md)
   - [VehicleTypeSearchResponse](docs/Model/VehicleTypeSearchResponse.md)
 
+ #### Example:
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$client = new GuzzleHttp\Client();
+$config = new Carooline\Configuration();
+$config->setHost('https://dev1.carooline.com/api');
+
+// Authenticate to get new Token
+$authApi = new Carooline\Api\AuthApi(
+ $client,
+ $config
+);
+$body = new Carooline\Model\LoginRequest([
+ 'login' => 'login',
+ 'password' => 'password'
+]);
+$result = $authApi->authLoginPost($body);
+$token = $result->getToken();
+
+// Setting token for subscequent requests
+$config->setAccessToken($token);
+
+// VehicleFindAPI
+$vehicleFindApi = new Carooline\Api\VehicleFindApi(
+  $client,
+  $config
+);
+$manufacturer_model = "PEUGEOT"; // string | 
+try {
+  $result = $vehicleFindApi->vehicleFindManufacturerGet($manufacturer_model);
+  print_r($result);
+} catch (Exception $e) {
+  echo 'Exception when calling VehicleFindApi->vehicleFindManufacturerGet: ', $e->getMessage(), PHP_EOL;
+}
+
+
+$model_name = "206"; // string | 
+$manufacturer_id = 31;
+try {
+  $result = $vehicleFindApi->vehicleFindManufacturerManufacturerIdModelGet($manufacturer_id, $model_name);
+  print_r($result);
+} catch (Exception $e) {
+  echo 'Exception when calling VehicleFindApi->vehicleFindManufacturerManufacturerIdModelGet: ', $e->getMessage(), PHP_EOL;
+}
+
+
+$type_name = "";
+$manufacturer_id = 31;
+$model_id = 3546;
+try {
+  $result = $vehicleFindApi->vehicleFindManufacturerManufacturerIdModelModelIdTypeGet($manufacturer_id, $model_id, $type_name);
+  print_r($result);
+} catch (Exception $e) {
+  echo 'Exception when calling VehicleFindApi->vehicleFindManufacturerManufacturerIdModelModelIdTypeGet: ', $e->getMessage(), PHP_EOL;
+}
+```
+
 ## Documentation For Authorization
 ```php
 <?php
