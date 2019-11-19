@@ -58,13 +58,15 @@ class VehicleType implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'model_id' => 'string',
 'output_hp' => 'int',
-'name' => 'string',
-'tecdoc_ref' => 'int',
 'date_to' => 'string',
 'active' => 'bool',
 'manufacturer_id' => 'string',
+'manufacturer' => 'string',
+'name' => 'string',
+'date_from' => 'string',
 'id' => 'int',
-'date_from' => 'string'    ];
+'tecdoc_ref' => 'int',
+'model' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -74,13 +76,15 @@ class VehicleType implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'model_id' => null,
 'output_hp' => null,
-'name' => null,
-'tecdoc_ref' => null,
 'date_to' => null,
 'active' => null,
 'manufacturer_id' => null,
+'manufacturer' => null,
+'name' => null,
+'date_from' => null,
 'id' => null,
-'date_from' => null    ];
+'tecdoc_ref' => null,
+'model' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -111,13 +115,15 @@ class VehicleType implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'model_id' => 'model_id',
 'output_hp' => 'output_hp',
-'name' => 'name',
-'tecdoc_ref' => 'tecdoc_ref',
 'date_to' => 'date_to',
 'active' => 'active',
 'manufacturer_id' => 'manufacturer_id',
+'manufacturer' => 'manufacturer',
+'name' => 'name',
+'date_from' => 'date_from',
 'id' => 'id',
-'date_from' => 'date_from'    ];
+'tecdoc_ref' => 'tecdoc_ref',
+'model' => 'model'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -127,13 +133,15 @@ class VehicleType implements ModelInterface, ArrayAccess
     protected static $setters = [
         'model_id' => 'setModelId',
 'output_hp' => 'setOutputHp',
-'name' => 'setName',
-'tecdoc_ref' => 'setTecdocRef',
 'date_to' => 'setDateTo',
 'active' => 'setActive',
 'manufacturer_id' => 'setManufacturerId',
+'manufacturer' => 'setManufacturer',
+'name' => 'setName',
+'date_from' => 'setDateFrom',
 'id' => 'setId',
-'date_from' => 'setDateFrom'    ];
+'tecdoc_ref' => 'setTecdocRef',
+'model' => 'setModel'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -143,13 +151,15 @@ class VehicleType implements ModelInterface, ArrayAccess
     protected static $getters = [
         'model_id' => 'getModelId',
 'output_hp' => 'getOutputHp',
-'name' => 'getName',
-'tecdoc_ref' => 'getTecdocRef',
 'date_to' => 'getDateTo',
 'active' => 'getActive',
 'manufacturer_id' => 'getManufacturerId',
+'manufacturer' => 'getManufacturer',
+'name' => 'getName',
+'date_from' => 'getDateFrom',
 'id' => 'getId',
-'date_from' => 'getDateFrom'    ];
+'tecdoc_ref' => 'getTecdocRef',
+'model' => 'getModel'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -211,13 +221,15 @@ class VehicleType implements ModelInterface, ArrayAccess
     {
         $this->container['model_id'] = isset($data['model_id']) ? $data['model_id'] : null;
         $this->container['output_hp'] = isset($data['output_hp']) ? $data['output_hp'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['tecdoc_ref'] = isset($data['tecdoc_ref']) ? $data['tecdoc_ref'] : null;
         $this->container['date_to'] = isset($data['date_to']) ? $data['date_to'] : null;
         $this->container['active'] = isset($data['active']) ? $data['active'] : null;
         $this->container['manufacturer_id'] = isset($data['manufacturer_id']) ? $data['manufacturer_id'] : null;
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['manufacturer'] = isset($data['manufacturer']) ? $data['manufacturer'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['date_from'] = isset($data['date_from']) ? $data['date_from'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['tecdoc_ref'] = isset($data['tecdoc_ref']) ? $data['tecdoc_ref'] : null;
+        $this->container['model'] = isset($data['model']) ? $data['model'] : null;
     }
 
     /**
@@ -296,54 +308,6 @@ class VehicleType implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets tecdoc_ref
-     *
-     * @return int
-     */
-    public function getTecdocRef()
-    {
-        return $this->container['tecdoc_ref'];
-    }
-
-    /**
-     * Sets tecdoc_ref
-     *
-     * @param int $tecdoc_ref tecdoc_ref
-     *
-     * @return $this
-     */
-    public function setTecdocRef($tecdoc_ref)
-    {
-        $this->container['tecdoc_ref'] = $tecdoc_ref;
-
-        return $this;
-    }
-
-    /**
      * Gets date_to
      *
      * @return string
@@ -416,25 +380,49 @@ class VehicleType implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets id
+     * Gets manufacturer
      *
-     * @return int
+     * @return string
      */
-    public function getId()
+    public function getManufacturer()
     {
-        return $this->container['id'];
+        return $this->container['manufacturer'];
     }
 
     /**
-     * Sets id
+     * Sets manufacturer
      *
-     * @param int $id id
+     * @param string $manufacturer manufacturer
      *
      * @return $this
      */
-    public function setId($id)
+    public function setManufacturer($manufacturer)
     {
-        $this->container['id'] = $id;
+        $this->container['manufacturer'] = $manufacturer;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string $name name
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
 
         return $this;
     }
@@ -459,6 +447,78 @@ class VehicleType implements ModelInterface, ArrayAccess
     public function setDateFrom($date_from)
     {
         $this->container['date_from'] = $date_from;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int $id id
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets tecdoc_ref
+     *
+     * @return int
+     */
+    public function getTecdocRef()
+    {
+        return $this->container['tecdoc_ref'];
+    }
+
+    /**
+     * Sets tecdoc_ref
+     *
+     * @param int $tecdoc_ref tecdoc_ref
+     *
+     * @return $this
+     */
+    public function setTecdocRef($tecdoc_ref)
+    {
+        $this->container['tecdoc_ref'] = $tecdoc_ref;
+
+        return $this;
+    }
+
+    /**
+     * Gets model
+     *
+     * @return string
+     */
+    public function getModel()
+    {
+        return $this->container['model'];
+    }
+
+    /**
+     * Sets model
+     *
+     * @param string $model model
+     *
+     * @return $this
+     */
+    public function setModel($model)
+    {
+        $this->container['model'] = $model;
 
         return $this;
     }
