@@ -39,34 +39,34 @@ use Carooline\ObjectSerializer;
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class OrdersLinesApiTest extends \PHPUnit_Framework_TestCase
+class OrdersLinesApiTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
      * Setup before running any test cases
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
     }
 
     /**
      * Setup before running each test case
      */
-    public function setUp()
+    protected function setUp() : void
     {
     }
 
     /**
      * Clean up after running each test case
      */
-    public function tearDown()
+    protected function tearDown() : void
     {
     }
 
     /**
      * Clean up after running all test cases
      */
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
     }
 

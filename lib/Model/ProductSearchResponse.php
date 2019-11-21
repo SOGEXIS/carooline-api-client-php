@@ -57,7 +57,7 @@ class ProductSearchResponse implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'count' => 'int',
-'rows' => '\Carooline\Model\ProductManufacturer[]'    ];
+'rows' => '\Carooline\Model\Product[]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -235,7 +235,7 @@ class ProductSearchResponse implements ModelInterface, ArrayAccess
     /**
      * Gets rows
      *
-     * @return \Carooline\Model\ProductManufacturer[]
+     * @return \Carooline\Model\Product[]
      */
     public function getRows()
     {
@@ -245,7 +245,7 @@ class ProductSearchResponse implements ModelInterface, ArrayAccess
     /**
      * Sets rows
      *
-     * @param \Carooline\Model\ProductManufacturer[] $rows rows
+     * @param \Carooline\Model\Product[] $rows rows
      *
      * @return $this
      */
