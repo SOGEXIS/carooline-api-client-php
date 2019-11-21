@@ -334,6 +334,10 @@ class ProductsApi
                 $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
             }
         }
+        // this endpoint requires BearerToken
+        if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
 
 
         $defaultHeaders = [];
@@ -580,6 +584,10 @@ class ProductsApi
                 // for HTTP post (form)
                 $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
             }
+        }
+        // this endpoint requires BearerToken
+        if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
 
@@ -842,6 +850,10 @@ class ProductsApi
                 // for HTTP post (form)
                 $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
             }
+        }
+        // this endpoint requires BearerToken
+        if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
 
@@ -1112,6 +1124,10 @@ class ProductsApi
                 // for HTTP post (form)
                 $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
             }
+        }
+        // this endpoint requires BearerToken
+        if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
 

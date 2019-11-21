@@ -316,6 +316,10 @@ class ManufacturerApi
                 $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
             }
         }
+        // this endpoint requires BearerToken
+        if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
 
 
         $defaultHeaders = [];
@@ -577,6 +581,10 @@ class ManufacturerApi
                 // for HTTP post (form)
                 $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
             }
+        }
+        // this endpoint requires BearerToken
+        if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
 
