@@ -27,9 +27,17 @@
 
 namespace Carooline;
 
+use GuzzleHttp\Client;
 use Carooline\Configuration;
 use Carooline\ApiException;
 use Carooline\ObjectSerializer;
+use Carooline\Api\AuthApi;
+use Carooline\Api\OrdersLinesApi;
+use Carooline\Model\LoginRequest;
+use Carooline\Model\OrderLineUpdateRequest;
+use Carooline\Model\OrderLineCreateRequest;
+use Carooline\Model\OrderLineSearchResponse;
+use Carooline\Model\OrderLine;
 
 /**
  * OrdersLinesApiTest Class Doc Comment
@@ -41,12 +49,31 @@ use Carooline\ObjectSerializer;
  */
 class OrdersLinesApiTest extends \PHPUnit\Framework\TestCase
 {
+    protected static $client;
+    protected static $config;
+    protected $orderLineApi;
 
     /**
      * Setup before running any test cases
      */
     public static function setUpBeforeClass() : void
     {
+        self::$client = new Client();
+        self::$config = new Configuration();
+        self::$config->setHost($_ENV['api_host']);
+
+        $authApi = new AuthApi(
+            self::$client,
+            self::$config
+        );
+        $body = new LoginRequest([
+            'login' => $_ENV['api_login'],
+            'password' => $_ENV['api_password']
+        ]);
+
+        $result = $authApi->authLoginPost($body);
+        $token = $result->getToken();
+        self::$config->setAccessToken($token);
     }
 
     /**
@@ -54,6 +81,10 @@ class OrdersLinesApiTest extends \PHPUnit\Framework\TestCase
      */
     protected function setUp() : void
     {
+        $this->orderLineApi = new OrdersLinesApi(
+            self::$client,
+            self::$config
+        );
     }
 
     /**
@@ -70,15 +101,6 @@ class OrdersLinesApiTest extends \PHPUnit\Framework\TestCase
     {
     }
 
-    /**
-     * Test case for ordersLinesCreatePost
-     *
-     * Create a new Order Line..
-     *
-     */
-    public function testOrdersLinesCreatePost()
-    {
-    }
 
     /**
      * Test case for ordersLinesGet
@@ -88,6 +110,9 @@ class OrdersLinesApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testOrdersLinesGet()
     {
+        $result = $this->orderLineApi->ordersLinesGet(71);
+        $this->assertInstanceOf(OrderLineSearchResponse::class, $result);
+        $this->assertGreaterThanOrEqual(3, $result->getCount());
     }
 
     /**
@@ -96,27 +121,46 @@ class OrdersLinesApiTest extends \PHPUnit\Framework\TestCase
      * Delete an Order line.
      *
      */
-    public function testOrdersLinesIdDelete()
+    public function testOrdersLinesOperations()
     {
+        $result = $this->orderLineApi->ordersLinesGet(71);
+        $countBefore = $result->getCount();
+        
+        // CREATE
+        $body = new OrderLineCreateRequest([
+            'order_id' => 71,
+            'product_id' => 74891,
+            'quantity' => 3,
+            'price_unit' => 45.34,
+        ]);
+        $result = $this->orderLineApi->ordersLinesCreatePost($body);
+        $this->assertInstanceOf(OrderLine::class, $result);
+        $this->assertInstanceOf(OrderLine::class, $result);
+        $this->assertEquals(3, $result->getQuantity());
+        $this->assertEquals(45.34, $result->getPriceUnit());
+        $this->assertEquals(71, $result->getOrderId());
+        $this->assertEquals(74891, $result->getProductId());
+        $newOrderLineId = $result->getId();
+        $quantityBefore = $result->getQuantity();
+        
+        // GET
+        $orderLine = $this->orderLineApi->ordersLinesIdGet($newOrderLineId);
+        $this->assertEquals($quantityBefore, $orderLine->getQuantity());
+        $this->assertEquals(71, $orderLine->getOrderId());
+        $this->assertEquals(45.34, $orderLine->getPriceUnit());
+        $this->assertEquals(74891, $orderLine->getProductId());
+
+        // PUT
+        $bodyUpdate = new OrderLineUpdateRequest([
+            'quantity' => 4,
+        ]);
+        $result = $this->orderLineApi->ordersLinesIdPut($newOrderLineId, $bodyUpdate);
+        $this->assertGreaterThan($countBefore, $result->getquantity());
+
+        // DELETE
+        $this->orderLineApi->ordersLinesIdDelete($newOrderLineId);
+        $result = $this->orderLineApi->ordersLinesGet(71);
+        $this->assertEquals($countBefore, $result->getCount());
     }
 
-    /**
-     * Test case for ordersLinesIdGet
-     *
-     * Get Orders's informations.
-     *
-     */
-    public function testOrdersLinesIdGet()
-    {
-    }
-
-    /**
-     * Test case for ordersLinesIdPut
-     *
-     * Update an Order Line.
-     *
-     */
-    public function testOrdersLinesIdPut()
-    {
-    }
 }

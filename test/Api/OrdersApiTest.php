@@ -27,9 +27,18 @@
 
 namespace Carooline;
 
+use GuzzleHttp\Client;
 use Carooline\Configuration;
 use Carooline\ApiException;
 use Carooline\ObjectSerializer;
+use Carooline\Api\AuthApi;
+use Carooline\Api\OrdersApi;
+use Carooline\Model\LoginRequest;
+use Carooline\Model\OrderCreateRequestOrderLine;
+use Carooline\Model\OrderCreateRequest;
+use Carooline\Model\OrderUpdateRequest;
+use Carooline\Model\OrderSearchResponse;
+use Carooline\Model\Order;
 
 /**
  * OrdersApiTest Class Doc Comment
@@ -41,12 +50,31 @@ use Carooline\ObjectSerializer;
  */
 class OrdersApiTest extends \PHPUnit\Framework\TestCase
 {
+    protected static $client;
+    protected static $config;
+    protected $orderApi;
 
     /**
      * Setup before running any test cases
      */
     public static function setUpBeforeClass() : void
     {
+        self::$client = new Client();
+        self::$config = new Configuration();
+        self::$config->setHost($_ENV['api_host']);
+
+        $authApi = new AuthApi(
+            self::$client,
+            self::$config
+        );
+        $body = new LoginRequest([
+            'login' => $_ENV['api_login'],
+            'password' => $_ENV['api_password']
+        ]);
+
+        $result = $authApi->authLoginPost($body);
+        $token = $result->getToken();
+        self::$config->setAccessToken($token);
     }
 
     /**
@@ -54,7 +82,12 @@ class OrdersApiTest extends \PHPUnit\Framework\TestCase
      */
     protected function setUp() : void
     {
+        $this->orderApi = new OrdersApi(
+            self::$client,
+            self::$config
+        );
     }
+
 
     /**
      * Clean up after running each test case
@@ -78,6 +111,35 @@ class OrdersApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testOrdersCreatePost()
     {
+        $body = new OrderCreateRequest([
+            'client_order_ref' => "AB12345",
+            'partner' => new \Carooline\Model\Partner([
+                'id' => 31
+            ]),
+            'order_line' => [
+                [
+                    'product_id' => 74891,
+                    'quantity' => 3,
+                    'price_unit' => 45.34,
+                ],
+                [
+                    'product_id' => 73114,
+                    'quantity' => 1,
+                    'price_unit' => 12,
+                ]
+            ]
+        ]);
+        $result = $this->orderApi->ordersCreatePost($body);
+        $this->assertInstanceOf(Order::class, $result);
+        $this->assertEquals(31, $result->getPartner()->getId());
+        foreach ($result->getOrderLine() as $orderLine) {
+            if ($orderLine->getProductId() == 73114) {
+                $this->assertEquals(1, $orderLine->getQuantity());
+            }
+            if ($orderLine->getProductId() == 74891) {
+                $this->assertEquals(3, $orderLine->getQuantity());
+            }
+        }
     }
 
     /**
@@ -88,6 +150,14 @@ class OrdersApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testOrdersGet()
     {
+        $result = $this->orderApi->ordersGet("71");
+        $this->assertInstanceOf(OrderSearchResponse::class, $result);
+        $this->assertGreaterThanOrEqual(1, $result->getCount());
+        foreach ($result->getRows() as $order) {
+            $this->assertInstanceOf(\Carooline\Model\Order::class, $order);
+            $this->assertStringContainsStringIgnoringCase("71", $order->getName());
+            $this->assertInstanceOf(\Carooline\Model\Partner::class, $order->getPartner());
+        }
     }
 
     /**
@@ -98,6 +168,25 @@ class OrdersApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testOrdersIdConfirmPost()
     {
+        $body = new OrderCreateRequest([
+            'client_order_ref' => "TOCONFIRM",
+            'partner' => new \Carooline\Model\Partner([
+                'id' => 31
+            ]),
+            'order_line' => [
+                [
+                    'product_id' => 74891,
+                    'quantity' => 3,
+                    'price_unit' => 45.34,
+                ]
+            ]
+        ]);
+        $result = $this->orderApi->ordersCreatePost($body);
+        $newId = $result->getId();
+        
+        $result = $this->orderApi->ordersIdConfirmPost($newId);
+        $this->assertInstanceOf(Order::class, $result);
+        $this->assertEquals('to_prepare', $result->getState());
     }
 
     /**
@@ -108,6 +197,34 @@ class OrdersApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testOrdersIdDelete()
     {
+        $body = new OrderCreateRequest([
+            'client_order_ref' => "TODELETE",
+            'partner' => new \Carooline\Model\Partner([
+                'id' => 31
+            ]),
+            'order_line' => [
+                [
+                    'product_id' => 74891,
+                    'quantity' => 3,
+                    'price_unit' => 45.34,
+                ],
+                [
+                    'product_id' => 73114,
+                    'quantity' => 1,
+                    'price_unit' => 12,
+                ]
+            ]
+        ]);
+        $result = $this->orderApi->ordersCreatePost($body);
+        $this->assertInstanceOf(Order::class, $result);
+        $uniqNumber = $result->getName();
+        $newId = $result->getId();
+        
+        $result = $this->orderApi->ordersIdDelete($newId);
+        
+        $result = $this->orderApi->ordersGet($uniqNumber);
+        $this->assertInstanceOf(OrderSearchResponse::class, $result);
+        $this->assertGreaterThanOrEqual(0, $result->getCount());
     }
 
     /**
@@ -118,6 +235,9 @@ class OrdersApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testOrdersIdGet()
     {
+        $result = $this->orderApi->ordersIdGet(71);
+        $this->assertInstanceOf(Order::class, $result);
+        $this->assertStringContainsStringIgnoringCase("71", $result->getName());
     }
 
     /**
@@ -128,5 +248,19 @@ class OrdersApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testOrdersIdPut()
     {
+        $body = new OrderUpdateRequest([
+            'client_order_ref' => "AB12345"
+        ]);
+        $result = $this->orderApi->ordersIdPut(71, $body);
+        $this->assertInstanceOf(Order::class, $result);
+        $this->assertStringContainsStringIgnoringCase("71", $result->getName());
+        $this->assertStringContainsStringIgnoringCase("AB12345", $result->getClientOrderRef());
+        
+        $body = new OrderUpdateRequest([
+            'client_order_ref' => "TESTREF123"
+        ]);
+        $result = $this->orderApi->ordersIdPut(71, $body);
+        $this->assertInstanceOf(Order::class, $result);
+        $this->assertStringContainsStringIgnoringCase("TESTREF123", $result->getClientOrderRef());
     }
 }

@@ -27,10 +27,17 @@
 
 namespace Carooline;
 
+use GuzzleHttp\Client;
 use Carooline\Configuration;
 use Carooline\ApiException;
 use Carooline\ObjectSerializer;
-
+use Carooline\Api\AuthApi;
+use Carooline\Api\PaymentTransactionsApi;
+use Carooline\Model\LoginRequest;
+use Carooline\Model\PaymentTransactionCreateRequest;
+use Carooline\Model\PaymentTransactionUpdateRequest;
+use Carooline\Model\PaymentTransactionSearchResponse;
+use Carooline\Model\PaymentTransaction;
 /**
  * PaymentTransactionsApiTest Class Doc Comment
  *
@@ -41,12 +48,31 @@ use Carooline\ObjectSerializer;
  */
 class PaymentTransactionsApiTest extends \PHPUnit\Framework\TestCase
 {
+    protected static $client;
+    protected static $config;
+    protected $paymentTransactionApi;
 
     /**
      * Setup before running any test cases
      */
     public static function setUpBeforeClass() : void
     {
+        self::$client = new Client();
+        self::$config = new Configuration();
+        self::$config->setHost($_ENV['api_host']);
+
+        $authApi = new AuthApi(
+            self::$client,
+            self::$config
+        );
+        $body = new LoginRequest([
+            'login' => $_ENV['api_login'],
+            'password' => $_ENV['api_password']
+        ]);
+
+        $result = $authApi->authLoginPost($body);
+        $token = $result->getToken();
+        self::$config->setAccessToken($token);
     }
 
     /**
@@ -54,21 +80,12 @@ class PaymentTransactionsApiTest extends \PHPUnit\Framework\TestCase
      */
     protected function setUp() : void
     {
+        $this->paymentTransactionApi = new PaymentTransactionsApi(
+            self::$client,
+            self::$config
+        );
     }
 
-    /**
-     * Clean up after running each test case
-     */
-    protected function tearDown() : void
-    {
-    }
-
-    /**
-     * Clean up after running all test cases
-     */
-    public static function tearDownAfterClass() : void
-    {
-    }
 
     /**
      * Test case for paymentTransactionsCreatePost
@@ -88,6 +105,16 @@ class PaymentTransactionsApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testPaymentTransactionsGet()
     {
+        //function paymentTransactionsGet($order_id = null, $partner_id = null, $reference = null)
+        $result = $this->paymentTransactionApi->paymentTransactionsGet(null, null, "DV0024");
+        $this->assertInstanceOf(PaymentTransactionSearchResponse::class, $result);
+        $this->assertEquals(1, $result->getCount());
+        foreach ($result->getRows() as $paymentTransaction) {
+            $this->assertInstanceOf(\Carooline\Model\PaymentTransaction::class, $paymentTransaction);
+            $this->assertStringContainsStringIgnoringCase("DV0024", $paymentTransaction->getReference());
+            $this->assertEquals(29, $paymentTransaction->getPartnerId());
+            // $this->assertInstanceOf(\Carooline\Model\Partner::class, $paymentTransaction->getPartner());
+        }
     }
 
     /**

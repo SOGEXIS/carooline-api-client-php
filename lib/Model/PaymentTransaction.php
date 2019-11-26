@@ -209,7 +209,11 @@ class PaymentTransaction implements ModelInterface, ArrayAccess
 
     const CURRENCY_EUR = 'EUR';
 const CURRENCY_USD = 'USD';
-const ACQUIRER_TRANSFER = 'Wire Transfer';
+const ACQUIRER_TRANSFER = 'Virement bancaire';
+const ACQUIRER_PAYBOX = 'Paybox';
+const ACQUIRER_PAYPAL = 'Paypal';
+const ACQUIRER_PAYBOX_TEST = 'Paybox Test';
+const ACQUIRER_PAYPAL_TEST = 'Paypal Test';
 const STATE_DRAFT = 'draft';
 const STATE_PENDING = 'pending';
 const STATE_DONE = 'done';
@@ -235,7 +239,12 @@ self::CURRENCY_USD,        ];
     public function getAcquirerAllowableValues()
     {
         return [
-            self::ACQUIRER_TRANSFER,        ];
+            self::ACQUIRER_TRANSFER,
+            self::ACQUIRER_PAYBOX,
+            self::ACQUIRER_PAYPAL,
+            self::ACQUIRER_PAYBOX_TEST,
+            self::ACQUIRER_PAYPAL_TEST
+        ];
     }
     /**
      * Gets allowable values of the enum

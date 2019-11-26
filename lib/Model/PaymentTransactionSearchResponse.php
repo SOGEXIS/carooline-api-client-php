@@ -57,7 +57,7 @@ class PaymentTransactionSearchResponse implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'count' => 'int',
-'rows' => '\Carooline\Model\Partner[]'    ];
+'rows' => '\Carooline\Model\PaymentTransaction[]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -235,7 +235,7 @@ class PaymentTransactionSearchResponse implements ModelInterface, ArrayAccess
     /**
      * Gets rows
      *
-     * @return \Carooline\Model\Partner[]
+     * @return \Carooline\Model\PaymentTransaction[]
      */
     public function getRows()
     {
@@ -245,7 +245,7 @@ class PaymentTransactionSearchResponse implements ModelInterface, ArrayAccess
     /**
      * Sets rows
      *
-     * @param \Carooline\Model\Partner[] $rows rows
+     * @param \Carooline\Model\PaymentTransaction[] $rows rows
      *
      * @return $this
      */

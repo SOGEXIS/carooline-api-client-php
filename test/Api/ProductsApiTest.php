@@ -101,12 +101,12 @@ class ProductsApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testProductsGet()
     {
-        $result = $this->productApi->productsGet(null, null, "3 397 007 256");
+        $result = $this->productApi->productsGet(null, null, "1 457 433 526");
         $this->assertInstanceOf(\Carooline\Model\ProductSearchResponse::class, $result);
         $this->assertGreaterThanOrEqual(1, $result->getCount());
         foreach ($result->getRows() as $product) {
             $this->assertInstanceOf(\Carooline\Model\Product::class, $product);
-            $this->assertStringContainsStringIgnoringCase("A256S Balais d'essuie-glace x2  Aerotwin", $product->getName());
+            $this->assertStringContainsStringIgnoringCase("Filtre à air", $product->getName());
         }
     }
 
@@ -119,15 +119,15 @@ class ProductsApiTest extends \PHPUnit\Framework\TestCase
     public function testProductsGetAllAvailabilitiesPost()
     {
         $body = new GetAllAvailabilitiesRequest([
-            'product_ids' => [21212, 21213]
+            'product_ids' => [74891, 73114]
         ]);
         $result = $this->productApi->productsGetAllAvailabilitiesPost($body);
         $this->assertInstanceOf(GetAllAvailabilitiesResponse::class, $result);
         $this->assertGreaterThanOrEqual(1, count($result->getAvailabilities()));
         foreach ($result->getAvailabilities() as $availability) {
             $this->assertIsInt($availability->getProductId());
-            if ($availability->getProductId() == 21212) {
-                $this->assertGreaterThanOrEqual(1, $availability->getQuantity());
+            if ($availability->getProductId() == 74891) {
+                $this->assertGreaterThanOrEqual(200, $availability->getQuantity());
             }
         }
     }
@@ -140,10 +140,10 @@ class ProductsApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testProductsIdGet()
     {
-        $result = $this->productApi->productsIdGet(21212);
+        $result = $this->productApi->productsIdGet(74891);
         $this->assertInstanceOf(\Carooline\Model\Product::class, $result);
-        $this->assertEquals(21212, $result->getId());
-        $this->assertEquals("A256S Balais d'essuie-glace x2  Aerotwin", $result->getName());
+        $this->assertEquals(74891, $result->getId());
+        $this->assertEquals("Filtre à air", $result->getName());
         $this->assertEquals("BOSCH", $result->getManufacturer()->getName());
     }
 
@@ -155,16 +155,16 @@ class ProductsApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testProductsIdPut()
     {
-        $body = new ProductUpdateRequest(['list_price' => 12.45]);
-        $result = $this->productApi->productsIdPut(21212, $body);
+        $body = new ProductUpdateRequest(['list_price' => 32.80]);
+        $result = $this->productApi->productsIdPut(74891, $body);
         $this->assertInstanceOf(\Carooline\Model\Product::class, $result);
-        $this->assertEquals(21212, $result->getId());
-        $this->assertEquals(12.45, $result->getListPrice());
+        $this->assertEquals(74891, $result->getId());
+        $this->assertEquals(32.80, $result->getListPrice());
         
-        $body = new ProductUpdateRequest(['list_price' => 50.85]);
-        $result = $this->productApi->productsIdPut(21212, $body);
+        $body = new ProductUpdateRequest(['list_price' => 30.80]);
+        $result = $this->productApi->productsIdPut(74891, $body);
         $this->assertInstanceOf(\Carooline\Model\Product::class, $result);
-        $this->assertEquals(21212, $result->getId());
-        $this->assertEquals(50.85, $result->getListPrice());
+        $this->assertEquals(74891, $result->getId());
+        $this->assertEquals(30.80, $result->getListPrice());
     }
 }
