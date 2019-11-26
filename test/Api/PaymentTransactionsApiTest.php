@@ -95,6 +95,22 @@ class PaymentTransactionsApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testPaymentTransactionsCreatePost()
     {
+        $orderId = "71";
+        $orderName = "DV0088";
+        $body = new PaymentTransactionCreateRequest([
+            'reference' => $orderName,
+            'partner_id' => 31,
+            'acquirer' => 'Paybox',
+            'amount' => 375.64,
+            'acquirer_reference' => "IUAHDKJAHZDKHKQJSD",
+        ]);
+        $result = $this->paymentTransactionApi->paymentTransactionsCreatePost($body);
+        
+        $this->assertInstanceOf(\Carooline\Model\PaymentTransaction::class, $result);
+        $this->assertEquals('draft', $result->getState());
+        
+        $transactionId = $result->getId();
+        $result = $this->paymentTransactionApi->paymentTransactionsIdDelete($transactionId);
     }
 
     /**
@@ -105,7 +121,6 @@ class PaymentTransactionsApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testPaymentTransactionsGet()
     {
-        //function paymentTransactionsGet($order_id = null, $partner_id = null, $reference = null)
         $result = $this->paymentTransactionApi->paymentTransactionsGet(null, null, "DV0024");
         $this->assertInstanceOf(PaymentTransactionSearchResponse::class, $result);
         $this->assertEquals(1, $result->getCount());
@@ -113,7 +128,6 @@ class PaymentTransactionsApiTest extends \PHPUnit\Framework\TestCase
             $this->assertInstanceOf(\Carooline\Model\PaymentTransaction::class, $paymentTransaction);
             $this->assertStringContainsStringIgnoringCase("DV0024", $paymentTransaction->getReference());
             $this->assertEquals(29, $paymentTransaction->getPartnerId());
-            // $this->assertInstanceOf(\Carooline\Model\Partner::class, $paymentTransaction->getPartner());
         }
     }
 
@@ -125,6 +139,20 @@ class PaymentTransactionsApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testPaymentTransactionsIdDelete()
     {
+        $orderId = "71";
+        $orderName = "DV9988";
+        $body = new PaymentTransactionCreateRequest([
+            'reference' => $orderName,
+            'partner_id' => 31,
+            'acquirer' => 'Paybox',
+            'amount' => 375.64,
+            'acquirer_reference' => "TO_DELETE",
+        ]);
+        $result = $this->paymentTransactionApi->paymentTransactionsCreatePost($body);
+        $this->assertInstanceOf(\Carooline\Model\PaymentTransaction::class, $result);
+        $transactionId = $result->getId();
+
+        $result = $this->paymentTransactionApi->paymentTransactionsIdDelete($transactionId);
     }
 
     /**
@@ -135,6 +163,11 @@ class PaymentTransactionsApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testPaymentTransactionsIdGet()
     {
+        $result = $this->paymentTransactionApi->paymentTransactionsIdGet(8);
+        $this->assertInstanceOf(PaymentTransaction::class, $result);
+        $this->assertInstanceOf(\Carooline\Model\PaymentTransaction::class, $result);
+        $this->assertStringContainsStringIgnoringCase("DV0024", $result->getReference());
+        $this->assertEquals(29, $result->getPartnerId());
     }
 
     /**
@@ -145,5 +178,20 @@ class PaymentTransactionsApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testPaymentTransactionsIdPut()
     {
+        $body = new PaymentTransactionUpdateRequest([
+            'state' => 'done'
+        ]);
+        $result = $this->paymentTransactionApi->paymentTransactionsIdPut(124, $body);
+        $this->assertInstanceOf(PaymentTransaction::class, $result);
+        $this->assertStringContainsStringIgnoringCase("DV0065-2", $result->getReference());
+        $this->assertEquals('done', $result->getState());
+
+        $body = new PaymentTransactionUpdateRequest([
+            'state' => 'draft'
+        ]);
+        $result = $this->paymentTransactionApi->paymentTransactionsIdPut(124, $body);
+        $this->assertInstanceOf(PaymentTransaction::class, $result);
+        $this->assertStringContainsStringIgnoringCase("DV0065-2", $result->getReference());
+        $this->assertEquals('draft', $result->getState());
     }
 }
