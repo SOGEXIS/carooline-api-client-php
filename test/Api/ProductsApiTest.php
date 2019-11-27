@@ -127,7 +127,9 @@ class ProductsApiTest extends \PHPUnit\Framework\TestCase
         foreach ($result->getAvailabilities() as $availability) {
             $this->assertIsInt($availability->getProductId());
             if ($availability->getProductId() == 74891) {
-                $this->assertGreaterThanOrEqual(200, $availability->getQuantity());
+                foreach ($availability->getStockLocations() as $stockLocations) {
+                    $this->assertGreaterThanOrEqual(200, $stockLocations->getStock());
+                }
             }
         }
     }

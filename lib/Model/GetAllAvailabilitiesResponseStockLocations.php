@@ -1,6 +1,6 @@
 <?php
 /**
- * GetAllAvailabilitiesResponseAvailabilities
+ * GetAllAvailabilitiesResponseStockLocations
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ use \ArrayAccess;
 use \Carooline\ObjectSerializer;
 
 /**
- * GetAllAvailabilitiesResponseAvailabilities Class Doc Comment
+ * GetAllAvailabilitiesResponseStockLocations Class Doc Comment
  *
  * @category Class
  * @package  Carooline
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class GetAllAvailabilitiesResponseAvailabilities implements ModelInterface, ArrayAccess
+class GetAllAvailabilitiesResponseStockLocations implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class GetAllAvailabilitiesResponseAvailabilities implements ModelInterface, Arra
       *
       * @var string
       */
-    protected static $swaggerModelName = 'GetAllAvailabilitiesResponse_availabilities';
+    protected static $swaggerModelName = 'GetAllAvailabilitiesResponse_stock_locations';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,8 +56,9 @@ class GetAllAvailabilitiesResponseAvailabilities implements ModelInterface, Arra
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'stock_locations' => '\Carooline\Model\GetAllAvailabilitiesResponseStockLocations[]',
-'product_id' => 'int'    ];
+        'location_id' => 'int',
+'company_name' => 'string',
+'stock' => 'float'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -65,8 +66,9 @@ class GetAllAvailabilitiesResponseAvailabilities implements ModelInterface, Arra
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'stock_locations' => null,
-'product_id' => null    ];
+        'location_id' => null,
+'company_name' => null,
+'stock' => 'float'    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -95,8 +97,9 @@ class GetAllAvailabilitiesResponseAvailabilities implements ModelInterface, Arra
      * @var string[]
      */
     protected static $attributeMap = [
-        'stock_locations' => 'stock_locations',
-'product_id' => 'product_id'    ];
+        'location_id' => 'location_id',
+'company_name' => 'company_name',
+'stock' => 'stock'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -104,8 +107,9 @@ class GetAllAvailabilitiesResponseAvailabilities implements ModelInterface, Arra
      * @var string[]
      */
     protected static $setters = [
-        'stock_locations' => 'setStockLocations',
-'product_id' => 'setProductId'    ];
+        'location_id' => 'setLocationId',
+'company_name' => 'setCompanyName',
+'stock' => 'setStock'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -113,8 +117,9 @@ class GetAllAvailabilitiesResponseAvailabilities implements ModelInterface, Arra
      * @var string[]
      */
     protected static $getters = [
-        'stock_locations' => 'getStockLocations',
-'product_id' => 'getProductId'    ];
+        'location_id' => 'getLocationId',
+'company_name' => 'getCompanyName',
+'stock' => 'getStock'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -174,8 +179,9 @@ class GetAllAvailabilitiesResponseAvailabilities implements ModelInterface, Arra
      */
     public function __construct(array $data = null)
     {
-        $this->container['stock_locations'] = isset($data['stock_locations']) ? $data['stock_locations'] : null;
-        $this->container['product_id'] = isset($data['product_id']) ? $data['product_id'] : null;
+        $this->container['location_id'] = isset($data['location_id']) ? $data['location_id'] : null;
+        $this->container['company_name'] = isset($data['company_name']) ? $data['company_name'] : null;
+        $this->container['stock'] = isset($data['stock']) ? $data['stock'] : null;
     }
 
     /**
@@ -203,49 +209,73 @@ class GetAllAvailabilitiesResponseAvailabilities implements ModelInterface, Arra
 
 
     /**
-     * Gets stock_locations
+     * Gets location_id
      *
-     * @return \Carooline\Model\GetAllAvailabilitiesResponseStockLocations[]
+     * @return int
      */
-    public function getStockLocations()
+    public function getLocationId()
     {
-        return $this->container['stock_locations'];
+        return $this->container['location_id'];
     }
 
     /**
-     * Sets stock_locations
+     * Sets location_id
      *
-     * @param \Carooline\Model\GetAllAvailabilitiesResponseStockLocations[] $stock_locations stock_locations
+     * @param int $location_id location_id
      *
      * @return $this
      */
-    public function setStockLocations($stock_locations)
+    public function setLocationId($location_id)
     {
-        $this->container['stock_locations'] = $stock_locations;
+        $this->container['location_id'] = $location_id;
 
         return $this;
     }
 
     /**
-     * Gets product_id
+     * Gets company_name
      *
-     * @return int
+     * @return string
      */
-    public function getProductId()
+    public function getCompanyName()
     {
-        return $this->container['product_id'];
+        return $this->container['company_name'];
     }
 
     /**
-     * Sets product_id
+     * Sets company_name
      *
-     * @param int $product_id product_id
+     * @param string $company_name company_name
      *
      * @return $this
      */
-    public function setProductId($product_id)
+    public function setCompanyName($company_name)
     {
-        $this->container['product_id'] = $product_id;
+        $this->container['company_name'] = $company_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets stock
+     *
+     * @return float
+     */
+    public function getStock()
+    {
+        return $this->container['stock'];
+    }
+
+    /**
+     * Sets stock
+     *
+     * @param float $stock stock
+     *
+     * @return $this
+     */
+    public function setStock($stock)
+    {
+        $this->container['stock'] = $stock;
 
         return $this;
     }
