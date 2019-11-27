@@ -56,9 +56,10 @@ class GetAllAvailabilitiesResponseStockLocations implements ModelInterface, Arra
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'location_id' => 'int',
-'company_name' => 'string',
-'stock' => 'float'    ];
+        'quantity' => 'float',
+'location_id' => 'int',
+'company_id' => 'int',
+'company_name' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -66,9 +67,10 @@ class GetAllAvailabilitiesResponseStockLocations implements ModelInterface, Arra
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'location_id' => null,
-'company_name' => null,
-'stock' => 'float'    ];
+        'quantity' => 'float',
+'location_id' => null,
+'company_id' => null,
+'company_name' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -97,9 +99,10 @@ class GetAllAvailabilitiesResponseStockLocations implements ModelInterface, Arra
      * @var string[]
      */
     protected static $attributeMap = [
-        'location_id' => 'location_id',
-'company_name' => 'company_name',
-'stock' => 'stock'    ];
+        'quantity' => 'quantity',
+'location_id' => 'location_id',
+'company_id' => 'company_id',
+'company_name' => 'company_name'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -107,9 +110,10 @@ class GetAllAvailabilitiesResponseStockLocations implements ModelInterface, Arra
      * @var string[]
      */
     protected static $setters = [
-        'location_id' => 'setLocationId',
-'company_name' => 'setCompanyName',
-'stock' => 'setStock'    ];
+        'quantity' => 'setQuantity',
+'location_id' => 'setLocationId',
+'company_id' => 'setCompanyId',
+'company_name' => 'setCompanyName'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -117,9 +121,10 @@ class GetAllAvailabilitiesResponseStockLocations implements ModelInterface, Arra
      * @var string[]
      */
     protected static $getters = [
-        'location_id' => 'getLocationId',
-'company_name' => 'getCompanyName',
-'stock' => 'getStock'    ];
+        'quantity' => 'getQuantity',
+'location_id' => 'getLocationId',
+'company_id' => 'getCompanyId',
+'company_name' => 'getCompanyName'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -179,9 +184,10 @@ class GetAllAvailabilitiesResponseStockLocations implements ModelInterface, Arra
      */
     public function __construct(array $data = null)
     {
+        $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
         $this->container['location_id'] = isset($data['location_id']) ? $data['location_id'] : null;
+        $this->container['company_id'] = isset($data['company_id']) ? $data['company_id'] : null;
         $this->container['company_name'] = isset($data['company_name']) ? $data['company_name'] : null;
-        $this->container['stock'] = isset($data['stock']) ? $data['stock'] : null;
     }
 
     /**
@@ -209,6 +215,30 @@ class GetAllAvailabilitiesResponseStockLocations implements ModelInterface, Arra
 
 
     /**
+     * Gets quantity
+     *
+     * @return float
+     */
+    public function getQuantity()
+    {
+        return $this->container['quantity'];
+    }
+
+    /**
+     * Sets quantity
+     *
+     * @param float $quantity quantity
+     *
+     * @return $this
+     */
+    public function setQuantity($quantity)
+    {
+        $this->container['quantity'] = $quantity;
+
+        return $this;
+    }
+
+    /**
      * Gets location_id
      *
      * @return int
@@ -233,6 +263,30 @@ class GetAllAvailabilitiesResponseStockLocations implements ModelInterface, Arra
     }
 
     /**
+     * Gets company_id
+     *
+     * @return int
+     */
+    public function getCompanyId()
+    {
+        return $this->container['company_id'];
+    }
+
+    /**
+     * Sets company_id
+     *
+     * @param int $company_id company_id
+     *
+     * @return $this
+     */
+    public function setCompanyId($company_id)
+    {
+        $this->container['company_id'] = $company_id;
+
+        return $this;
+    }
+
+    /**
      * Gets company_name
      *
      * @return string
@@ -252,30 +306,6 @@ class GetAllAvailabilitiesResponseStockLocations implements ModelInterface, Arra
     public function setCompanyName($company_name)
     {
         $this->container['company_name'] = $company_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets stock
-     *
-     * @return float
-     */
-    public function getStock()
-    {
-        return $this->container['stock'];
-    }
-
-    /**
-     * Sets stock
-     *
-     * @param float $stock stock
-     *
-     * @return $this
-     */
-    public function setStock($stock)
-    {
-        $this->container['stock'] = $stock;
 
         return $this;
     }
