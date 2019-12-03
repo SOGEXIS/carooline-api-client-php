@@ -218,12 +218,14 @@ Class | Method | HTTP request | Description
  - [ProductUpdateRequest](docs/Model/ProductUpdateRequest.md)
 
 
-### Sale Orders
+### Sale Methods
 
 All URIs are relative to *http://dev1.carooline.com/api/sale*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*InvoicesApi* | [**invoicesGet**](docs/Api/InvoicesApi.md#invoicesget) | **GET** /invoices | Search Invoice by name/ref or partner&#x27;s id and state [&#x27;paid&#x27;,&#x27;open&#x27;]. Type [&#x27;out_invoice&#x27;, &#x27;in_invoice&#x27;] Invoice/Refund
+*InvoicesApi* | [**invoicesIdGet**](docs/Api/InvoicesApi.md#invoicesidget) | **GET** /invoices/{id} | Get Invoice&#x27;s informations
 *OrdersApi* | [**ordersCreatePost**](docs/Api/OrdersApi.md#orderscreatepost) | **POST** /orders/create | Create a new Order.  The partner is a mandatory information, it can either:     - Be referenced by giving a correct partner&#x27;s id     - Be created by giving at least a name
 *OrdersApi* | [**ordersGet**](docs/Api/OrdersApi.md#ordersget) | **GET** /orders | Search Order by name/ref or partner&#x27;s id
 *OrdersApi* | [**ordersIdConfirmPost**](docs/Api/OrdersApi.md#ordersidconfirmpost) | **POST** /orders/{id}/confirm | Confirm the Order. The state will be updated and the Order line are then frozen.
@@ -245,28 +247,36 @@ Class | Method | HTTP request | Description
 *PaymentTransactionsApi* | [**paymentTransactionsIdDelete**](docs/Api/PaymentTransactionsApi.md#paymenttransactionsiddelete) | **DELETE** /payment_transactions/{id} | Delete Payment Transaction
 *PaymentTransactionsApi* | [**paymentTransactionsIdGet**](docs/Api/PaymentTransactionsApi.md#paymenttransactionsidget) | **GET** /payment_transactions/{id} | Get Payment Transactions
 *PaymentTransactionsApi* | [**paymentTransactionsIdPut**](docs/Api/PaymentTransactionsApi.md#paymenttransactionsidput) | **PUT** /payment_transactions/{id} | Update PaymentTransaction informations
+*PricelistsApi* | [**pricelistsGet**](docs/Api/PricelistsApi.md#pricelistsget) | **GET** /pricelists | Search Pricelists by name.
+*PricelistsApi* | [**pricelistsIdGet**](docs/Api/PricelistsApi.md#pricelistsidget) | **GET** /pricelists/{id} | Get Pricelists&#x27;s informations
 
 #### Documentation For Models
 
- - [Order](docs/Model/Order.md)
- - [OrderCarrier](docs/Model/OrderCarrier.md)
- - [OrderCreateRequest](docs/Model/OrderCreateRequest.md)
- - [OrderCreateRequestOrderLine](docs/Model/OrderCreateRequestOrderLine.md)
- - [OrderLine](docs/Model/OrderLine.md)
- - [OrderLineCreateRequest](docs/Model/OrderLineCreateRequest.md)
- - [OrderLineSearchResponse](docs/Model/OrderLineSearchResponse.md)
- - [OrderLineUpdateRequest](docs/Model/OrderLineUpdateRequest.md)
- - [OrderPaymentTransaction](docs/Model/OrderPaymentTransaction.md)
- - [OrderSearchResponse](docs/Model/OrderSearchResponse.md)
- - [OrderUpdateRequest](docs/Model/OrderUpdateRequest.md)
- - [Partner](docs/Model/Partner.md)
- - [PartnerCreateRequest](docs/Model/PartnerCreateRequest.md)
- - [PartnerSearchResponse](docs/Model/PartnerSearchResponse.md)
- - [PartnerUpdateRequest](docs/Model/PartnerUpdateRequest.md)
- - [PaymentTransaction](docs/Model/PaymentTransaction.md)
- - [PaymentTransactionCreateRequest](docs/Model/PaymentTransactionCreateRequest.md)
- - [PaymentTransactionSearchResponse](docs/Model/PaymentTransactionSearchResponse.md)
- - [PaymentTransactionUpdateRequest](docs/Model/PaymentTransactionUpdateRequest.md)
+- [Invoice](docs/Model/Invoice.md)
+- [InvoiceLine](docs/Model/InvoiceLine.md)
+- [InvoiceSearchResponse](docs/Model/InvoiceSearchResponse.md)
+- [Order](docs/Model/Order.md)
+- [OrderCarrier](docs/Model/OrderCarrier.md)
+- [OrderCreateRequest](docs/Model/OrderCreateRequest.md)
+- [OrderCreateRequestOrderLine](docs/Model/OrderCreateRequestOrderLine.md)
+- [OrderLine](docs/Model/OrderLine.md)
+- [OrderLineCreateRequest](docs/Model/OrderLineCreateRequest.md)
+- [OrderLineSearchResponse](docs/Model/OrderLineSearchResponse.md)
+- [OrderLineUpdateRequest](docs/Model/OrderLineUpdateRequest.md)
+- [OrderPaymentTransaction](docs/Model/OrderPaymentTransaction.md)
+- [OrderSearchResponse](docs/Model/OrderSearchResponse.md)
+- [OrderUpdateRequest](docs/Model/OrderUpdateRequest.md)
+- [Partner](docs/Model/Partner.md)
+- [PartnerCreateRequest](docs/Model/PartnerCreateRequest.md)
+- [PartnerSearchResponse](docs/Model/PartnerSearchResponse.md)
+- [PartnerUpdateRequest](docs/Model/PartnerUpdateRequest.md)
+- [PaymentTransaction](docs/Model/PaymentTransaction.md)
+- [PaymentTransactionCreateRequest](docs/Model/PaymentTransactionCreateRequest.md)
+- [PaymentTransactionSearchResponse](docs/Model/PaymentTransactionSearchResponse.md)
+- [PaymentTransactionUpdateRequest](docs/Model/PaymentTransactionUpdateRequest.md)
+- [Pricelist](docs/Model/Pricelist.md)
+- [PricelistItem](docs/Model/PricelistItem.md)
+- [PricelistSearchResponse](docs/Model/PricelistSearchResponse.md)
 
 
 ### Vehicles

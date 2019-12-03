@@ -1,6 +1,6 @@
 <?php
 /**
- * Order
+ * Invoice
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ use \ArrayAccess;
 use \Carooline\ObjectSerializer;
 
 /**
- * Order Class Doc Comment
+ * Invoice Class Doc Comment
  *
  * @category Class
  * @package  Carooline
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Order implements ModelInterface, ArrayAccess
+class Invoice implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class Order implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Order';
+    protected static $swaggerModelName = 'Invoice';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,19 +57,17 @@ class Order implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'print_href' => 'string',
-'order_line' => '\Carooline\Model\OrderLine[]',
-'payment_transaction' => '\Carooline\Model\OrderPaymentTransaction',
+'number' => 'string',
+'date_invoice' => 'string',
 'client_order_ref' => 'string',
 'partner' => '\Carooline\Model\Partner',
-'date_order' => 'string',
 'id' => 'int',
 'amount_total' => 'float',
 'amount_untaxed' => 'float',
-'name' => 'string',
-'mobile' => 'string',
 'amount_tax' => 'float',
 'state' => 'string',
-'carrier' => '\Carooline\Model\OrderCarrier'    ];
+'type' => 'string',
+'invoice_line' => '\Carooline\Model\InvoiceLine[]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -78,19 +76,17 @@ class Order implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'print_href' => null,
-'order_line' => null,
-'payment_transaction' => null,
+'number' => null,
+'date_invoice' => null,
 'client_order_ref' => null,
 'partner' => null,
-'date_order' => null,
 'id' => null,
 'amount_total' => 'float',
 'amount_untaxed' => 'float',
-'name' => null,
-'mobile' => null,
 'amount_tax' => 'float',
 'state' => null,
-'carrier' => null    ];
+'type' => null,
+'invoice_line' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -120,19 +116,17 @@ class Order implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'print_href' => 'print_href',
-'order_line' => 'order_line',
-'payment_transaction' => 'payment_transaction',
+'number' => 'number',
+'date_invoice' => 'date_invoice',
 'client_order_ref' => 'client_order_ref',
 'partner' => 'partner',
-'date_order' => 'date_order',
 'id' => 'id',
 'amount_total' => 'amount_total',
 'amount_untaxed' => 'amount_untaxed',
-'name' => 'name',
-'mobile' => 'mobile',
 'amount_tax' => 'amount_tax',
 'state' => 'state',
-'carrier' => 'carrier'    ];
+'type' => 'type',
+'invoice_line' => 'invoice_line'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -141,19 +135,17 @@ class Order implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'print_href' => 'setPrintHref',
-'order_line' => 'setOrderLine',
-'payment_transaction' => 'setPaymentTransaction',
+'number' => 'setNumber',
+'date_invoice' => 'setDateInvoice',
 'client_order_ref' => 'setClientOrderRef',
 'partner' => 'setPartner',
-'date_order' => 'setDateOrder',
 'id' => 'setId',
 'amount_total' => 'setAmountTotal',
 'amount_untaxed' => 'setAmountUntaxed',
-'name' => 'setName',
-'mobile' => 'setMobile',
 'amount_tax' => 'setAmountTax',
 'state' => 'setState',
-'carrier' => 'setCarrier'    ];
+'type' => 'setType',
+'invoice_line' => 'setInvoiceLine'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -162,19 +154,17 @@ class Order implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'print_href' => 'getPrintHref',
-'order_line' => 'getOrderLine',
-'payment_transaction' => 'getPaymentTransaction',
+'number' => 'getNumber',
+'date_invoice' => 'getDateInvoice',
 'client_order_ref' => 'getClientOrderRef',
 'partner' => 'getPartner',
-'date_order' => 'getDateOrder',
 'id' => 'getId',
 'amount_total' => 'getAmountTotal',
 'amount_untaxed' => 'getAmountUntaxed',
-'name' => 'getName',
-'mobile' => 'getMobile',
 'amount_tax' => 'getAmountTax',
 'state' => 'getState',
-'carrier' => 'getCarrier'    ];
+'type' => 'getType',
+'invoice_line' => 'getInvoiceLine'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -235,19 +225,17 @@ class Order implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['print_href'] = isset($data['print_href']) ? $data['print_href'] : null;
-        $this->container['order_line'] = isset($data['order_line']) ? $data['order_line'] : null;
-        $this->container['payment_transaction'] = isset($data['payment_transaction']) ? $data['payment_transaction'] : null;
+        $this->container['number'] = isset($data['number']) ? $data['number'] : null;
+        $this->container['date_invoice'] = isset($data['date_invoice']) ? $data['date_invoice'] : null;
         $this->container['client_order_ref'] = isset($data['client_order_ref']) ? $data['client_order_ref'] : null;
         $this->container['partner'] = isset($data['partner']) ? $data['partner'] : null;
-        $this->container['date_order'] = isset($data['date_order']) ? $data['date_order'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['amount_total'] = isset($data['amount_total']) ? $data['amount_total'] : null;
         $this->container['amount_untaxed'] = isset($data['amount_untaxed']) ? $data['amount_untaxed'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['mobile'] = isset($data['mobile']) ? $data['mobile'] : null;
         $this->container['amount_tax'] = isset($data['amount_tax']) ? $data['amount_tax'] : null;
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        $this->container['carrier'] = isset($data['carrier']) ? $data['carrier'] : null;
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        $this->container['invoice_line'] = isset($data['invoice_line']) ? $data['invoice_line'] : null;
     }
 
     /**
@@ -305,49 +293,49 @@ class Order implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets order_line
+     * Gets number
      *
-     * @return \Carooline\Model\OrderLine[]
+     * @return string
      */
-    public function getOrderLine()
+    public function getNumber()
     {
-        return $this->container['order_line'];
+        return $this->container['number'];
     }
 
     /**
-     * Sets order_line
+     * Sets number
      *
-     * @param \Carooline\Model\OrderLine[] $order_line order_line
+     * @param string $number number
      *
      * @return $this
      */
-    public function setOrderLine($order_line)
+    public function setNumber($number)
     {
-        $this->container['order_line'] = $order_line;
+        $this->container['number'] = $number;
 
         return $this;
     }
 
     /**
-     * Gets payment_transaction
+     * Gets date_invoice
      *
-     * @return \Carooline\Model\OrderPaymentTransaction
+     * @return string
      */
-    public function getPaymentTransaction()
+    public function getDateInvoice()
     {
-        return $this->container['payment_transaction'];
+        return $this->container['date_invoice'];
     }
 
     /**
-     * Sets payment_transaction
+     * Sets date_invoice
      *
-     * @param \Carooline\Model\OrderPaymentTransaction $payment_transaction payment_transaction
+     * @param string $date_invoice date_invoice
      *
      * @return $this
      */
-    public function setPaymentTransaction($payment_transaction)
+    public function setDateInvoice($date_invoice)
     {
-        $this->container['payment_transaction'] = $payment_transaction;
+        $this->container['date_invoice'] = $date_invoice;
 
         return $this;
     }
@@ -396,30 +384,6 @@ class Order implements ModelInterface, ArrayAccess
     public function setPartner($partner)
     {
         $this->container['partner'] = $partner;
-
-        return $this;
-    }
-
-    /**
-     * Gets date_order
-     *
-     * @return string
-     */
-    public function getDateOrder()
-    {
-        return $this->container['date_order'];
-    }
-
-    /**
-     * Sets date_order
-     *
-     * @param string $date_order date_order
-     *
-     * @return $this
-     */
-    public function setDateOrder($date_order)
-    {
-        $this->container['date_order'] = $date_order;
 
         return $this;
     }
@@ -497,54 +461,6 @@ class Order implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets mobile
-     *
-     * @return string
-     */
-    public function getMobile()
-    {
-        return $this->container['mobile'];
-    }
-
-    /**
-     * Sets mobile
-     *
-     * @param string $mobile mobile
-     *
-     * @return $this
-     */
-    public function setMobile($mobile)
-    {
-        $this->container['mobile'] = $mobile;
-
-        return $this;
-    }
-
-    /**
      * Gets amount_tax
      *
      * @return float
@@ -593,25 +509,49 @@ class Order implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets carrier
+     * Gets type
      *
-     * @return \Carooline\Model\OrderCarrier
+     * @return string
      */
-    public function getCarrier()
+    public function getType()
     {
-        return $this->container['carrier'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets carrier
+     * Sets type
      *
-     * @param \Carooline\Model\OrderCarrier $carrier carrier
+     * @param string $type type
      *
      * @return $this
      */
-    public function setCarrier($carrier)
+    public function setType($type)
     {
-        $this->container['carrier'] = $carrier;
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets invoice_line
+     *
+     * @return \Carooline\Model\InvoiceLine[]
+     */
+    public function getInvoiceLine()
+    {
+        return $this->container['invoice_line'];
+    }
+
+    /**
+     * Sets invoice_line
+     *
+     * @param \Carooline\Model\InvoiceLine[] $invoice_line invoice_line
+     *
+     * @return $this
+     */
+    public function setInvoiceLine($invoice_line)
+    {
+        $this->container['invoice_line'] = $invoice_line;
 
         return $this;
     }

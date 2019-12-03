@@ -73,7 +73,7 @@ class Product implements ModelInterface, ArrayAccess
 'price_ht' => 'float',
 'consigne_price' => 'float',
 'tire_scale' => 'string',
-'tire_eu_db' => 'string',
+'tire_eu_db' => 'int',
 'full_picture_url' => 'string',
 'active' => 'bool',
 'tire_eu_adherence_id' => 'string',
