@@ -1,6 +1,6 @@
 <?php
 /**
- * PricelistsApi
+ * CompanyApi
  * PHP version 5
  *
  * @category Class
@@ -39,14 +39,14 @@ use Carooline\HeaderSelector;
 use Carooline\ObjectSerializer;
 
 /**
- * PricelistsApi Class Doc Comment
+ * CompanyApi Class Doc Comment
  *
  * @category Class
  * @package  Carooline
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class PricelistsApi
+class CompanyApi
 {
     /**
      * @var ClientInterface
@@ -87,39 +87,41 @@ class PricelistsApi
     }
 
     /**
-     * Operation pricelistsGet
+     * Operation companyGet
      *
-     * Search Pricelists by name.
+     * Search Company by name or company's group.
      *
-     * @param  int $company_id company_id (optional)
+     * @param  int $company_group_number company_group_number (optional)
      * @param  string $name name (optional)
+     * @param  int $tradename_number tradename_number (optional)
      *
      * @throws \Carooline\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Carooline\Model\PricelistSearchResponse
+     * @return \Carooline\Model\CompanySearchResponse
      */
-    public function pricelistsGet($company_id = null, $name = null)
+    public function companyGet($company_group_number = null, $name = null, $tradename_number = null)
     {
-        list($response) = $this->pricelistsGetWithHttpInfo($company_id, $name);
+        list($response) = $this->companyGetWithHttpInfo($company_group_number, $name, $tradename_number);
         return $response;
     }
 
     /**
-     * Operation pricelistsGetWithHttpInfo
+     * Operation companyGetWithHttpInfo
      *
-     * Search Pricelists by name.
+     * Search Company by name or company's group.
      *
-     * @param  int $company_id (optional)
+     * @param  int $company_group_number (optional)
      * @param  string $name (optional)
+     * @param  int $tradename_number (optional)
      *
      * @throws \Carooline\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Carooline\Model\PricelistSearchResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Carooline\Model\CompanySearchResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function pricelistsGetWithHttpInfo($company_id = null, $name = null)
+    public function companyGetWithHttpInfo($company_group_number = null, $name = null, $tradename_number = null)
     {
-        $returnType = '\Carooline\Model\PricelistSearchResponse';
-        $request = $this->pricelistsGetRequest($company_id, $name);
+        $returnType = '\Carooline\Model\CompanySearchResponse';
+        $request = $this->companyGetRequest($company_group_number, $name, $tradename_number);
 
         try {
             $options = $this->createHttpClientOption();
@@ -170,7 +172,7 @@ class PricelistsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Carooline\Model\PricelistSearchResponse',
+                        '\Carooline\Model\CompanySearchResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -181,19 +183,20 @@ class PricelistsApi
     }
 
     /**
-     * Operation pricelistsGetAsync
+     * Operation companyGetAsync
      *
-     * Search Pricelists by name.
+     * Search Company by name or company's group.
      *
-     * @param  int $company_id (optional)
+     * @param  int $company_group_number (optional)
      * @param  string $name (optional)
+     * @param  int $tradename_number (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function pricelistsGetAsync($company_id = null, $name = null)
+    public function companyGetAsync($company_group_number = null, $name = null, $tradename_number = null)
     {
-        return $this->pricelistsGetAsyncWithHttpInfo($company_id, $name)
+        return $this->companyGetAsyncWithHttpInfo($company_group_number, $name, $tradename_number)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -202,20 +205,21 @@ class PricelistsApi
     }
 
     /**
-     * Operation pricelistsGetAsyncWithHttpInfo
+     * Operation companyGetAsyncWithHttpInfo
      *
-     * Search Pricelists by name.
+     * Search Company by name or company's group.
      *
-     * @param  int $company_id (optional)
+     * @param  int $company_group_number (optional)
      * @param  string $name (optional)
+     * @param  int $tradename_number (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function pricelistsGetAsyncWithHttpInfo($company_id = null, $name = null)
+    public function companyGetAsyncWithHttpInfo($company_group_number = null, $name = null, $tradename_number = null)
     {
-        $returnType = '\Carooline\Model\PricelistSearchResponse';
-        $request = $this->pricelistsGetRequest($company_id, $name);
+        $returnType = '\Carooline\Model\CompanySearchResponse';
+        $request = $this->companyGetRequest($company_group_number, $name, $tradename_number);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -255,18 +259,19 @@ class PricelistsApi
     }
 
     /**
-     * Create request for operation 'pricelistsGet'
+     * Create request for operation 'companyGet'
      *
-     * @param  int $company_id (optional)
+     * @param  int $company_group_number (optional)
      * @param  string $name (optional)
+     * @param  int $tradename_number (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function pricelistsGetRequest($company_id = null, $name = null)
+    protected function companyGetRequest($company_group_number = null, $name = null, $tradename_number = null)
     {
 
-        $resourcePath = '/sale/pricelists';
+        $resourcePath = '/sale/company';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -274,12 +279,16 @@ class PricelistsApi
         $multipart = false;
 
         // query params
-        if ($company_id !== null) {
-            $queryParams['company_id'] = ObjectSerializer::toQueryValue($company_id);
+        if ($company_group_number !== null) {
+            $queryParams['company_group_number'] = ObjectSerializer::toQueryValue($company_group_number);
         }
         // query params
         if ($name !== null) {
             $queryParams['name'] = ObjectSerializer::toQueryValue($name);
+        }
+        // query params
+        if ($tradename_number !== null) {
+            $queryParams['tradename_number'] = ObjectSerializer::toQueryValue($tradename_number);
         }
 
 
@@ -351,37 +360,37 @@ class PricelistsApi
     }
 
     /**
-     * Operation pricelistsIdGet
+     * Operation companyIdGet
      *
-     * Get Pricelists's informations
+     * Get Company's informations
      *
      * @param  int $id Item id (required)
      *
      * @throws \Carooline\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Carooline\Model\Pricelist
+     * @return \Carooline\Model\Company
      */
-    public function pricelistsIdGet($id)
+    public function companyIdGet($id)
     {
-        list($response) = $this->pricelistsIdGetWithHttpInfo($id);
+        list($response) = $this->companyIdGetWithHttpInfo($id);
         return $response;
     }
 
     /**
-     * Operation pricelistsIdGetWithHttpInfo
+     * Operation companyIdGetWithHttpInfo
      *
-     * Get Pricelists's informations
+     * Get Company's informations
      *
      * @param  int $id Item id (required)
      *
      * @throws \Carooline\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Carooline\Model\Pricelist, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Carooline\Model\Company, HTTP status code, HTTP response headers (array of strings)
      */
-    public function pricelistsIdGetWithHttpInfo($id)
+    public function companyIdGetWithHttpInfo($id)
     {
-        $returnType = '\Carooline\Model\Pricelist';
-        $request = $this->pricelistsIdGetRequest($id);
+        $returnType = '\Carooline\Model\Company';
+        $request = $this->companyIdGetRequest($id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -432,7 +441,7 @@ class PricelistsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Carooline\Model\Pricelist',
+                        '\Carooline\Model\Company',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -443,18 +452,18 @@ class PricelistsApi
     }
 
     /**
-     * Operation pricelistsIdGetAsync
+     * Operation companyIdGetAsync
      *
-     * Get Pricelists's informations
+     * Get Company's informations
      *
      * @param  int $id Item id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function pricelistsIdGetAsync($id)
+    public function companyIdGetAsync($id)
     {
-        return $this->pricelistsIdGetAsyncWithHttpInfo($id)
+        return $this->companyIdGetAsyncWithHttpInfo($id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -463,19 +472,19 @@ class PricelistsApi
     }
 
     /**
-     * Operation pricelistsIdGetAsyncWithHttpInfo
+     * Operation companyIdGetAsyncWithHttpInfo
      *
-     * Get Pricelists's informations
+     * Get Company's informations
      *
      * @param  int $id Item id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function pricelistsIdGetAsyncWithHttpInfo($id)
+    public function companyIdGetAsyncWithHttpInfo($id)
     {
-        $returnType = '\Carooline\Model\Pricelist';
-        $request = $this->pricelistsIdGetRequest($id);
+        $returnType = '\Carooline\Model\Company';
+        $request = $this->companyIdGetRequest($id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -515,23 +524,23 @@ class PricelistsApi
     }
 
     /**
-     * Create request for operation 'pricelistsIdGet'
+     * Create request for operation 'companyIdGet'
      *
      * @param  int $id Item id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function pricelistsIdGetRequest($id)
+    protected function companyIdGetRequest($id)
     {
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling pricelistsIdGet'
+                'Missing the required parameter $id when calling companyIdGet'
             );
         }
 
-        $resourcePath = '/sale/pricelists/{id}';
+        $resourcePath = '/sale/company/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -547,6 +556,252 @@ class PricelistsApi
                 $resourcePath
             );
         }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+        // this endpoint requires BearerToken
+        if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation companyMyCompanyGet
+     *
+     * Get info about your Company
+     *
+     *
+     * @throws \Carooline\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Carooline\Model\Company
+     */
+    public function companyMyCompanyGet()
+    {
+        list($response) = $this->companyMyCompanyGetWithHttpInfo();
+        return $response;
+    }
+
+    /**
+     * Operation companyMyCompanyGetWithHttpInfo
+     *
+     * Get info about your Company
+     *
+     *
+     * @throws \Carooline\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Carooline\Model\Company, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function companyMyCompanyGetWithHttpInfo()
+    {
+        $returnType = '\Carooline\Model\Company';
+        $request = $this->companyMyCompanyGetRequest();
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if (!in_array($returnType, ['string','integer','bool'])) {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carooline\Model\Company',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation companyMyCompanyGetAsync
+     *
+     * Get info about your Company
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function companyMyCompanyGetAsync()
+    {
+        return $this->companyMyCompanyGetAsyncWithHttpInfo()
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation companyMyCompanyGetAsyncWithHttpInfo
+     *
+     * Get info about your Company
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function companyMyCompanyGetAsyncWithHttpInfo()
+    {
+        $returnType = '\Carooline\Model\Company';
+        $request = $this->companyMyCompanyGetRequest();
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'companyMyCompanyGet'
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function companyMyCompanyGetRequest()
+    {
+
+        $resourcePath = '/sale/company/my_company';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
 
         // body params
         $_tempBody = null;

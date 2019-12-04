@@ -1,6 +1,6 @@
 <?php
 /**
- * Partner
+ * Company
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ use \ArrayAccess;
 use \Carooline\ObjectSerializer;
 
 /**
- * Partner Class Doc Comment
+ * Company Class Doc Comment
  *
  * @category Class
  * @package  Carooline
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Partner implements ModelInterface, ArrayAccess
+class Company implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class Partner implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Partner';
+    protected static $swaggerModelName = 'Company';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,15 +57,18 @@ class Partner implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'street2' => 'string',
+'company_group_number' => 'int',
 'phone' => 'string',
 'street' => 'string',
+'partner' => '\Carooline\Model\Partner',
+'partner_id' => 'int',
 'id' => 'int',
 'city' => 'string',
 'name' => 'string',
 'zip' => 'string',
-'mobile' => 'string',
+'tradename_number' => 'int',
 'country' => 'string',
-'ref' => 'string',
+'parent_id' => 'int',
 'email' => 'string'    ];
 
     /**
@@ -75,15 +78,18 @@ class Partner implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'street2' => null,
+'company_group_number' => null,
 'phone' => null,
 'street' => null,
+'partner' => null,
+'partner_id' => null,
 'id' => null,
 'city' => null,
 'name' => null,
 'zip' => null,
-'mobile' => null,
+'tradename_number' => null,
 'country' => null,
-'ref' => null,
+'parent_id' => null,
 'email' => null    ];
 
     /**
@@ -114,15 +120,18 @@ class Partner implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'street2' => 'street2',
+'company_group_number' => 'company_group_number',
 'phone' => 'phone',
 'street' => 'street',
+'partner' => 'partner',
+'partner_id' => 'partner_id',
 'id' => 'id',
 'city' => 'city',
 'name' => 'name',
 'zip' => 'zip',
-'mobile' => 'mobile',
+'tradename_number' => 'tradename_number',
 'country' => 'country',
-'ref' => 'ref',
+'parent_id' => 'parent_id',
 'email' => 'email'    ];
 
     /**
@@ -132,15 +141,18 @@ class Partner implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'street2' => 'setStreet2',
+'company_group_number' => 'setCompanyGroupNumber',
 'phone' => 'setPhone',
 'street' => 'setStreet',
+'partner' => 'setPartner',
+'partner_id' => 'setPartnerId',
 'id' => 'setId',
 'city' => 'setCity',
 'name' => 'setName',
 'zip' => 'setZip',
-'mobile' => 'setMobile',
+'tradename_number' => 'setTradenameNumber',
 'country' => 'setCountry',
-'ref' => 'setRef',
+'parent_id' => 'setParentId',
 'email' => 'setEmail'    ];
 
     /**
@@ -150,15 +162,18 @@ class Partner implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'street2' => 'getStreet2',
+'company_group_number' => 'getCompanyGroupNumber',
 'phone' => 'getPhone',
 'street' => 'getStreet',
+'partner' => 'getPartner',
+'partner_id' => 'getPartnerId',
 'id' => 'getId',
 'city' => 'getCity',
 'name' => 'getName',
 'zip' => 'getZip',
-'mobile' => 'getMobile',
+'tradename_number' => 'getTradenameNumber',
 'country' => 'getCountry',
-'ref' => 'getRef',
+'parent_id' => 'getParentId',
 'email' => 'getEmail'    ];
 
     /**
@@ -220,15 +235,18 @@ class Partner implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['street2'] = isset($data['street2']) ? $data['street2'] : null;
+        $this->container['company_group_number'] = isset($data['company_group_number']) ? $data['company_group_number'] : null;
         $this->container['phone'] = isset($data['phone']) ? $data['phone'] : null;
         $this->container['street'] = isset($data['street']) ? $data['street'] : null;
+        $this->container['partner'] = isset($data['partner']) ? $data['partner'] : null;
+        $this->container['partner_id'] = isset($data['partner_id']) ? $data['partner_id'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['city'] = isset($data['city']) ? $data['city'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['zip'] = isset($data['zip']) ? $data['zip'] : null;
-        $this->container['mobile'] = isset($data['mobile']) ? $data['mobile'] : null;
+        $this->container['tradename_number'] = isset($data['tradename_number']) ? $data['tradename_number'] : null;
         $this->container['country'] = isset($data['country']) ? $data['country'] : null;
-        $this->container['ref'] = isset($data['ref']) ? $data['ref'] : null;
+        $this->container['parent_id'] = isset($data['parent_id']) ? $data['parent_id'] : null;
         $this->container['email'] = isset($data['email']) ? $data['email'] : null;
     }
 
@@ -241,6 +259,12 @@ class Partner implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['partner'] === null) {
+            $invalidProperties[] = "'partner' can't be null";
+        }
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -276,6 +300,30 @@ class Partner implements ModelInterface, ArrayAccess
     public function setStreet2($street2)
     {
         $this->container['street2'] = $street2;
+
+        return $this;
+    }
+
+    /**
+     * Gets company_group_number
+     *
+     * @return int
+     */
+    public function getCompanyGroupNumber()
+    {
+        return $this->container['company_group_number'];
+    }
+
+    /**
+     * Sets company_group_number
+     *
+     * @param int $company_group_number company_group_number
+     *
+     * @return $this
+     */
+    public function setCompanyGroupNumber($company_group_number)
+    {
+        $this->container['company_group_number'] = $company_group_number;
 
         return $this;
     }
@@ -324,6 +372,54 @@ class Partner implements ModelInterface, ArrayAccess
     public function setStreet($street)
     {
         $this->container['street'] = $street;
+
+        return $this;
+    }
+
+    /**
+     * Gets partner
+     *
+     * @return \Carooline\Model\Partner
+     */
+    public function getPartner()
+    {
+        return $this->container['partner'];
+    }
+
+    /**
+     * Sets partner
+     *
+     * @param \Carooline\Model\Partner $partner partner
+     *
+     * @return $this
+     */
+    public function setPartner($partner)
+    {
+        $this->container['partner'] = $partner;
+
+        return $this;
+    }
+
+    /**
+     * Gets partner_id
+     *
+     * @return int
+     */
+    public function getPartnerId()
+    {
+        return $this->container['partner_id'];
+    }
+
+    /**
+     * Sets partner_id
+     *
+     * @param int $partner_id partner_id
+     *
+     * @return $this
+     */
+    public function setPartnerId($partner_id)
+    {
+        $this->container['partner_id'] = $partner_id;
 
         return $this;
     }
@@ -425,25 +521,25 @@ class Partner implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets mobile
+     * Gets tradename_number
      *
-     * @return string
+     * @return int
      */
-    public function getMobile()
+    public function getTradenameNumber()
     {
-        return $this->container['mobile'];
+        return $this->container['tradename_number'];
     }
 
     /**
-     * Sets mobile
+     * Sets tradename_number
      *
-     * @param string $mobile mobile
+     * @param int $tradename_number tradename_number
      *
      * @return $this
      */
-    public function setMobile($mobile)
+    public function setTradenameNumber($tradename_number)
     {
-        $this->container['mobile'] = $mobile;
+        $this->container['tradename_number'] = $tradename_number;
 
         return $this;
     }
@@ -473,25 +569,25 @@ class Partner implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets ref
+     * Gets parent_id
      *
-     * @return string
+     * @return int
      */
-    public function getRef()
+    public function getParentId()
     {
-        return $this->container['ref'];
+        return $this->container['parent_id'];
     }
 
     /**
-     * Sets ref
+     * Sets parent_id
      *
-     * @param string $ref ref
+     * @param int $parent_id parent_id
      *
      * @return $this
      */
-    public function setRef($ref)
+    public function setParentId($parent_id)
     {
-        $this->container['ref'] = $ref;
+        $this->container['parent_id'] = $parent_id;
 
         return $this;
     }

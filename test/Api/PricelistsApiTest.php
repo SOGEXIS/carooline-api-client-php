@@ -102,7 +102,7 @@ class PricelistsApiTest extends \PHPUnit\Framework\TestCase
             $this->assertInstanceOf(\Carooline\Model\Pricelist::class, $pricelist);
         }
         
-        $result = $this->pricelistApi->pricelistsGet("catal");
+        $result = $this->pricelistApi->pricelistsGet(null, "catal");
         $this->assertInstanceOf(PricelistSearchResponse::class, $result);
         $this->assertEquals(1, $result->getCount());
         foreach ($result->getRows() as $pricelist) {
@@ -113,6 +113,9 @@ class PricelistsApiTest extends \PHPUnit\Framework\TestCase
             $this->assertEquals(8, $pricelist->getVersionId());
             $this->assertEquals("Liste de prix catalogue", $pricelist->getName());
         }
+        $result = $this->pricelistApi->pricelistsGet(2);
+        $this->assertInstanceOf(PricelistSearchResponse::class, $result);
+        $this->assertEquals(0, $result->getCount());
     }
 
     /**

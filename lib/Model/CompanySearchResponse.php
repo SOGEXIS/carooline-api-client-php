@@ -1,6 +1,6 @@
 <?php
 /**
- * PartnerUpdateRequest
+ * CompanySearchResponse
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ use \ArrayAccess;
 use \Carooline\ObjectSerializer;
 
 /**
- * PartnerUpdateRequest Class Doc Comment
+ * CompanySearchResponse Class Doc Comment
  *
  * @category Class
  * @package  Carooline
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class PartnerUpdateRequest implements ModelInterface, ArrayAccess
+class CompanySearchResponse implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class PartnerUpdateRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PartnerUpdateRequest';
+    protected static $swaggerModelName = 'CompanySearchResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,15 +56,8 @@ class PartnerUpdateRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'city' => 'string',
-'street' => 'string',
-'name' => 'string',
-'zip' => 'string',
-'phone' => 'string',
-'mobile' => 'string',
-'country' => 'string',
-'street2' => 'string',
-'email' => 'string'    ];
+        'count' => 'int',
+'rows' => '\Carooline\Model\Company[]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -72,15 +65,8 @@ class PartnerUpdateRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'city' => null,
-'street' => null,
-'name' => null,
-'zip' => null,
-'phone' => null,
-'mobile' => null,
-'country' => null,
-'street2' => null,
-'email' => null    ];
+        'count' => null,
+'rows' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -109,15 +95,8 @@ class PartnerUpdateRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'city' => 'city',
-'street' => 'street',
-'name' => 'name',
-'zip' => 'zip',
-'phone' => 'phone',
-'mobile' => 'mobile',
-'country' => 'country',
-'street2' => 'street2',
-'email' => 'email'    ];
+        'count' => 'count',
+'rows' => 'rows'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -125,15 +104,8 @@ class PartnerUpdateRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'city' => 'setCity',
-'street' => 'setStreet',
-'name' => 'setName',
-'zip' => 'setZip',
-'phone' => 'setPhone',
-'mobile' => 'setMobile',
-'country' => 'setCountry',
-'street2' => 'setStreet2',
-'email' => 'setEmail'    ];
+        'count' => 'setCount',
+'rows' => 'setRows'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -141,15 +113,8 @@ class PartnerUpdateRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'city' => 'getCity',
-'street' => 'getStreet',
-'name' => 'getName',
-'zip' => 'getZip',
-'phone' => 'getPhone',
-'mobile' => 'getMobile',
-'country' => 'getCountry',
-'street2' => 'getStreet2',
-'email' => 'getEmail'    ];
+        'count' => 'getCount',
+'rows' => 'getRows'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -209,15 +174,8 @@ class PartnerUpdateRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['city'] = isset($data['city']) ? $data['city'] : null;
-        $this->container['street'] = isset($data['street']) ? $data['street'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['zip'] = isset($data['zip']) ? $data['zip'] : null;
-        $this->container['phone'] = isset($data['phone']) ? $data['phone'] : null;
-        $this->container['mobile'] = isset($data['mobile']) ? $data['mobile'] : null;
-        $this->container['country'] = isset($data['country']) ? $data['country'] : null;
-        $this->container['street2'] = isset($data['street2']) ? $data['street2'] : null;
-        $this->container['email'] = isset($data['email']) ? $data['email'] : null;
+        $this->container['count'] = isset($data['count']) ? $data['count'] : null;
+        $this->container['rows'] = isset($data['rows']) ? $data['rows'] : null;
     }
 
     /**
@@ -229,6 +187,12 @@ class PartnerUpdateRequest implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['count'] === null) {
+            $invalidProperties[] = "'count' can't be null";
+        }
+        if ($this->container['rows'] === null) {
+            $invalidProperties[] = "'rows' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -245,217 +209,49 @@ class PartnerUpdateRequest implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets city
+     * Gets count
      *
-     * @return string
+     * @return int
      */
-    public function getCity()
+    public function getCount()
     {
-        return $this->container['city'];
+        return $this->container['count'];
     }
 
     /**
-     * Sets city
+     * Sets count
      *
-     * @param string $city city
+     * @param int $count count
      *
      * @return $this
      */
-    public function setCity($city)
+    public function setCount($count)
     {
-        $this->container['city'] = $city;
+        $this->container['count'] = $count;
 
         return $this;
     }
 
     /**
-     * Gets street
+     * Gets rows
      *
-     * @return string
+     * @return \Carooline\Model\Company[]
      */
-    public function getStreet()
+    public function getRows()
     {
-        return $this->container['street'];
+        return $this->container['rows'];
     }
 
     /**
-     * Sets street
+     * Sets rows
      *
-     * @param string $street street
+     * @param \Carooline\Model\Company[] $rows rows
      *
      * @return $this
      */
-    public function setStreet($street)
+    public function setRows($rows)
     {
-        $this->container['street'] = $street;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets zip
-     *
-     * @return string
-     */
-    public function getZip()
-    {
-        return $this->container['zip'];
-    }
-
-    /**
-     * Sets zip
-     *
-     * @param string $zip zip
-     *
-     * @return $this
-     */
-    public function setZip($zip)
-    {
-        $this->container['zip'] = $zip;
-
-        return $this;
-    }
-
-    /**
-     * Gets phone
-     *
-     * @return string
-     */
-    public function getPhone()
-    {
-        return $this->container['phone'];
-    }
-
-    /**
-     * Sets phone
-     *
-     * @param string $phone phone
-     *
-     * @return $this
-     */
-    public function setPhone($phone)
-    {
-        $this->container['phone'] = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Gets mobile
-     *
-     * @return string
-     */
-    public function getMobile()
-    {
-        return $this->container['mobile'];
-    }
-
-    /**
-     * Sets mobile
-     *
-     * @param string $mobile mobile
-     *
-     * @return $this
-     */
-    public function setMobile($mobile)
-    {
-        $this->container['mobile'] = $mobile;
-
-        return $this;
-    }
-
-    /**
-     * Gets country
-     *
-     * @return string
-     */
-    public function getCountry()
-    {
-        return $this->container['country'];
-    }
-
-    /**
-     * Sets country
-     *
-     * @param string $country country
-     *
-     * @return $this
-     */
-    public function setCountry($country)
-    {
-        $this->container['country'] = $country;
-
-        return $this;
-    }
-
-    /**
-     * Gets street2
-     *
-     * @return string
-     */
-    public function getStreet2()
-    {
-        return $this->container['street2'];
-    }
-
-    /**
-     * Sets street2
-     *
-     * @param string $street2 street2
-     *
-     * @return $this
-     */
-    public function setStreet2($street2)
-    {
-        $this->container['street2'] = $street2;
-
-        return $this;
-    }
-
-    /**
-     * Gets email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->container['email'];
-    }
-
-    /**
-     * Sets email
-     *
-     * @param string $email email
-     *
-     * @return $this
-     */
-    public function setEmail($email)
-    {
-        $this->container['email'] = $email;
+        $this->container['rows'] = $rows;
 
         return $this;
     }

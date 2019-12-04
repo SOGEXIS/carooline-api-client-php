@@ -59,6 +59,7 @@ class PartnerCreateRequest implements ModelInterface, ArrayAccess
         'city' => 'string',
 'street' => 'string',
 'name' => 'string',
+'zip' => 'string',
 'phone' => 'string',
 'mobile' => 'string',
 'country' => 'string',
@@ -74,6 +75,7 @@ class PartnerCreateRequest implements ModelInterface, ArrayAccess
         'city' => null,
 'street' => null,
 'name' => null,
+'zip' => null,
 'phone' => null,
 'mobile' => null,
 'country' => null,
@@ -110,6 +112,7 @@ class PartnerCreateRequest implements ModelInterface, ArrayAccess
         'city' => 'city',
 'street' => 'street',
 'name' => 'name',
+'zip' => 'zip',
 'phone' => 'phone',
 'mobile' => 'mobile',
 'country' => 'country',
@@ -125,6 +128,7 @@ class PartnerCreateRequest implements ModelInterface, ArrayAccess
         'city' => 'setCity',
 'street' => 'setStreet',
 'name' => 'setName',
+'zip' => 'setZip',
 'phone' => 'setPhone',
 'mobile' => 'setMobile',
 'country' => 'setCountry',
@@ -140,6 +144,7 @@ class PartnerCreateRequest implements ModelInterface, ArrayAccess
         'city' => 'getCity',
 'street' => 'getStreet',
 'name' => 'getName',
+'zip' => 'getZip',
 'phone' => 'getPhone',
 'mobile' => 'getMobile',
 'country' => 'getCountry',
@@ -207,6 +212,7 @@ class PartnerCreateRequest implements ModelInterface, ArrayAccess
         $this->container['city'] = isset($data['city']) ? $data['city'] : null;
         $this->container['street'] = isset($data['street']) ? $data['street'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['zip'] = isset($data['zip']) ? $data['zip'] : null;
         $this->container['phone'] = isset($data['phone']) ? $data['phone'] : null;
         $this->container['mobile'] = isset($data['mobile']) ? $data['mobile'] : null;
         $this->container['country'] = isset($data['country']) ? $data['country'] : null;
@@ -312,6 +318,30 @@ class PartnerCreateRequest implements ModelInterface, ArrayAccess
     public function setName($name)
     {
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets zip
+     *
+     * @return string
+     */
+    public function getZip()
+    {
+        return $this->container['zip'];
+    }
+
+    /**
+     * Sets zip
+     *
+     * @param string $zip zip
+     *
+     * @return $this
+     */
+    public function setZip($zip)
+    {
+        $this->container['zip'] = $zip;
 
         return $this;
     }
