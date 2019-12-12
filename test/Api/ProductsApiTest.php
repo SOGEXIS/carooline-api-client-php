@@ -221,6 +221,16 @@ class ProductsApiTest extends \PHPUnit\Framework\TestCase
         $result = $this->productApi->productsOmnisearchPost($body);
         $this->assertInstanceOf(\Carooline\Model\ProductSearchResponse::class, $result);
         $this->assertEquals(1, $result->getCount());
+        
+        
+        // Ref of a HELLA product with one equivalence 8DZ 355 209-121
+        // No vehicle selected
+        $body = new OmniSearchProductsRequest([
+            'search_query' => '8DZ 355 209-121'
+        ]);
+        $result = $this->productApi->productsOmnisearchPost($body);
+        $this->assertInstanceOf(\Carooline\Model\ProductSearchResponse::class, $result);
+        $this->assertEquals(2, $result->getCount());
     }
 
 
