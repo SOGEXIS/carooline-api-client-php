@@ -37,6 +37,8 @@ use Carooline\Model\LoginRequest;
 use Carooline\Model\GetAllAvailabilitiesResponse;
 use Carooline\Model\GetAllAvailabilitiesRequest;
 use Carooline\Model\ProductUpdateRequest;
+use Carooline\Model\SearchProductsForVehicleAndCategoryRequest;
+use Carooline\Model\OmniSearchProductsRequest;
 
 /**
  * ProductsApiTest Class Doc Comment
@@ -101,7 +103,8 @@ class ProductsApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testProductsGet()
     {
-        $result = $this->productApi->productsGet(null, null, "1 457 433 526");
+        // productsGet($categ_id = null, $manufacturer_id = null, $name = null, $ref = null)
+        $result = $this->productApi->productsGet(null, null, null, "1 457 433 526");
         $this->assertInstanceOf(\Carooline\Model\ProductSearchResponse::class, $result);
         $this->assertGreaterThanOrEqual(1, $result->getCount());
         foreach ($result->getRows() as $product) {
@@ -171,4 +174,81 @@ class ProductsApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(74891, $result->getId());
         $this->assertEquals(30.80, $result->getListPrice());
     }
+    
+    /**
+     * Test case for productsOmnisearchPost
+     *
+     * Get Products for a search term. Search term can be a Ref or Product name. If a vehicle_qery is set, all the results will be compatible with it.
+     *
+     */
+    public function testProductsOmnisearchPost()
+    {
+        // 3878 plaquette de frein
+        // type_id PEUGEOT 206: 13558
+        // k_type PEUGEOT 206: '30091'
+        // Search ref TEXTAR 2359703
+        // Brand MINTEXT id = 142
+        $body = new OmniSearchProductsRequest([
+            'vehicle_query' => '13558',
+            'search_query' => '2359703'
+        ]);
+        $result = $this->productApi->productsOmnisearchPost($body);
+        $this->assertInstanceOf(\Carooline\Model\ProductSearchResponse::class, $result);
+        $this->assertGreaterThanOrEqual(2, $result->getCount());
+        
+        //only One HELLA product (manufacturer_id = 76)
+        $body->setManufacturerId(142);
+        $result = $this->productApi->productsOmnisearchPost($body);
+        $this->assertInstanceOf(\Carooline\Model\ProductSearchResponse::class, $result);
+        $this->assertEquals(1, $result->getCount());
+        
+        $body = new OmniSearchProductsRequest([
+            'vehicle_query' => '13558',
+            'search_query' => 'disque de frein'
+        ]);
+        $result = $this->productApi->productsOmnisearchPost($body);
+        $this->assertInstanceOf(\Carooline\Model\ProductSearchResponse::class, $result);
+        $this->assertGreaterThanOrEqual(10, $result->getCount());
+        
+        // Categ id : 3875 Disques
+        $body->setCategId(3875);
+        $result = $this->productApi->productsOmnisearchPost($body);
+        $this->assertInstanceOf(\Carooline\Model\ProductSearchResponse::class, $result);
+        $this->assertEquals(7, $result->getCount());
+        
+        // Only HELLA product (manufacturer_id = 76)
+        $body->setManufacturerId(76);
+        $result = $this->productApi->productsOmnisearchPost($body);
+        $this->assertInstanceOf(\Carooline\Model\ProductSearchResponse::class, $result);
+        $this->assertEquals(1, $result->getCount());
+    }
+
+
+    /**
+     * Test case for productsGetForVehicleAndCategoryPost
+     *
+     * Get Products for a given Category and selected Vehicle type id or ktype.
+     *
+     */
+    public function testProductsGetForVehicleAndCategoryPost()
+    {
+        // 3878 plaquette de frein
+        // type_id PEUGEOT 206: 13558
+        // k_type PEUGEOT 206: '30091'
+        $body = new SearchProductsForVehicleAndCategoryRequest([
+            'vehicle_query' => '30091',
+            'vehicle_query_type' => 'k_type',
+            'categ_id' => 3878
+        ]);
+        $result = $this->productApi->productsGetForVehicleAndCategoryPost($body);
+        $this->assertInstanceOf(\Carooline\Model\ProductSearchResponse::class, $result);
+        $this->assertGreaterThanOrEqual(5, $result->getCount());
+        
+        //only One HELLA product (manufacturer_id = 76)
+        $body->setManufacturerId(76);
+        $result = $this->productApi->productsGetForVehicleAndCategoryPost($body);
+        $this->assertInstanceOf(\Carooline\Model\ProductSearchResponse::class, $result);
+        $this->assertEquals(1, $result->getCount());
+    }
+
 }

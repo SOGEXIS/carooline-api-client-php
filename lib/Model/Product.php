@@ -56,34 +56,41 @@ class Product implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'list_price' => 'float',
+        'vehicle_specificities' => '\Carooline\Model\ProductVehicleSpecificities[]',
+'categ' => '\Carooline\Model\ProductCateg',
+'list_price' => 'float',
 'tire_width' => 'string',
+'price_ht' => 'float',
 'tire_is_runflat' => 'bool',
+'consigne_price' => 'float',
+'tire_scale' => 'string',
+'full_picture_url' => 'string',
+'oe_references_list' => '\Carooline\Model\ProductOeReferencesList[]',
+'tire_eu_db' => 'int',
+'is_equivalence_to' => 'string',
 'default_code' => 'string',
+'is_equivalence_result' => 'bool',
+'active' => 'bool',
+'tire_eu_adherence_id' => 'string',
+'tecdoc_specificities' => '\Carooline\Model\ProductVehicleSpecificities[]',
+'price_ttc' => 'float',
 'id' => 'int',
+'short_codes' => 'string',
+'sale_ok' => 'bool',
 'tire_diameter' => 'string',
 'real_qty_available' => 'float',
-'sale_ok' => 'bool',
+'name' => 'string',
 'is_tire' => 'bool',
 'tire_is_reinforced' => 'bool',
 'tire_speed' => 'string',
-'type' => 'string',
-'tire_load' => 'string',
-'categ' => '\Carooline\Model\ProductCateg',
-'price_ht' => 'float',
-'consigne_price' => 'float',
-'tire_scale' => 'string',
-'tire_eu_db' => 'int',
-'full_picture_url' => 'string',
-'active' => 'bool',
-'tire_eu_adherence_id' => 'string',
-'price_ttc' => 'float',
-'short_codes' => 'string',
-'manufacturer' => '\Carooline\Model\ProductManufacturer',
-'name' => 'string',
 'tire_height' => 'string',
+'tire_load' => 'string',
+'linked_vehicle_types' => '\Carooline\Model\ProductLinkedVehicleTypes[]',
+'equiv_references_list' => '\Carooline\Model\ProductOeReferencesList[]',
 'tire_type' => 'string',
-'tire_eu_eco' => 'string'    ];
+'tire_eu_eco' => 'string',
+'manufacturer' => '\Carooline\Model\ProductManufacturer',
+'type' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -91,34 +98,41 @@ class Product implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'list_price' => 'float',
+        'vehicle_specificities' => null,
+'categ' => null,
+'list_price' => 'float',
 'tire_width' => null,
+'price_ht' => 'float',
 'tire_is_runflat' => null,
+'consigne_price' => 'float',
+'tire_scale' => null,
+'full_picture_url' => null,
+'oe_references_list' => null,
+'tire_eu_db' => null,
+'is_equivalence_to' => null,
 'default_code' => null,
+'is_equivalence_result' => null,
+'active' => null,
+'tire_eu_adherence_id' => null,
+'tecdoc_specificities' => null,
+'price_ttc' => 'float',
 'id' => null,
+'short_codes' => null,
+'sale_ok' => null,
 'tire_diameter' => null,
 'real_qty_available' => 'float',
-'sale_ok' => null,
+'name' => null,
 'is_tire' => null,
 'tire_is_reinforced' => null,
 'tire_speed' => null,
-'type' => null,
-'tire_load' => null,
-'categ' => null,
-'price_ht' => 'float',
-'consigne_price' => 'float',
-'tire_scale' => null,
-'tire_eu_db' => null,
-'full_picture_url' => null,
-'active' => null,
-'tire_eu_adherence_id' => null,
-'price_ttc' => 'float',
-'short_codes' => null,
-'manufacturer' => null,
-'name' => null,
 'tire_height' => null,
+'tire_load' => null,
+'linked_vehicle_types' => null,
+'equiv_references_list' => null,
 'tire_type' => null,
-'tire_eu_eco' => null    ];
+'tire_eu_eco' => null,
+'manufacturer' => null,
+'type' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -147,34 +161,41 @@ class Product implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'list_price' => 'list_price',
+        'vehicle_specificities' => 'vehicle_specificities',
+'categ' => 'categ',
+'list_price' => 'list_price',
 'tire_width' => 'tire_width',
+'price_ht' => 'price_ht',
 'tire_is_runflat' => 'tire_is_runflat',
+'consigne_price' => 'consigne_price',
+'tire_scale' => 'tire_scale',
+'full_picture_url' => 'full_picture_url',
+'oe_references_list' => 'oe_references_list',
+'tire_eu_db' => 'tire_eu_db',
+'is_equivalence_to' => 'is_equivalence_to',
 'default_code' => 'default_code',
+'is_equivalence_result' => 'is_equivalence_result',
+'active' => 'active',
+'tire_eu_adherence_id' => 'tire_eu_adherence_id',
+'tecdoc_specificities' => 'tecdoc_specificities',
+'price_ttc' => 'price_ttc',
 'id' => 'id',
+'short_codes' => 'short_codes',
+'sale_ok' => 'sale_ok',
 'tire_diameter' => 'tire_diameter',
 'real_qty_available' => 'real_qty_available',
-'sale_ok' => 'sale_ok',
+'name' => 'name',
 'is_tire' => 'is_tire',
 'tire_is_reinforced' => 'tire_is_reinforced',
 'tire_speed' => 'tire_speed',
-'type' => 'type',
-'tire_load' => 'tire_load',
-'categ' => 'categ',
-'price_ht' => 'price_ht',
-'consigne_price' => 'consigne_price',
-'tire_scale' => 'tire_scale',
-'tire_eu_db' => 'tire_eu_db',
-'full_picture_url' => 'full_picture_url',
-'active' => 'active',
-'tire_eu_adherence_id' => 'tire_eu_adherence_id',
-'price_ttc' => 'price_ttc',
-'short_codes' => 'short_codes',
-'manufacturer' => 'manufacturer',
-'name' => 'name',
 'tire_height' => 'tire_height',
+'tire_load' => 'tire_load',
+'linked_vehicle_types' => 'linked_vehicle_types',
+'equiv_references_list' => 'equiv_references_list',
 'tire_type' => 'tire_type',
-'tire_eu_eco' => 'tire_eu_eco'    ];
+'tire_eu_eco' => 'tire_eu_eco',
+'manufacturer' => 'manufacturer',
+'type' => 'type'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -182,34 +203,41 @@ class Product implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'list_price' => 'setListPrice',
+        'vehicle_specificities' => 'setVehicleSpecificities',
+'categ' => 'setCateg',
+'list_price' => 'setListPrice',
 'tire_width' => 'setTireWidth',
+'price_ht' => 'setPriceHt',
 'tire_is_runflat' => 'setTireIsRunflat',
+'consigne_price' => 'setConsignePrice',
+'tire_scale' => 'setTireScale',
+'full_picture_url' => 'setFullPictureUrl',
+'oe_references_list' => 'setOeReferencesList',
+'tire_eu_db' => 'setTireEuDb',
+'is_equivalence_to' => 'setIsEquivalenceTo',
 'default_code' => 'setDefaultCode',
+'is_equivalence_result' => 'setIsEquivalenceResult',
+'active' => 'setActive',
+'tire_eu_adherence_id' => 'setTireEuAdherenceId',
+'tecdoc_specificities' => 'setTecdocSpecificities',
+'price_ttc' => 'setPriceTtc',
 'id' => 'setId',
+'short_codes' => 'setShortCodes',
+'sale_ok' => 'setSaleOk',
 'tire_diameter' => 'setTireDiameter',
 'real_qty_available' => 'setRealQtyAvailable',
-'sale_ok' => 'setSaleOk',
+'name' => 'setName',
 'is_tire' => 'setIsTire',
 'tire_is_reinforced' => 'setTireIsReinforced',
 'tire_speed' => 'setTireSpeed',
-'type' => 'setType',
-'tire_load' => 'setTireLoad',
-'categ' => 'setCateg',
-'price_ht' => 'setPriceHt',
-'consigne_price' => 'setConsignePrice',
-'tire_scale' => 'setTireScale',
-'tire_eu_db' => 'setTireEuDb',
-'full_picture_url' => 'setFullPictureUrl',
-'active' => 'setActive',
-'tire_eu_adherence_id' => 'setTireEuAdherenceId',
-'price_ttc' => 'setPriceTtc',
-'short_codes' => 'setShortCodes',
-'manufacturer' => 'setManufacturer',
-'name' => 'setName',
 'tire_height' => 'setTireHeight',
+'tire_load' => 'setTireLoad',
+'linked_vehicle_types' => 'setLinkedVehicleTypes',
+'equiv_references_list' => 'setEquivReferencesList',
 'tire_type' => 'setTireType',
-'tire_eu_eco' => 'setTireEuEco'    ];
+'tire_eu_eco' => 'setTireEuEco',
+'manufacturer' => 'setManufacturer',
+'type' => 'setType'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -217,34 +245,41 @@ class Product implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'list_price' => 'getListPrice',
+        'vehicle_specificities' => 'getVehicleSpecificities',
+'categ' => 'getCateg',
+'list_price' => 'getListPrice',
 'tire_width' => 'getTireWidth',
+'price_ht' => 'getPriceHt',
 'tire_is_runflat' => 'getTireIsRunflat',
+'consigne_price' => 'getConsignePrice',
+'tire_scale' => 'getTireScale',
+'full_picture_url' => 'getFullPictureUrl',
+'oe_references_list' => 'getOeReferencesList',
+'tire_eu_db' => 'getTireEuDb',
+'is_equivalence_to' => 'getIsEquivalenceTo',
 'default_code' => 'getDefaultCode',
+'is_equivalence_result' => 'getIsEquivalenceResult',
+'active' => 'getActive',
+'tire_eu_adherence_id' => 'getTireEuAdherenceId',
+'tecdoc_specificities' => 'getTecdocSpecificities',
+'price_ttc' => 'getPriceTtc',
 'id' => 'getId',
+'short_codes' => 'getShortCodes',
+'sale_ok' => 'getSaleOk',
 'tire_diameter' => 'getTireDiameter',
 'real_qty_available' => 'getRealQtyAvailable',
-'sale_ok' => 'getSaleOk',
+'name' => 'getName',
 'is_tire' => 'getIsTire',
 'tire_is_reinforced' => 'getTireIsReinforced',
 'tire_speed' => 'getTireSpeed',
-'type' => 'getType',
-'tire_load' => 'getTireLoad',
-'categ' => 'getCateg',
-'price_ht' => 'getPriceHt',
-'consigne_price' => 'getConsignePrice',
-'tire_scale' => 'getTireScale',
-'tire_eu_db' => 'getTireEuDb',
-'full_picture_url' => 'getFullPictureUrl',
-'active' => 'getActive',
-'tire_eu_adherence_id' => 'getTireEuAdherenceId',
-'price_ttc' => 'getPriceTtc',
-'short_codes' => 'getShortCodes',
-'manufacturer' => 'getManufacturer',
-'name' => 'getName',
 'tire_height' => 'getTireHeight',
+'tire_load' => 'getTireLoad',
+'linked_vehicle_types' => 'getLinkedVehicleTypes',
+'equiv_references_list' => 'getEquivReferencesList',
 'tire_type' => 'getTireType',
-'tire_eu_eco' => 'getTireEuEco'    ];
+'tire_eu_eco' => 'getTireEuEco',
+'manufacturer' => 'getManufacturer',
+'type' => 'getType'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -304,34 +339,41 @@ class Product implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['vehicle_specificities'] = isset($data['vehicle_specificities']) ? $data['vehicle_specificities'] : null;
+        $this->container['categ'] = isset($data['categ']) ? $data['categ'] : null;
         $this->container['list_price'] = isset($data['list_price']) ? $data['list_price'] : null;
         $this->container['tire_width'] = isset($data['tire_width']) ? $data['tire_width'] : null;
+        $this->container['price_ht'] = isset($data['price_ht']) ? $data['price_ht'] : null;
         $this->container['tire_is_runflat'] = isset($data['tire_is_runflat']) ? $data['tire_is_runflat'] : null;
+        $this->container['consigne_price'] = isset($data['consigne_price']) ? $data['consigne_price'] : null;
+        $this->container['tire_scale'] = isset($data['tire_scale']) ? $data['tire_scale'] : null;
+        $this->container['full_picture_url'] = isset($data['full_picture_url']) ? $data['full_picture_url'] : null;
+        $this->container['oe_references_list'] = isset($data['oe_references_list']) ? $data['oe_references_list'] : null;
+        $this->container['tire_eu_db'] = isset($data['tire_eu_db']) ? $data['tire_eu_db'] : null;
+        $this->container['is_equivalence_to'] = isset($data['is_equivalence_to']) ? $data['is_equivalence_to'] : null;
         $this->container['default_code'] = isset($data['default_code']) ? $data['default_code'] : null;
+        $this->container['is_equivalence_result'] = isset($data['is_equivalence_result']) ? $data['is_equivalence_result'] : false;
+        $this->container['active'] = isset($data['active']) ? $data['active'] : null;
+        $this->container['tire_eu_adherence_id'] = isset($data['tire_eu_adherence_id']) ? $data['tire_eu_adherence_id'] : null;
+        $this->container['tecdoc_specificities'] = isset($data['tecdoc_specificities']) ? $data['tecdoc_specificities'] : null;
+        $this->container['price_ttc'] = isset($data['price_ttc']) ? $data['price_ttc'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['short_codes'] = isset($data['short_codes']) ? $data['short_codes'] : null;
+        $this->container['sale_ok'] = isset($data['sale_ok']) ? $data['sale_ok'] : null;
         $this->container['tire_diameter'] = isset($data['tire_diameter']) ? $data['tire_diameter'] : null;
         $this->container['real_qty_available'] = isset($data['real_qty_available']) ? $data['real_qty_available'] : null;
-        $this->container['sale_ok'] = isset($data['sale_ok']) ? $data['sale_ok'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['is_tire'] = isset($data['is_tire']) ? $data['is_tire'] : null;
         $this->container['tire_is_reinforced'] = isset($data['tire_is_reinforced']) ? $data['tire_is_reinforced'] : null;
         $this->container['tire_speed'] = isset($data['tire_speed']) ? $data['tire_speed'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['tire_load'] = isset($data['tire_load']) ? $data['tire_load'] : null;
-        $this->container['categ'] = isset($data['categ']) ? $data['categ'] : null;
-        $this->container['price_ht'] = isset($data['price_ht']) ? $data['price_ht'] : null;
-        $this->container['consigne_price'] = isset($data['consigne_price']) ? $data['consigne_price'] : null;
-        $this->container['tire_scale'] = isset($data['tire_scale']) ? $data['tire_scale'] : null;
-        $this->container['tire_eu_db'] = isset($data['tire_eu_db']) ? $data['tire_eu_db'] : null;
-        $this->container['full_picture_url'] = isset($data['full_picture_url']) ? $data['full_picture_url'] : null;
-        $this->container['active'] = isset($data['active']) ? $data['active'] : null;
-        $this->container['tire_eu_adherence_id'] = isset($data['tire_eu_adherence_id']) ? $data['tire_eu_adherence_id'] : null;
-        $this->container['price_ttc'] = isset($data['price_ttc']) ? $data['price_ttc'] : null;
-        $this->container['short_codes'] = isset($data['short_codes']) ? $data['short_codes'] : null;
-        $this->container['manufacturer'] = isset($data['manufacturer']) ? $data['manufacturer'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['tire_height'] = isset($data['tire_height']) ? $data['tire_height'] : null;
+        $this->container['tire_load'] = isset($data['tire_load']) ? $data['tire_load'] : null;
+        $this->container['linked_vehicle_types'] = isset($data['linked_vehicle_types']) ? $data['linked_vehicle_types'] : null;
+        $this->container['equiv_references_list'] = isset($data['equiv_references_list']) ? $data['equiv_references_list'] : null;
         $this->container['tire_type'] = isset($data['tire_type']) ? $data['tire_type'] : null;
         $this->container['tire_eu_eco'] = isset($data['tire_eu_eco']) ? $data['tire_eu_eco'] : null;
+        $this->container['manufacturer'] = isset($data['manufacturer']) ? $data['manufacturer'] : null;
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
     }
 
     /**
@@ -366,6 +408,54 @@ class Product implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets vehicle_specificities
+     *
+     * @return \Carooline\Model\ProductVehicleSpecificities[]
+     */
+    public function getVehicleSpecificities()
+    {
+        return $this->container['vehicle_specificities'];
+    }
+
+    /**
+     * Sets vehicle_specificities
+     *
+     * @param \Carooline\Model\ProductVehicleSpecificities[] $vehicle_specificities vehicle_specificities
+     *
+     * @return $this
+     */
+    public function setVehicleSpecificities($vehicle_specificities)
+    {
+        $this->container['vehicle_specificities'] = $vehicle_specificities;
+
+        return $this;
+    }
+
+    /**
+     * Gets categ
+     *
+     * @return \Carooline\Model\ProductCateg
+     */
+    public function getCateg()
+    {
+        return $this->container['categ'];
+    }
+
+    /**
+     * Sets categ
+     *
+     * @param \Carooline\Model\ProductCateg $categ categ
+     *
+     * @return $this
+     */
+    public function setCateg($categ)
+    {
+        $this->container['categ'] = $categ;
+
+        return $this;
+    }
 
     /**
      * Gets list_price
@@ -416,6 +506,30 @@ class Product implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets price_ht
+     *
+     * @return float
+     */
+    public function getPriceHt()
+    {
+        return $this->container['price_ht'];
+    }
+
+    /**
+     * Sets price_ht
+     *
+     * @param float $price_ht price_ht
+     *
+     * @return $this
+     */
+    public function setPriceHt($price_ht)
+    {
+        $this->container['price_ht'] = $price_ht;
+
+        return $this;
+    }
+
+    /**
      * Gets tire_is_runflat
      *
      * @return bool
@@ -435,6 +549,150 @@ class Product implements ModelInterface, ArrayAccess
     public function setTireIsRunflat($tire_is_runflat)
     {
         $this->container['tire_is_runflat'] = $tire_is_runflat;
+
+        return $this;
+    }
+
+    /**
+     * Gets consigne_price
+     *
+     * @return float
+     */
+    public function getConsignePrice()
+    {
+        return $this->container['consigne_price'];
+    }
+
+    /**
+     * Sets consigne_price
+     *
+     * @param float $consigne_price consigne_price
+     *
+     * @return $this
+     */
+    public function setConsignePrice($consigne_price)
+    {
+        $this->container['consigne_price'] = $consigne_price;
+
+        return $this;
+    }
+
+    /**
+     * Gets tire_scale
+     *
+     * @return string
+     */
+    public function getTireScale()
+    {
+        return $this->container['tire_scale'];
+    }
+
+    /**
+     * Sets tire_scale
+     *
+     * @param string $tire_scale tire_scale
+     *
+     * @return $this
+     */
+    public function setTireScale($tire_scale)
+    {
+        $this->container['tire_scale'] = $tire_scale;
+
+        return $this;
+    }
+
+    /**
+     * Gets full_picture_url
+     *
+     * @return string
+     */
+    public function getFullPictureUrl()
+    {
+        return $this->container['full_picture_url'];
+    }
+
+    /**
+     * Sets full_picture_url
+     *
+     * @param string $full_picture_url full_picture_url
+     *
+     * @return $this
+     */
+    public function setFullPictureUrl($full_picture_url)
+    {
+        $this->container['full_picture_url'] = $full_picture_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets oe_references_list
+     *
+     * @return \Carooline\Model\ProductOeReferencesList[]
+     */
+    public function getOeReferencesList()
+    {
+        return $this->container['oe_references_list'];
+    }
+
+    /**
+     * Sets oe_references_list
+     *
+     * @param \Carooline\Model\ProductOeReferencesList[] $oe_references_list oe_references_list
+     *
+     * @return $this
+     */
+    public function setOeReferencesList($oe_references_list)
+    {
+        $this->container['oe_references_list'] = $oe_references_list;
+
+        return $this;
+    }
+
+    /**
+     * Gets tire_eu_db
+     *
+     * @return int
+     */
+    public function getTireEuDb()
+    {
+        return $this->container['tire_eu_db'];
+    }
+
+    /**
+     * Sets tire_eu_db
+     *
+     * @param int $tire_eu_db tire_eu_db
+     *
+     * @return $this
+     */
+    public function setTireEuDb($tire_eu_db)
+    {
+        $this->container['tire_eu_db'] = $tire_eu_db;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_equivalence_to
+     *
+     * @return string
+     */
+    public function getIsEquivalenceTo()
+    {
+        return $this->container['is_equivalence_to'];
+    }
+
+    /**
+     * Sets is_equivalence_to
+     *
+     * @param string $is_equivalence_to is_equivalence_to
+     *
+     * @return $this
+     */
+    public function setIsEquivalenceTo($is_equivalence_to)
+    {
+        $this->container['is_equivalence_to'] = $is_equivalence_to;
 
         return $this;
     }
@@ -464,6 +722,126 @@ class Product implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets is_equivalence_result
+     *
+     * @return bool
+     */
+    public function getIsEquivalenceResult()
+    {
+        return $this->container['is_equivalence_result'];
+    }
+
+    /**
+     * Sets is_equivalence_result
+     *
+     * @param bool $is_equivalence_result is_equivalence_result
+     *
+     * @return $this
+     */
+    public function setIsEquivalenceResult($is_equivalence_result)
+    {
+        $this->container['is_equivalence_result'] = $is_equivalence_result;
+
+        return $this;
+    }
+
+    /**
+     * Gets active
+     *
+     * @return bool
+     */
+    public function getActive()
+    {
+        return $this->container['active'];
+    }
+
+    /**
+     * Sets active
+     *
+     * @param bool $active active
+     *
+     * @return $this
+     */
+    public function setActive($active)
+    {
+        $this->container['active'] = $active;
+
+        return $this;
+    }
+
+    /**
+     * Gets tire_eu_adherence_id
+     *
+     * @return string
+     */
+    public function getTireEuAdherenceId()
+    {
+        return $this->container['tire_eu_adherence_id'];
+    }
+
+    /**
+     * Sets tire_eu_adherence_id
+     *
+     * @param string $tire_eu_adherence_id tire_eu_adherence_id
+     *
+     * @return $this
+     */
+    public function setTireEuAdherenceId($tire_eu_adherence_id)
+    {
+        $this->container['tire_eu_adherence_id'] = $tire_eu_adherence_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets tecdoc_specificities
+     *
+     * @return \Carooline\Model\ProductVehicleSpecificities[]
+     */
+    public function getTecdocSpecificities()
+    {
+        return $this->container['tecdoc_specificities'];
+    }
+
+    /**
+     * Sets tecdoc_specificities
+     *
+     * @param \Carooline\Model\ProductVehicleSpecificities[] $tecdoc_specificities tecdoc_specificities
+     *
+     * @return $this
+     */
+    public function setTecdocSpecificities($tecdoc_specificities)
+    {
+        $this->container['tecdoc_specificities'] = $tecdoc_specificities;
+
+        return $this;
+    }
+
+    /**
+     * Gets price_ttc
+     *
+     * @return float
+     */
+    public function getPriceTtc()
+    {
+        return $this->container['price_ttc'];
+    }
+
+    /**
+     * Sets price_ttc
+     *
+     * @param float $price_ttc price_ttc
+     *
+     * @return $this
+     */
+    public function setPriceTtc($price_ttc)
+    {
+        $this->container['price_ttc'] = $price_ttc;
+
+        return $this;
+    }
+
+    /**
      * Gets id
      *
      * @return int
@@ -483,6 +861,54 @@ class Product implements ModelInterface, ArrayAccess
     public function setId($id)
     {
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets short_codes
+     *
+     * @return string
+     */
+    public function getShortCodes()
+    {
+        return $this->container['short_codes'];
+    }
+
+    /**
+     * Sets short_codes
+     *
+     * @param string $short_codes short_codes
+     *
+     * @return $this
+     */
+    public function setShortCodes($short_codes)
+    {
+        $this->container['short_codes'] = $short_codes;
+
+        return $this;
+    }
+
+    /**
+     * Gets sale_ok
+     *
+     * @return bool
+     */
+    public function getSaleOk()
+    {
+        return $this->container['sale_ok'];
+    }
+
+    /**
+     * Sets sale_ok
+     *
+     * @param bool $sale_ok sale_ok
+     *
+     * @return $this
+     */
+    public function setSaleOk($sale_ok)
+    {
+        $this->container['sale_ok'] = $sale_ok;
 
         return $this;
     }
@@ -536,25 +962,25 @@ class Product implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets sale_ok
+     * Gets name
      *
-     * @return bool
+     * @return string
      */
-    public function getSaleOk()
+    public function getName()
     {
-        return $this->container['sale_ok'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets sale_ok
+     * Sets name
      *
-     * @param bool $sale_ok sale_ok
+     * @param string $name name
      *
      * @return $this
      */
-    public function setSaleOk($sale_ok)
+    public function setName($name)
     {
-        $this->container['sale_ok'] = $sale_ok;
+        $this->container['name'] = $name;
 
         return $this;
     }
@@ -632,25 +1058,25 @@ class Product implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets type
+     * Gets tire_height
      *
      * @return string
      */
-    public function getType()
+    public function getTireHeight()
     {
-        return $this->container['type'];
+        return $this->container['tire_height'];
     }
 
     /**
-     * Sets type
+     * Sets tire_height
      *
-     * @param string $type type
+     * @param string $tire_height tire_height
      *
      * @return $this
      */
-    public function setType($type)
+    public function setTireHeight($tire_height)
     {
-        $this->container['type'] = $type;
+        $this->container['tire_height'] = $tire_height;
 
         return $this;
     }
@@ -680,313 +1106,49 @@ class Product implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets categ
+     * Gets linked_vehicle_types
      *
-     * @return \Carooline\Model\ProductCateg
+     * @return \Carooline\Model\ProductLinkedVehicleTypes[]
      */
-    public function getCateg()
+    public function getLinkedVehicleTypes()
     {
-        return $this->container['categ'];
+        return $this->container['linked_vehicle_types'];
     }
 
     /**
-     * Sets categ
+     * Sets linked_vehicle_types
      *
-     * @param \Carooline\Model\ProductCateg $categ categ
+     * @param \Carooline\Model\ProductLinkedVehicleTypes[] $linked_vehicle_types linked_vehicle_types
      *
      * @return $this
      */
-    public function setCateg($categ)
+    public function setLinkedVehicleTypes($linked_vehicle_types)
     {
-        $this->container['categ'] = $categ;
+        $this->container['linked_vehicle_types'] = $linked_vehicle_types;
 
         return $this;
     }
 
     /**
-     * Gets price_ht
+     * Gets equiv_references_list
      *
-     * @return float
+     * @return \Carooline\Model\ProductOeReferencesList[]
      */
-    public function getPriceHt()
+    public function getEquivReferencesList()
     {
-        return $this->container['price_ht'];
+        return $this->container['equiv_references_list'];
     }
 
     /**
-     * Sets price_ht
+     * Sets equiv_references_list
      *
-     * @param float $price_ht price_ht
+     * @param \Carooline\Model\ProductOeReferencesList[] $equiv_references_list equiv_references_list
      *
      * @return $this
      */
-    public function setPriceHt($price_ht)
+    public function setEquivReferencesList($equiv_references_list)
     {
-        $this->container['price_ht'] = $price_ht;
-
-        return $this;
-    }
-
-    /**
-     * Gets consigne_price
-     *
-     * @return float
-     */
-    public function getConsignePrice()
-    {
-        return $this->container['consigne_price'];
-    }
-
-    /**
-     * Sets consigne_price
-     *
-     * @param float $consigne_price consigne_price
-     *
-     * @return $this
-     */
-    public function setConsignePrice($consigne_price)
-    {
-        $this->container['consigne_price'] = $consigne_price;
-
-        return $this;
-    }
-
-    /**
-     * Gets tire_scale
-     *
-     * @return string
-     */
-    public function getTireScale()
-    {
-        return $this->container['tire_scale'];
-    }
-
-    /**
-     * Sets tire_scale
-     *
-     * @param string $tire_scale tire_scale
-     *
-     * @return $this
-     */
-    public function setTireScale($tire_scale)
-    {
-        $this->container['tire_scale'] = $tire_scale;
-
-        return $this;
-    }
-
-    /**
-     * Gets tire_eu_db
-     *
-     * @return string
-     */
-    public function getTireEuDb()
-    {
-        return $this->container['tire_eu_db'];
-    }
-
-    /**
-     * Sets tire_eu_db
-     *
-     * @param string $tire_eu_db tire_eu_db
-     *
-     * @return $this
-     */
-    public function setTireEuDb($tire_eu_db)
-    {
-        $this->container['tire_eu_db'] = $tire_eu_db;
-
-        return $this;
-    }
-
-    /**
-     * Gets full_picture_url
-     *
-     * @return string
-     */
-    public function getFullPictureUrl()
-    {
-        return $this->container['full_picture_url'];
-    }
-
-    /**
-     * Sets full_picture_url
-     *
-     * @param string $full_picture_url full_picture_url
-     *
-     * @return $this
-     */
-    public function setFullPictureUrl($full_picture_url)
-    {
-        $this->container['full_picture_url'] = $full_picture_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets active
-     *
-     * @return bool
-     */
-    public function getActive()
-    {
-        return $this->container['active'];
-    }
-
-    /**
-     * Sets active
-     *
-     * @param bool $active active
-     *
-     * @return $this
-     */
-    public function setActive($active)
-    {
-        $this->container['active'] = $active;
-
-        return $this;
-    }
-
-    /**
-     * Gets tire_eu_adherence_id
-     *
-     * @return string
-     */
-    public function getTireEuAdherenceId()
-    {
-        return $this->container['tire_eu_adherence_id'];
-    }
-
-    /**
-     * Sets tire_eu_adherence_id
-     *
-     * @param string $tire_eu_adherence_id tire_eu_adherence_id
-     *
-     * @return $this
-     */
-    public function setTireEuAdherenceId($tire_eu_adherence_id)
-    {
-        $this->container['tire_eu_adherence_id'] = $tire_eu_adherence_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets price_ttc
-     *
-     * @return float
-     */
-    public function getPriceTtc()
-    {
-        return $this->container['price_ttc'];
-    }
-
-    /**
-     * Sets price_ttc
-     *
-     * @param float $price_ttc price_ttc
-     *
-     * @return $this
-     */
-    public function setPriceTtc($price_ttc)
-    {
-        $this->container['price_ttc'] = $price_ttc;
-
-        return $this;
-    }
-
-    /**
-     * Gets short_codes
-     *
-     * @return string
-     */
-    public function getShortCodes()
-    {
-        return $this->container['short_codes'];
-    }
-
-    /**
-     * Sets short_codes
-     *
-     * @param string $short_codes short_codes
-     *
-     * @return $this
-     */
-    public function setShortCodes($short_codes)
-    {
-        $this->container['short_codes'] = $short_codes;
-
-        return $this;
-    }
-
-    /**
-     * Gets manufacturer
-     *
-     * @return \Carooline\Model\ProductManufacturer
-     */
-    public function getManufacturer()
-    {
-        return $this->container['manufacturer'];
-    }
-
-    /**
-     * Sets manufacturer
-     *
-     * @param \Carooline\Model\ProductManufacturer $manufacturer manufacturer
-     *
-     * @return $this
-     */
-    public function setManufacturer($manufacturer)
-    {
-        $this->container['manufacturer'] = $manufacturer;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets tire_height
-     *
-     * @return string
-     */
-    public function getTireHeight()
-    {
-        return $this->container['tire_height'];
-    }
-
-    /**
-     * Sets tire_height
-     *
-     * @param string $tire_height tire_height
-     *
-     * @return $this
-     */
-    public function setTireHeight($tire_height)
-    {
-        $this->container['tire_height'] = $tire_height;
+        $this->container['equiv_references_list'] = $equiv_references_list;
 
         return $this;
     }
@@ -1035,6 +1197,54 @@ class Product implements ModelInterface, ArrayAccess
     public function setTireEuEco($tire_eu_eco)
     {
         $this->container['tire_eu_eco'] = $tire_eu_eco;
+
+        return $this;
+    }
+
+    /**
+     * Gets manufacturer
+     *
+     * @return \Carooline\Model\ProductManufacturer
+     */
+    public function getManufacturer()
+    {
+        return $this->container['manufacturer'];
+    }
+
+    /**
+     * Sets manufacturer
+     *
+     * @param \Carooline\Model\ProductManufacturer $manufacturer manufacturer
+     *
+     * @return $this
+     */
+    public function setManufacturer($manufacturer)
+    {
+        $this->container['manufacturer'] = $manufacturer;
+
+        return $this;
+    }
+
+    /**
+     * Gets type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param string $type type
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
 
         return $this;
     }

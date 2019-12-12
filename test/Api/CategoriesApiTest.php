@@ -34,6 +34,7 @@ use Carooline\ObjectSerializer;
 use Carooline\Api\AuthApi;
 use Carooline\Api\CategoriesApi;
 use Carooline\Model\LoginRequest;
+use Carooline\Model\SearchCategoriesForVehicleRequest;
 
 /**
  * CategoriesApiTest Class Doc Comment
@@ -104,5 +105,40 @@ class CategoriesApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(2246, $result->getId());
         $this->assertEquals("Pièces / Filtre / Filtre à air", $result->getDisplayName());
         
+    }
+
+
+    /**
+     * Test case for categoriesSearchForVehiclePost
+     *
+     * Get Categories for Vehicle.
+     *
+     */
+    public function testCategoriesSearchForVehiclePost()
+    {
+        $categoriesApi = new CategoriesApi(
+            self::$client,
+            self::$config
+        );
+        // type_id PEUGEOT 206: 13558
+        $body = new SearchCategoriesForVehicleRequest([
+            'vehicle_query_type' => 'carooline_type_id',
+            'vehicle_query' => '13558'
+        ]);
+        $result = $categoriesApi->categoriesSearchForVehiclePost($body);
+        $this->assertInstanceOf(\Carooline\Model\ProductCategorySearchResponse::class, $result);
+        $this->assertGreaterThanOrEqual(10, $result->getCount());
+        
+        $body->setParentCategId(3885);
+        $result = $categoriesApi->categoriesSearchForVehiclePost($body);
+        $this->assertInstanceOf(\Carooline\Model\ProductCategorySearchResponse::class, $result);
+        $this->assertEquals(4, $result->getCount());
+        
+        // k_type PEUGEOT 206: '30091'
+        $body->setVehicleQueryType('k_type');
+        $body->setVehicleQuery('30091');
+        $result = $categoriesApi->categoriesSearchForVehiclePost($body);
+        $this->assertInstanceOf(\Carooline\Model\ProductCategorySearchResponse::class, $result);
+        $this->assertEquals(4, $result->getCount());
     }
 }

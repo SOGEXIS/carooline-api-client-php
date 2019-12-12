@@ -89,8 +89,9 @@ class ProductsApi
     /**
      * Operation productsGet
      *
-     * Search Product by ref / brand
+     * Search Product by name/ref/brand/categ_id
      *
+     * @param  int $categ_id categ_id (optional)
      * @param  int $manufacturer_id manufacturer_id (optional)
      * @param  string $name name (optional)
      * @param  string $ref ref (optional)
@@ -99,17 +100,18 @@ class ProductsApi
      * @throws \InvalidArgumentException
      * @return \Carooline\Model\ProductSearchResponse
      */
-    public function productsGet($manufacturer_id = null, $name = null, $ref = null)
+    public function productsGet($categ_id = null, $manufacturer_id = null, $name = null, $ref = null)
     {
-        list($response) = $this->productsGetWithHttpInfo($manufacturer_id, $name, $ref);
+        list($response) = $this->productsGetWithHttpInfo($categ_id, $manufacturer_id, $name, $ref);
         return $response;
     }
 
     /**
      * Operation productsGetWithHttpInfo
      *
-     * Search Product by ref / brand
+     * Search Product by name/ref/brand/categ_id
      *
+     * @param  int $categ_id (optional)
      * @param  int $manufacturer_id (optional)
      * @param  string $name (optional)
      * @param  string $ref (optional)
@@ -118,10 +120,10 @@ class ProductsApi
      * @throws \InvalidArgumentException
      * @return array of \Carooline\Model\ProductSearchResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function productsGetWithHttpInfo($manufacturer_id = null, $name = null, $ref = null)
+    public function productsGetWithHttpInfo($categ_id = null, $manufacturer_id = null, $name = null, $ref = null)
     {
         $returnType = '\Carooline\Model\ProductSearchResponse';
-        $request = $this->productsGetRequest($manufacturer_id, $name, $ref);
+        $request = $this->productsGetRequest($categ_id, $manufacturer_id, $name, $ref);
 
         try {
             $options = $this->createHttpClientOption();
@@ -185,8 +187,9 @@ class ProductsApi
     /**
      * Operation productsGetAsync
      *
-     * Search Product by ref / brand
+     * Search Product by name/ref/brand/categ_id
      *
+     * @param  int $categ_id (optional)
      * @param  int $manufacturer_id (optional)
      * @param  string $name (optional)
      * @param  string $ref (optional)
@@ -194,9 +197,9 @@ class ProductsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function productsGetAsync($manufacturer_id = null, $name = null, $ref = null)
+    public function productsGetAsync($categ_id = null, $manufacturer_id = null, $name = null, $ref = null)
     {
-        return $this->productsGetAsyncWithHttpInfo($manufacturer_id, $name, $ref)
+        return $this->productsGetAsyncWithHttpInfo($categ_id, $manufacturer_id, $name, $ref)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -207,8 +210,9 @@ class ProductsApi
     /**
      * Operation productsGetAsyncWithHttpInfo
      *
-     * Search Product by ref / brand
+     * Search Product by name/ref/brand/categ_id
      *
+     * @param  int $categ_id (optional)
      * @param  int $manufacturer_id (optional)
      * @param  string $name (optional)
      * @param  string $ref (optional)
@@ -216,10 +220,10 @@ class ProductsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function productsGetAsyncWithHttpInfo($manufacturer_id = null, $name = null, $ref = null)
+    public function productsGetAsyncWithHttpInfo($categ_id = null, $manufacturer_id = null, $name = null, $ref = null)
     {
         $returnType = '\Carooline\Model\ProductSearchResponse';
-        $request = $this->productsGetRequest($manufacturer_id, $name, $ref);
+        $request = $this->productsGetRequest($categ_id, $manufacturer_id, $name, $ref);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -261,6 +265,7 @@ class ProductsApi
     /**
      * Create request for operation 'productsGet'
      *
+     * @param  int $categ_id (optional)
      * @param  int $manufacturer_id (optional)
      * @param  string $name (optional)
      * @param  string $ref (optional)
@@ -268,7 +273,7 @@ class ProductsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function productsGetRequest($manufacturer_id = null, $name = null, $ref = null)
+    protected function productsGetRequest($categ_id = null, $manufacturer_id = null, $name = null, $ref = null)
     {
 
         $resourcePath = '/catalog/products';
@@ -278,6 +283,10 @@ class ProductsApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        if ($categ_id !== null) {
+            $queryParams['categ_id'] = ObjectSerializer::toQueryValue($categ_id);
+        }
         // query params
         if ($manufacturer_id !== null) {
             $queryParams['manufacturer_id'] = ObjectSerializer::toQueryValue($manufacturer_id);
@@ -532,6 +541,261 @@ class ProductsApi
     {
 
         $resourcePath = '/catalog/products/get_all_availabilities';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // body params
+        $_tempBody = null;
+        if (isset($body)) {
+            $_tempBody = $body;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+        // this endpoint requires BearerToken
+        if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation productsGetForVehicleAndCategoryPost
+     *
+     * Get Products for a given Category and selected Vehicle type id or ktype
+     *
+     * @param  \Carooline\Model\SearchProductsForVehicleAndCategoryRequest $body body (optional)
+     *
+     * @throws \Carooline\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Carooline\Model\ProductSearchResponse
+     */
+    public function productsGetForVehicleAndCategoryPost($body = null)
+    {
+        list($response) = $this->productsGetForVehicleAndCategoryPostWithHttpInfo($body);
+        return $response;
+    }
+
+    /**
+     * Operation productsGetForVehicleAndCategoryPostWithHttpInfo
+     *
+     * Get Products for a given Category and selected Vehicle type id or ktype
+     *
+     * @param  \Carooline\Model\SearchProductsForVehicleAndCategoryRequest $body (optional)
+     *
+     * @throws \Carooline\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Carooline\Model\ProductSearchResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function productsGetForVehicleAndCategoryPostWithHttpInfo($body = null)
+    {
+        $returnType = '\Carooline\Model\ProductSearchResponse';
+        $request = $this->productsGetForVehicleAndCategoryPostRequest($body);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if (!in_array($returnType, ['string','integer','bool'])) {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carooline\Model\ProductSearchResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation productsGetForVehicleAndCategoryPostAsync
+     *
+     * Get Products for a given Category and selected Vehicle type id or ktype
+     *
+     * @param  \Carooline\Model\SearchProductsForVehicleAndCategoryRequest $body (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function productsGetForVehicleAndCategoryPostAsync($body = null)
+    {
+        return $this->productsGetForVehicleAndCategoryPostAsyncWithHttpInfo($body)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation productsGetForVehicleAndCategoryPostAsyncWithHttpInfo
+     *
+     * Get Products for a given Category and selected Vehicle type id or ktype
+     *
+     * @param  \Carooline\Model\SearchProductsForVehicleAndCategoryRequest $body (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function productsGetForVehicleAndCategoryPostAsyncWithHttpInfo($body = null)
+    {
+        $returnType = '\Carooline\Model\ProductSearchResponse';
+        $request = $this->productsGetForVehicleAndCategoryPostRequest($body);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'productsGetForVehicleAndCategoryPost'
+     *
+     * @param  \Carooline\Model\SearchProductsForVehicleAndCategoryRequest $body (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function productsGetForVehicleAndCategoryPostRequest($body = null)
+    {
+
+        $resourcePath = '/catalog/products/get_for_vehicle_and_category';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1145,6 +1409,261 @@ class ProductsApi
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
         return new Request(
             'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation productsOmnisearchPost
+     *
+     * Get Products for a search term. Search term can be a Ref or Product name. If a vehicle_qery is set, all the results will be compatible with it.
+     *
+     * @param  \Carooline\Model\OmniSearchProductsRequest $body body (optional)
+     *
+     * @throws \Carooline\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Carooline\Model\ProductSearchResponse
+     */
+    public function productsOmnisearchPost($body = null)
+    {
+        list($response) = $this->productsOmnisearchPostWithHttpInfo($body);
+        return $response;
+    }
+
+    /**
+     * Operation productsOmnisearchPostWithHttpInfo
+     *
+     * Get Products for a search term. Search term can be a Ref or Product name. If a vehicle_qery is set, all the results will be compatible with it.
+     *
+     * @param  \Carooline\Model\OmniSearchProductsRequest $body (optional)
+     *
+     * @throws \Carooline\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Carooline\Model\ProductSearchResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function productsOmnisearchPostWithHttpInfo($body = null)
+    {
+        $returnType = '\Carooline\Model\ProductSearchResponse';
+        $request = $this->productsOmnisearchPostRequest($body);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if (!in_array($returnType, ['string','integer','bool'])) {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carooline\Model\ProductSearchResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation productsOmnisearchPostAsync
+     *
+     * Get Products for a search term. Search term can be a Ref or Product name. If a vehicle_qery is set, all the results will be compatible with it.
+     *
+     * @param  \Carooline\Model\OmniSearchProductsRequest $body (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function productsOmnisearchPostAsync($body = null)
+    {
+        return $this->productsOmnisearchPostAsyncWithHttpInfo($body)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation productsOmnisearchPostAsyncWithHttpInfo
+     *
+     * Get Products for a search term. Search term can be a Ref or Product name. If a vehicle_qery is set, all the results will be compatible with it.
+     *
+     * @param  \Carooline\Model\OmniSearchProductsRequest $body (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function productsOmnisearchPostAsyncWithHttpInfo($body = null)
+    {
+        $returnType = '\Carooline\Model\ProductSearchResponse';
+        $request = $this->productsOmnisearchPostRequest($body);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'productsOmnisearchPost'
+     *
+     * @param  \Carooline\Model\OmniSearchProductsRequest $body (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function productsOmnisearchPostRequest($body = null)
+    {
+
+        $resourcePath = '/catalog/products/omnisearch';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // body params
+        $_tempBody = null;
+        if (isset($body)) {
+            $_tempBody = $body;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+        // this endpoint requires BearerToken
+        if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

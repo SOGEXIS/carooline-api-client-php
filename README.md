@@ -195,28 +195,47 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *CategoriesApi* | [**categoriesGet**](docs/Api/CategoriesApi.md#categoriesget) | **GET** /categories | Search Category by name
 *CategoriesApi* | [**categoriesIdGet**](docs/Api/CategoriesApi.md#categoriesidget) | **GET** /categories/{id} | Get Category&#x27;s informations
+*CategoriesApi* | [**categoriesSearchForVehiclePost**](docs/Api/CategoriesApi.md#categoriessearchforvehiclepost) | **POST** /categories/search_for_vehicle | Get Categories for Vehicle
+*ForfaitsApi* | [**forfaitsGet**](docs/Api/ForfaitsApi.md#forfaitsget) | **GET** /forfaits | Search Forfait by name
+*ForfaitsApi* | [**forfaitsIdGet**](docs/Api/ForfaitsApi.md#forfaitsidget) | **GET** /forfaits/{id} | Get Forfait&#x27;s informations
+*ForfaitsCategoriesApi* | [**forfaitsCategoriesGet**](docs/Api/ForfaitsCategoriesApi.md#forfaitscategoriesget) | **GET** /forfaits_categories | Search Forfait Category by name
+*ForfaitsCategoriesApi* | [**forfaitsCategoriesIdGet**](docs/Api/ForfaitsCategoriesApi.md#forfaitscategoriesidget) | **GET** /forfaits_categories/{id} | Get Forfait&#x27;s Category&#x27;s informations
 *ManufacturerApi* | [**manufacturerGet**](docs/Api/ManufacturerApi.md#manufacturerget) | **GET** /manufacturer | Searh manufacturer by name
 *ManufacturerApi* | [**manufacturerIdGet**](docs/Api/ManufacturerApi.md#manufactureridget) | **GET** /manufacturer/{id} | Get manufacturer&#x27;s informations
-*ProductsApi* | [**productsGet**](docs/Api/ProductsApi.md#productsget) | **GET** /products | Search Product by ref / brand
+*ProductsApi* | [**productsGet**](docs/Api/ProductsApi.md#productsget) | **GET** /products | Search Product by name/ref/brand/categ_id
 *ProductsApi* | [**productsGetAllAvailabilitiesPost**](docs/Api/ProductsApi.md#productsgetallavailabilitiespost) | **POST** /products/get_all_availabilities | 
+*ProductsApi* | [**productsGetForVehicleAndCategoryPost**](docs/Api/ProductsApi.md#productsgetforvehicleandcategorypost) | **POST** /products/get_for_vehicle_and_category | Get Categories for Vehicle
 *ProductsApi* | [**productsIdGet**](docs/Api/ProductsApi.md#productsidget) | **GET** /products/{id} | Get Products&#x27;s informations
 *ProductsApi* | [**productsIdPut**](docs/Api/ProductsApi.md#productsidput) | **PUT** /products/{id} | Update product informations
+*ProductsApi* | [**productsOmnisearchPost**](docs/Api/ProductsApi.md#productsomnisearchpost) | **POST** /products/omnisearch | Get Categories for Vehicle
 
 #### Documentation For Models
 
+ - [Forfait](docs/Model/Forfait.md)
+ - [ForfaitCategory](docs/Model/ForfaitCategory.md)
+ - [ForfaitCategorySearchResponse](docs/Model/ForfaitCategorySearchResponse.md)
+ - [ForfaitCompanies](docs/Model/ForfaitCompanies.md)
+ - [ForfaitSearchResponse](docs/Model/ForfaitSearchResponse.md)
  - [GetAllAvailabilitiesRequest](docs/Model/GetAllAvailabilitiesRequest.md)
  - [GetAllAvailabilitiesResponse](docs/Model/GetAllAvailabilitiesResponse.md)
  - [GetAllAvailabilitiesResponseAvailabilities](docs/Model/GetAllAvailabilitiesResponseAvailabilities.md)
+ - [GetAllAvailabilitiesResponseStockLocations](docs/Model/GetAllAvailabilitiesResponseStockLocations.md)
+ - [OmniSearchProductsRequest](docs/Model/OmniSearchProductsRequest.md)
  - [Product](docs/Model/Product.md)
  - [ProductCateg](docs/Model/ProductCateg.md)
  - [ProductCategory](docs/Model/ProductCategory.md)
  - [ProductCategorySearchResponse](docs/Model/ProductCategorySearchResponse.md)
  - [ProductCreateRequest](docs/Model/ProductCreateRequest.md)
+ - [ProductCreateRequestManufacturer](docs/Model/ProductCreateRequestManufacturer.md)
+ - [ProductLinkedVehicleTypes](docs/Model/ProductLinkedVehicleTypes.md)
  - [ProductManufacturer](docs/Model/ProductManufacturer.md)
  - [ProductManufacturerSearchResponse](docs/Model/ProductManufacturerSearchResponse.md)
+ - [ProductOeReferencesList](docs/Model/ProductOeReferencesList.md)
  - [ProductSearchResponse](docs/Model/ProductSearchResponse.md)
  - [ProductUpdateRequest](docs/Model/ProductUpdateRequest.md)
-
+ - [ProductVehicleSpecificities](docs/Model/ProductVehicleSpecificities.md)
+ - [SearchCategoriesForVehicleRequest](docs/Model/SearchCategoriesForVehicleRequest.md)
+ - [SearchProductsForVehicleAndCategoryRequest](docs/Model/SearchProductsForVehicleAndCategoryRequest.md)
 
 ### Sale Methods
 
