@@ -1,11 +1,12 @@
 {
     "name": "SOGEXIS/carooline-api-client-php",
-    "description": "",
+    "description": "Carooline PHP Api Client",
     "keywords": [
         "swagger",
         "php",
         "sdk",
-        "api"
+        "api",
+        "carooline"
     ],
     "homepage": "http://sogexis.fr",
     "license": "proprietary",
