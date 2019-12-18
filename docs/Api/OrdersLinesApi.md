@@ -1,6 +1,6 @@
 # Carooline\OrdersLinesApi
 
-All URIs are relative to *http://sfpr-pre-prod.carooline.com/api/sale*
+All URIs are relative to *http://dev1.carooline.com/api/sale*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
