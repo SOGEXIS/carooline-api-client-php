@@ -298,6 +298,26 @@ Class | Method | HTTP request | Description
 - [PricelistSearchResponse](docs/Model/PricelistSearchResponse.md)
 
 
+### CRM
+
+All URIs are relative to *https://dev1.carooline.com/api/crm*
+
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+*CrmLeadsApi* | [**crmLeadsCreatePost**](docs/Api/CrmLeadsApi.md#crmleadscreatepost) | **POST** /crm_leads/create | Create a new Crm Lead.
+*CrmLeadsApi* | [**crmLeadsGet**](docs/Api/CrmLeadsApi.md#crmleadsget) | **GET** /crm_leads | Search CrmLead by Name(Subject) or Emailfrom
+*CrmLeadsApi* | [**crmLeadsIdDelete**](docs/Api/CrmLeadsApi.md#crmleadsiddelete) | **DELETE** /crm_leads/{id} | Delete a Crm Lead
+*CrmLeadsApi* | [**crmLeadsIdGet**](docs/Api/CrmLeadsApi.md#crmleadsidget) | **GET** /crm_leads/{id} | Get CrmLead&#x27;s informations
+*CrmLeadsApi* | [**crmLeadsIdPut**](docs/Api/CrmLeadsApi.md#crmleadsidput) | **PUT** /crm_leads/{id} | Update Crm Lead informations
+
+#### Documentation For Models
+
+ - [CrmLead](docs/Model/CrmLead.md)
+ - [CrmLeadCreateRequest](docs/Model/CrmLeadCreateRequest.md)
+ - [CrmLeadSearchResponse](docs/Model/CrmLeadSearchResponse.md)
+ - [CrmLeadUpdateRequest](docs/Model/CrmLeadUpdateRequest.md)
+
+
 ### Vehicles
 
  All URIs are relative to *https://dev1.carooline.com/api/vehicles*
@@ -393,7 +413,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 $client = new GuzzleHttp\Client();
 $config = new Carooline\Configuration();
-$config->setHost('https://sfpr-pre-prod.carooline.com/api');
+$config->setHost('https://dev1.carooline.com/api');
 
 // Authenticate to get new Token
 $authApi = new Carooline\Api\AuthApi(
