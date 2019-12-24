@@ -1,6 +1,6 @@
 <?php
 /**
- * ProductSearchResponse
+ * ProductSearchResponseLinks
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ use \ArrayAccess;
 use \Carooline\ObjectSerializer;
 
 /**
- * ProductSearchResponse Class Doc Comment
+ * ProductSearchResponseLinks Class Doc Comment
  *
  * @category Class
  * @package  Carooline
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class ProductSearchResponse implements ModelInterface, ArrayAccess
+class ProductSearchResponseLinks implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ProductSearchResponse implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ProductSearchResponse';
+    protected static $swaggerModelName = 'ProductSearchResponse_links';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,13 +56,11 @@ class ProductSearchResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'count' => 'int',
-'rows' => '\Carooline\Model\Product[]',
-'links' => '\Carooline\Model\ProductSearchResponseLinks',
-'total_count' => 'int',
-'page_count' => 'int',
-'page_size' => 'int',
-'page' => 'int'    ];
+        'next' => 'string',
+'self' => 'string',
+'previous' => 'string',
+'last' => 'string',
+'first' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -70,13 +68,11 @@ class ProductSearchResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'count' => null,
-'rows' => null,
-'links' => null,
-'total_count' => null,
-'page_count' => null,
-'page_size' => null,
-'page' => null    ];
+        'next' => null,
+'self' => null,
+'previous' => null,
+'last' => null,
+'first' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -105,13 +101,11 @@ class ProductSearchResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'count' => 'count',
-'rows' => 'rows',
-'links' => 'links',
-'total_count' => 'total_count',
-'page_count' => 'page_count',
-'page_size' => 'page_size',
-'page' => 'page'    ];
+        'next' => 'next',
+'self' => 'self',
+'previous' => 'previous',
+'last' => 'last',
+'first' => 'first'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -119,13 +113,11 @@ class ProductSearchResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'count' => 'setCount',
-'rows' => 'setRows',
-'links' => 'setLinks',
-'total_count' => 'setTotalCount',
-'page_count' => 'setPageCount',
-'page_size' => 'setPageSize',
-'page' => 'setPage'    ];
+        'next' => 'setNext',
+'self' => 'setSelf',
+'previous' => 'setPrevious',
+'last' => 'setLast',
+'first' => 'setFirst'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -133,13 +125,11 @@ class ProductSearchResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'count' => 'getCount',
-'rows' => 'getRows',
-'links' => 'getLinks',
-'total_count' => 'getTotalCount',
-'page_count' => 'getPageCount',
-'page_size' => 'getPageSize',
-'page' => 'getPage'    ];
+        'next' => 'getNext',
+'self' => 'getSelf',
+'previous' => 'getPrevious',
+'last' => 'getLast',
+'first' => 'getFirst'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -199,13 +189,11 @@ class ProductSearchResponse implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['count'] = isset($data['count']) ? $data['count'] : null;
-        $this->container['rows'] = isset($data['rows']) ? $data['rows'] : null;
-        $this->container['links'] = isset($data['links']) ? $data['links'] : null;
-        $this->container['total_count'] = isset($data['total_count']) ? $data['total_count'] : null;
-        $this->container['page_count'] = isset($data['page_count']) ? $data['page_count'] : null;
-        $this->container['page_size'] = isset($data['page_size']) ? $data['page_size'] : null;
-        $this->container['page'] = isset($data['page']) ? $data['page'] : null;
+        $this->container['next'] = isset($data['next']) ? $data['next'] : null;
+        $this->container['self'] = isset($data['self']) ? $data['self'] : null;
+        $this->container['previous'] = isset($data['previous']) ? $data['previous'] : null;
+        $this->container['last'] = isset($data['last']) ? $data['last'] : null;
+        $this->container['first'] = isset($data['first']) ? $data['first'] : null;
     }
 
     /**
@@ -217,15 +205,6 @@ class ProductSearchResponse implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['count'] === null) {
-            $invalidProperties[] = "'count' can't be null";
-        }
-        if ($this->container['rows'] === null) {
-            $invalidProperties[] = "'rows' can't be null";
-        }
-        if ($this->container['total_count'] === null) {
-            $invalidProperties[] = "'total_count' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -242,169 +221,121 @@ class ProductSearchResponse implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets count
+     * Gets next
      *
-     * @return int
+     * @return string
      */
-    public function getCount()
+    public function getNext()
     {
-        return $this->container['count'];
+        return $this->container['next'];
     }
 
     /**
-     * Sets count
+     * Sets next
      *
-     * @param int $count count
+     * @param string $next next
      *
      * @return $this
      */
-    public function setCount($count)
+    public function setNext($next)
     {
-        $this->container['count'] = $count;
+        $this->container['next'] = $next;
 
         return $this;
     }
 
     /**
-     * Gets rows
+     * Gets self
      *
-     * @return \Carooline\Model\Product[]
+     * @return string
      */
-    public function getRows()
+    public function getSelf()
     {
-        return $this->container['rows'];
+        return $this->container['self'];
     }
 
     /**
-     * Sets rows
+     * Sets self
      *
-     * @param \Carooline\Model\Product[] $rows rows
+     * @param string $self self
      *
      * @return $this
      */
-    public function setRows($rows)
+    public function setSelf($self)
     {
-        $this->container['rows'] = $rows;
+        $this->container['self'] = $self;
 
         return $this;
     }
 
     /**
-     * Gets links
+     * Gets previous
      *
-     * @return \Carooline\Model\ProductSearchResponseLinks
+     * @return string
      */
-    public function getLinks()
+    public function getPrevious()
     {
-        return $this->container['links'];
+        return $this->container['previous'];
     }
 
     /**
-     * Sets links
+     * Sets previous
      *
-     * @param \Carooline\Model\ProductSearchResponseLinks $links links
+     * @param string $previous previous
      *
      * @return $this
      */
-    public function setLinks($links)
+    public function setPrevious($previous)
     {
-        $this->container['links'] = $links;
+        $this->container['previous'] = $previous;
 
         return $this;
     }
 
     /**
-     * Gets total_count
+     * Gets last
      *
-     * @return int
+     * @return string
      */
-    public function getTotalCount()
+    public function getLast()
     {
-        return $this->container['total_count'];
+        return $this->container['last'];
     }
 
     /**
-     * Sets total_count
+     * Sets last
      *
-     * @param int $total_count total_count
+     * @param string $last last
      *
      * @return $this
      */
-    public function setTotalCount($total_count)
+    public function setLast($last)
     {
-        $this->container['total_count'] = $total_count;
+        $this->container['last'] = $last;
 
         return $this;
     }
 
     /**
-     * Gets page_count
+     * Gets first
      *
-     * @return int
+     * @return string
      */
-    public function getPageCount()
+    public function getFirst()
     {
-        return $this->container['page_count'];
+        return $this->container['first'];
     }
 
     /**
-     * Sets page_count
+     * Sets first
      *
-     * @param int $page_count page_count
+     * @param string $first first
      *
      * @return $this
      */
-    public function setPageCount($page_count)
+    public function setFirst($first)
     {
-        $this->container['page_count'] = $page_count;
-
-        return $this;
-    }
-
-    /**
-     * Gets page_size
-     *
-     * @return int
-     */
-    public function getPageSize()
-    {
-        return $this->container['page_size'];
-    }
-
-    /**
-     * Sets page_size
-     *
-     * @param int $page_size page_size
-     *
-     * @return $this
-     */
-    public function setPageSize($page_size)
-    {
-        $this->container['page_size'] = $page_size;
-
-        return $this;
-    }
-
-    /**
-     * Gets page
-     *
-     * @return int
-     */
-    public function getPage()
-    {
-        return $this->container['page'];
-    }
-
-    /**
-     * Sets page
-     *
-     * @param int $page page
-     *
-     * @return $this
-     */
-    public function setPage($page)
-    {
-        $this->container['page'] = $page;
+        $this->container['first'] = $first;
 
         return $this;
     }

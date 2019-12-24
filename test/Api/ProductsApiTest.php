@@ -104,13 +104,30 @@ class ProductsApiTest extends \PHPUnit\Framework\TestCase
     public function testProductsGet()
     {
         // productsGet($categ_id = null, $manufacturer_id = null, $name = null, $ref = null)
-        $result = $this->productApi->productsGet(null, null, null, "1 457 433 526");
+        // productsGet($categ_id = null, $manufacturer_id = null, $name = null, $page = null, $page_size = null, $ref = null)
+        $result = $this->productApi->productsGet(null, null, null, "1 457 433 526", null, null);
         $this->assertInstanceOf(\Carooline\Model\ProductSearchResponse::class, $result);
         $this->assertGreaterThanOrEqual(1, $result->getCount());
         foreach ($result->getRows() as $product) {
             $this->assertInstanceOf(\Carooline\Model\Product::class, $product);
             $this->assertStringContainsStringIgnoringCase("Filtre à air", $product->getName());
         }
+        
+        $result = $this->productApi->productsGet(null, null, "Filtre", null, null, 30);
+        $this->assertInstanceOf(\Carooline\Model\ProductSearchResponse::class, $result);
+        $this->assertEquals(30, $result->getCount());
+        $this->assertGreaterThanOrEqual(2000, $result->getTotalCount());
+        $this->assertInstanceOf(\Carooline\Model\ProductSearchResponseLinks::class, $result->getLinks());
+        
+        $result = $this->productApi->productsGet(null, null, "Filtre", null, 20, 30);
+        $this->assertInstanceOf(\Carooline\Model\ProductSearchResponse::class, $result);
+        $this->assertEquals(30, $result->getCount());
+        $this->assertEquals(30, $result->getPageSize());
+        $this->assertEquals(20, $result->getPage());
+        $this->assertStringContainsString("20", $result->getLinks()->getSelf());
+        $this->assertStringContainsString("19", $result->getLinks()->getPrevious());
+        $this->assertStringContainsString("21", $result->getLinks()->getNext());
+        $this->assertStringContainsString($result->getPageCount(), $result->getLinks()->getLast());
     }
 
     /**

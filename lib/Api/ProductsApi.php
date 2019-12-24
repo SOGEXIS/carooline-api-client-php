@@ -85,7 +85,7 @@ class ProductsApi
     {
         return $this->config;
     }
-
+    
     /**
      * Operation productsGet
      *
@@ -94,15 +94,17 @@ class ProductsApi
      * @param  int $categ_id categ_id (optional)
      * @param  int $manufacturer_id manufacturer_id (optional)
      * @param  string $name name (optional)
+     * @param  int $page page (optional)
+     * @param  int $page_size page_size (optional)
      * @param  string $ref ref (optional)
      *
      * @throws \Carooline\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Carooline\Model\ProductSearchResponse
      */
-    public function productsGet($categ_id = null, $manufacturer_id = null, $name = null, $ref = null)
+    public function productsGet($categ_id = null, $manufacturer_id = null, $name = null, $ref = null, $page = null, $page_size = null)
     {
-        list($response) = $this->productsGetWithHttpInfo($categ_id, $manufacturer_id, $name, $ref);
+        list($response) = $this->productsGetWithHttpInfo($categ_id, $manufacturer_id, $name, $ref, $page, $page_size);
         return $response;
     }
 
@@ -114,16 +116,18 @@ class ProductsApi
      * @param  int $categ_id (optional)
      * @param  int $manufacturer_id (optional)
      * @param  string $name (optional)
+     * @param  int $page (optional)
+     * @param  int $page_size (optional)
      * @param  string $ref (optional)
      *
      * @throws \Carooline\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Carooline\Model\ProductSearchResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function productsGetWithHttpInfo($categ_id = null, $manufacturer_id = null, $name = null, $ref = null)
+    public function productsGetWithHttpInfo($categ_id = null, $manufacturer_id = null, $name = null, $ref = null, $page = null, $page_size = null)
     {
         $returnType = '\Carooline\Model\ProductSearchResponse';
-        $request = $this->productsGetRequest($categ_id, $manufacturer_id, $name, $ref);
+        $request = $this->productsGetRequest($categ_id, $manufacturer_id, $name, $ref, $page, $page_size);
 
         try {
             $options = $this->createHttpClientOption();
@@ -192,14 +196,16 @@ class ProductsApi
      * @param  int $categ_id (optional)
      * @param  int $manufacturer_id (optional)
      * @param  string $name (optional)
+     * @param  int $page (optional)
+     * @param  int $page_size (optional)
      * @param  string $ref (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function productsGetAsync($categ_id = null, $manufacturer_id = null, $name = null, $ref = null)
+    public function productsGetAsync($categ_id = null, $manufacturer_id = null, $name = null, $ref = null, $page = null, $page_size = null)
     {
-        return $this->productsGetAsyncWithHttpInfo($categ_id, $manufacturer_id, $name, $ref)
+        return $this->productsGetAsyncWithHttpInfo($categ_id, $manufacturer_id, $name, $ref, $page, $page_size)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -215,15 +221,17 @@ class ProductsApi
      * @param  int $categ_id (optional)
      * @param  int $manufacturer_id (optional)
      * @param  string $name (optional)
+     * @param  int $page (optional)
+     * @param  int $page_size (optional)
      * @param  string $ref (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function productsGetAsyncWithHttpInfo($categ_id = null, $manufacturer_id = null, $name = null, $ref = null)
+    public function productsGetAsyncWithHttpInfo($categ_id = null, $manufacturer_id = null, $name = null, $ref = null, $page = null, $page_size = null)
     {
         $returnType = '\Carooline\Model\ProductSearchResponse';
-        $request = $this->productsGetRequest($categ_id, $manufacturer_id, $name, $ref);
+        $request = $this->productsGetRequest($categ_id, $manufacturer_id, $name, $ref, $page, $page_size);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -268,12 +276,14 @@ class ProductsApi
      * @param  int $categ_id (optional)
      * @param  int $manufacturer_id (optional)
      * @param  string $name (optional)
+     * @param  int $page (optional)
+     * @param  int $page_size (optional)
      * @param  string $ref (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function productsGetRequest($categ_id = null, $manufacturer_id = null, $name = null, $ref = null)
+    protected function productsGetRequest($categ_id = null, $manufacturer_id = null, $name = null, $ref = null, $page = null, $page_size = null)
     {
 
         $resourcePath = '/catalog/products';
@@ -294,6 +304,14 @@ class ProductsApi
         // query params
         if ($name !== null) {
             $queryParams['name'] = ObjectSerializer::toQueryValue($name);
+        }
+        // query params
+        if ($page !== null) {
+            $queryParams['page'] = ObjectSerializer::toQueryValue($page);
+        }
+        // query params
+        if ($page_size !== null) {
+            $queryParams['page_size'] = ObjectSerializer::toQueryValue($page_size);
         }
         // query params
         if ($ref !== null) {
@@ -368,7 +386,6 @@ class ProductsApi
             $httpBody
         );
     }
-
     /**
      * Operation productsGetAllAvailabilitiesPost
      *
