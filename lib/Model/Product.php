@@ -71,7 +71,6 @@ class Product implements ModelInterface, ArrayAccess
 'default_code' => 'string',
 'is_equivalence_result' => 'bool',
 'active' => 'bool',
-'tire_eu_adherence_id' => 'string',
 'tecdoc_specificities' => '\Carooline\Model\ProductVehicleSpecificities[]',
 'price_ttc' => 'float',
 'id' => 'int',
@@ -83,6 +82,7 @@ class Product implements ModelInterface, ArrayAccess
 'is_tire' => 'bool',
 'tire_is_reinforced' => 'bool',
 'tire_speed' => 'string',
+'tire_eu_adherence' => 'string',
 'tire_height' => 'string',
 'tire_load' => 'string',
 'linked_vehicle_types' => '\Carooline\Model\ProductLinkedVehicleTypes[]',
@@ -113,7 +113,6 @@ class Product implements ModelInterface, ArrayAccess
 'default_code' => null,
 'is_equivalence_result' => null,
 'active' => null,
-'tire_eu_adherence_id' => null,
 'tecdoc_specificities' => null,
 'price_ttc' => 'float',
 'id' => null,
@@ -125,6 +124,7 @@ class Product implements ModelInterface, ArrayAccess
 'is_tire' => null,
 'tire_is_reinforced' => null,
 'tire_speed' => null,
+'tire_eu_adherence' => null,
 'tire_height' => null,
 'tire_load' => null,
 'linked_vehicle_types' => null,
@@ -176,7 +176,6 @@ class Product implements ModelInterface, ArrayAccess
 'default_code' => 'default_code',
 'is_equivalence_result' => 'is_equivalence_result',
 'active' => 'active',
-'tire_eu_adherence_id' => 'tire_eu_adherence_id',
 'tecdoc_specificities' => 'tecdoc_specificities',
 'price_ttc' => 'price_ttc',
 'id' => 'id',
@@ -188,6 +187,7 @@ class Product implements ModelInterface, ArrayAccess
 'is_tire' => 'is_tire',
 'tire_is_reinforced' => 'tire_is_reinforced',
 'tire_speed' => 'tire_speed',
+'tire_eu_adherence' => 'tire_eu_adherence',
 'tire_height' => 'tire_height',
 'tire_load' => 'tire_load',
 'linked_vehicle_types' => 'linked_vehicle_types',
@@ -218,7 +218,6 @@ class Product implements ModelInterface, ArrayAccess
 'default_code' => 'setDefaultCode',
 'is_equivalence_result' => 'setIsEquivalenceResult',
 'active' => 'setActive',
-'tire_eu_adherence_id' => 'setTireEuAdherenceId',
 'tecdoc_specificities' => 'setTecdocSpecificities',
 'price_ttc' => 'setPriceTtc',
 'id' => 'setId',
@@ -230,6 +229,7 @@ class Product implements ModelInterface, ArrayAccess
 'is_tire' => 'setIsTire',
 'tire_is_reinforced' => 'setTireIsReinforced',
 'tire_speed' => 'setTireSpeed',
+'tire_eu_adherence' => 'setTireEuAdherence',
 'tire_height' => 'setTireHeight',
 'tire_load' => 'setTireLoad',
 'linked_vehicle_types' => 'setLinkedVehicleTypes',
@@ -260,7 +260,6 @@ class Product implements ModelInterface, ArrayAccess
 'default_code' => 'getDefaultCode',
 'is_equivalence_result' => 'getIsEquivalenceResult',
 'active' => 'getActive',
-'tire_eu_adherence_id' => 'getTireEuAdherenceId',
 'tecdoc_specificities' => 'getTecdocSpecificities',
 'price_ttc' => 'getPriceTtc',
 'id' => 'getId',
@@ -272,6 +271,7 @@ class Product implements ModelInterface, ArrayAccess
 'is_tire' => 'getIsTire',
 'tire_is_reinforced' => 'getTireIsReinforced',
 'tire_speed' => 'getTireSpeed',
+'tire_eu_adherence' => 'getTireEuAdherence',
 'tire_height' => 'getTireHeight',
 'tire_load' => 'getTireLoad',
 'linked_vehicle_types' => 'getLinkedVehicleTypes',
@@ -354,7 +354,6 @@ class Product implements ModelInterface, ArrayAccess
         $this->container['default_code'] = isset($data['default_code']) ? $data['default_code'] : null;
         $this->container['is_equivalence_result'] = isset($data['is_equivalence_result']) ? $data['is_equivalence_result'] : false;
         $this->container['active'] = isset($data['active']) ? $data['active'] : null;
-        $this->container['tire_eu_adherence_id'] = isset($data['tire_eu_adherence_id']) ? $data['tire_eu_adherence_id'] : null;
         $this->container['tecdoc_specificities'] = isset($data['tecdoc_specificities']) ? $data['tecdoc_specificities'] : null;
         $this->container['price_ttc'] = isset($data['price_ttc']) ? $data['price_ttc'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
@@ -366,6 +365,7 @@ class Product implements ModelInterface, ArrayAccess
         $this->container['is_tire'] = isset($data['is_tire']) ? $data['is_tire'] : null;
         $this->container['tire_is_reinforced'] = isset($data['tire_is_reinforced']) ? $data['tire_is_reinforced'] : null;
         $this->container['tire_speed'] = isset($data['tire_speed']) ? $data['tire_speed'] : null;
+        $this->container['tire_eu_adherence'] = isset($data['tire_eu_adherence']) ? $data['tire_eu_adherence'] : null;
         $this->container['tire_height'] = isset($data['tire_height']) ? $data['tire_height'] : null;
         $this->container['tire_load'] = isset($data['tire_load']) ? $data['tire_load'] : null;
         $this->container['linked_vehicle_types'] = isset($data['linked_vehicle_types']) ? $data['linked_vehicle_types'] : null;
@@ -770,30 +770,6 @@ class Product implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets tire_eu_adherence_id
-     *
-     * @return string
-     */
-    public function getTireEuAdherenceId()
-    {
-        return $this->container['tire_eu_adherence_id'];
-    }
-
-    /**
-     * Sets tire_eu_adherence_id
-     *
-     * @param string $tire_eu_adherence_id tire_eu_adherence_id
-     *
-     * @return $this
-     */
-    public function setTireEuAdherenceId($tire_eu_adherence_id)
-    {
-        $this->container['tire_eu_adherence_id'] = $tire_eu_adherence_id;
-
-        return $this;
-    }
-
-    /**
      * Gets tecdoc_specificities
      *
      * @return \Carooline\Model\ProductVehicleSpecificities[]
@@ -1053,6 +1029,30 @@ class Product implements ModelInterface, ArrayAccess
     public function setTireSpeed($tire_speed)
     {
         $this->container['tire_speed'] = $tire_speed;
+
+        return $this;
+    }
+
+    /**
+     * Gets tire_eu_adherence
+     *
+     * @return string
+     */
+    public function getTireEuAdherence()
+    {
+        return $this->container['tire_eu_adherence'];
+    }
+
+    /**
+     * Sets tire_eu_adherence
+     *
+     * @param string $tire_eu_adherence tire_eu_adherence
+     *
+     * @return $this
+     */
+    public function setTireEuAdherence($tire_eu_adherence)
+    {
+        $this->container['tire_eu_adherence'] = $tire_eu_adherence;
 
         return $this;
     }

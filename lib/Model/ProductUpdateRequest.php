@@ -70,13 +70,13 @@ class ProductUpdateRequest implements ModelInterface, ArrayAccess
 'categ' => '\Carooline\Model\ProductCateg',
 'consigne_price' => 'float',
 'tire_scale' => 'string',
-'tire_eu_db' => 'string',
+'tire_eu_db' => 'int',
 'full_picture_url' => 'string',
 'active' => 'bool',
-'tire_eu_adherence_id' => 'string',
 'short_codes' => 'string',
-'manufacturer' => '\Carooline\Model\ProductManufacturer',
+'manufacturer' => '\Carooline\Model\ProductCreateRequestManufacturer',
 'name' => 'string',
+'tire_eu_adherence' => 'string',
 'tire_is_reinforced' => 'bool',
 'tire_type' => 'string',
 'tire_eu_eco' => 'string'    ];
@@ -104,10 +104,10 @@ class ProductUpdateRequest implements ModelInterface, ArrayAccess
 'tire_eu_db' => null,
 'full_picture_url' => null,
 'active' => null,
-'tire_eu_adherence_id' => null,
 'short_codes' => null,
 'manufacturer' => null,
 'name' => null,
+'tire_eu_adherence' => null,
 'tire_is_reinforced' => null,
 'tire_type' => null,
 'tire_eu_eco' => null    ];
@@ -156,10 +156,10 @@ class ProductUpdateRequest implements ModelInterface, ArrayAccess
 'tire_eu_db' => 'tire_eu_db',
 'full_picture_url' => 'full_picture_url',
 'active' => 'active',
-'tire_eu_adherence_id' => 'tire_eu_adherence_id',
 'short_codes' => 'short_codes',
 'manufacturer' => 'manufacturer',
 'name' => 'name',
+'tire_eu_adherence' => 'tire_eu_adherence',
 'tire_is_reinforced' => 'tire_is_reinforced',
 'tire_type' => 'tire_type',
 'tire_eu_eco' => 'tire_eu_eco'    ];
@@ -187,10 +187,10 @@ class ProductUpdateRequest implements ModelInterface, ArrayAccess
 'tire_eu_db' => 'setTireEuDb',
 'full_picture_url' => 'setFullPictureUrl',
 'active' => 'setActive',
-'tire_eu_adherence_id' => 'setTireEuAdherenceId',
 'short_codes' => 'setShortCodes',
 'manufacturer' => 'setManufacturer',
 'name' => 'setName',
+'tire_eu_adherence' => 'setTireEuAdherence',
 'tire_is_reinforced' => 'setTireIsReinforced',
 'tire_type' => 'setTireType',
 'tire_eu_eco' => 'setTireEuEco'    ];
@@ -218,10 +218,10 @@ class ProductUpdateRequest implements ModelInterface, ArrayAccess
 'tire_eu_db' => 'getTireEuDb',
 'full_picture_url' => 'getFullPictureUrl',
 'active' => 'getActive',
-'tire_eu_adherence_id' => 'getTireEuAdherenceId',
 'short_codes' => 'getShortCodes',
 'manufacturer' => 'getManufacturer',
 'name' => 'getName',
+'tire_eu_adherence' => 'getTireEuAdherence',
 'tire_is_reinforced' => 'getTireIsReinforced',
 'tire_type' => 'getTireType',
 'tire_eu_eco' => 'getTireEuEco'    ];
@@ -301,10 +301,10 @@ class ProductUpdateRequest implements ModelInterface, ArrayAccess
         $this->container['tire_eu_db'] = isset($data['tire_eu_db']) ? $data['tire_eu_db'] : null;
         $this->container['full_picture_url'] = isset($data['full_picture_url']) ? $data['full_picture_url'] : null;
         $this->container['active'] = isset($data['active']) ? $data['active'] : null;
-        $this->container['tire_eu_adherence_id'] = isset($data['tire_eu_adherence_id']) ? $data['tire_eu_adherence_id'] : null;
         $this->container['short_codes'] = isset($data['short_codes']) ? $data['short_codes'] : null;
         $this->container['manufacturer'] = isset($data['manufacturer']) ? $data['manufacturer'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['tire_eu_adherence'] = isset($data['tire_eu_adherence']) ? $data['tire_eu_adherence'] : null;
         $this->container['tire_is_reinforced'] = isset($data['tire_is_reinforced']) ? $data['tire_is_reinforced'] : null;
         $this->container['tire_type'] = isset($data['tire_type']) ? $data['tire_type'] : null;
         $this->container['tire_eu_eco'] = isset($data['tire_eu_eco']) ? $data['tire_eu_eco'] : null;
@@ -673,7 +673,7 @@ class ProductUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Gets tire_eu_db
      *
-     * @return string
+     * @return int
      */
     public function getTireEuDb()
     {
@@ -683,7 +683,7 @@ class ProductUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Sets tire_eu_db
      *
-     * @param string $tire_eu_db tire_eu_db
+     * @param int $tire_eu_db tire_eu_db
      *
      * @return $this
      */
@@ -743,30 +743,6 @@ class ProductUpdateRequest implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets tire_eu_adherence_id
-     *
-     * @return string
-     */
-    public function getTireEuAdherenceId()
-    {
-        return $this->container['tire_eu_adherence_id'];
-    }
-
-    /**
-     * Sets tire_eu_adherence_id
-     *
-     * @param string $tire_eu_adherence_id tire_eu_adherence_id
-     *
-     * @return $this
-     */
-    public function setTireEuAdherenceId($tire_eu_adherence_id)
-    {
-        $this->container['tire_eu_adherence_id'] = $tire_eu_adherence_id;
-
-        return $this;
-    }
-
-    /**
      * Gets short_codes
      *
      * @return string
@@ -793,7 +769,7 @@ class ProductUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Gets manufacturer
      *
-     * @return \Carooline\Model\ProductManufacturer
+     * @return \Carooline\Model\ProductCreateRequestManufacturer
      */
     public function getManufacturer()
     {
@@ -803,7 +779,7 @@ class ProductUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Sets manufacturer
      *
-     * @param \Carooline\Model\ProductManufacturer $manufacturer manufacturer
+     * @param \Carooline\Model\ProductCreateRequestManufacturer $manufacturer manufacturer
      *
      * @return $this
      */
@@ -834,6 +810,30 @@ class ProductUpdateRequest implements ModelInterface, ArrayAccess
     public function setName($name)
     {
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets tire_eu_adherence
+     *
+     * @return string
+     */
+    public function getTireEuAdherence()
+    {
+        return $this->container['tire_eu_adherence'];
+    }
+
+    /**
+     * Sets tire_eu_adherence
+     *
+     * @param string $tire_eu_adherence tire_eu_adherence
+     *
+     * @return $this
+     */
+    public function setTireEuAdherence($tire_eu_adherence)
+    {
+        $this->container['tire_eu_adherence'] = $tire_eu_adherence;
 
         return $this;
     }

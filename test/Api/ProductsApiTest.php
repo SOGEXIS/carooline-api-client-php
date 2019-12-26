@@ -190,6 +190,37 @@ class ProductsApiTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(\Carooline\Model\Product::class, $result);
         $this->assertEquals(74891, $result->getId());
         $this->assertEquals(30.80, $result->getListPrice());
+        
+        
+        // Update tire 74887
+        $body = new ProductUpdateRequest([
+            'tire_type' => 'VUL',
+            'tire_scale' => 'Prémium',
+            'tire_is_runflat' => true,
+            'tire_is_reinforced' => true,
+            'tire_eu_eco' => 'F',
+            'tire_eu_adherence' => 'B',
+            'tire_eu_db' => 345,
+            'tire_width' => "45",
+            'tire_height' => "45",
+            'tire_diameter' => "26",
+            'tire_load' => "53",
+            'tire_speed' => "S",
+        ]);
+        $result = $this->productApi->productsIdPut(74887, $body);
+        $this->assertInstanceOf(\Carooline\Model\Product::class, $result);
+        $this->assertEquals('VUL', $result->getTireType());
+        $this->assertEquals('Prémium', $result->getTireScale());
+        $this->assertEquals(true, $result->getTireIsRunflat());
+        $this->assertEquals(true, $result->getTireIsReinforced());
+        $this->assertEquals('F', $result->getTireEuEco());
+        $this->assertEquals('B', $result->getTireEuAdherence());
+        $this->assertEquals(345, $result->getTireEuDb());
+        $this->assertEquals("45", $result->getTireWidth());
+        $this->assertEquals("45", $result->getTireHeight());
+        $this->assertEquals("26", $result->getTireDiameter());
+        $this->assertEquals("53", $result->getTireLoad());
+        $this->assertEquals("S", $result->getTireSpeed());
     }
     
     /**
