@@ -349,39 +349,41 @@ class CategoriesApi
             $httpBody
         );
     }
-
+    
     /**
      * Operation categoriesIdGet
      *
-     * Get Category's informations
+     * Get Category's informations. If recursive_childs set to true then  all child categories with products will be shown.
      *
      * @param  int $id Item id (required)
+     * @param  bool $recursive_childs recursive_childs (optional)
      *
      * @throws \Carooline\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Carooline\Model\ProductCategory
      */
-    public function categoriesIdGet($id)
+    public function categoriesIdGet($id, $recursive_childs = null)
     {
-        list($response) = $this->categoriesIdGetWithHttpInfo($id);
+        list($response) = $this->categoriesIdGetWithHttpInfo($id, $recursive_childs);
         return $response;
     }
 
     /**
      * Operation categoriesIdGetWithHttpInfo
      *
-     * Get Category's informations
+     * Get Category's informations. If recursive_childs set to true then  all child categories with products will be shown.
      *
      * @param  int $id Item id (required)
+     * @param  bool $recursive_childs (optional)
      *
      * @throws \Carooline\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Carooline\Model\ProductCategory, HTTP status code, HTTP response headers (array of strings)
      */
-    public function categoriesIdGetWithHttpInfo($id)
+    public function categoriesIdGetWithHttpInfo($id, $recursive_childs = null)
     {
         $returnType = '\Carooline\Model\ProductCategory';
-        $request = $this->categoriesIdGetRequest($id);
+        $request = $this->categoriesIdGetRequest($id, $recursive_childs);
 
         try {
             $options = $this->createHttpClientOption();
@@ -445,16 +447,17 @@ class CategoriesApi
     /**
      * Operation categoriesIdGetAsync
      *
-     * Get Category's informations
+     * Get Category's informations. If recursive_childs set to true then  all child categories with products will be shown.
      *
      * @param  int $id Item id (required)
+     * @param  bool $recursive_childs (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function categoriesIdGetAsync($id)
+    public function categoriesIdGetAsync($id, $recursive_childs = null)
     {
-        return $this->categoriesIdGetAsyncWithHttpInfo($id)
+        return $this->categoriesIdGetAsyncWithHttpInfo($id, $recursive_childs)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -465,17 +468,18 @@ class CategoriesApi
     /**
      * Operation categoriesIdGetAsyncWithHttpInfo
      *
-     * Get Category's informations
+     * Get Category's informations. If recursive_childs set to true then  all child categories with products will be shown.
      *
      * @param  int $id Item id (required)
+     * @param  bool $recursive_childs (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function categoriesIdGetAsyncWithHttpInfo($id)
+    public function categoriesIdGetAsyncWithHttpInfo($id, $recursive_childs = null)
     {
         $returnType = '\Carooline\Model\ProductCategory';
-        $request = $this->categoriesIdGetRequest($id);
+        $request = $this->categoriesIdGetRequest($id, $recursive_childs);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -518,11 +522,12 @@ class CategoriesApi
      * Create request for operation 'categoriesIdGet'
      *
      * @param  int $id Item id (required)
+     * @param  bool $recursive_childs (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function categoriesIdGetRequest($id)
+    protected function categoriesIdGetRequest($id, $recursive_childs = null)
     {
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
@@ -538,6 +543,10 @@ class CategoriesApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        if ($recursive_childs !== null) {
+            $queryParams['recursive_childs'] = ObjectSerializer::toQueryValue($recursive_childs);
+        }
 
         // path params
         if ($id !== null) {
@@ -614,6 +623,7 @@ class CategoriesApi
             $httpBody
         );
     }
+
 
     /**
      * Operation categoriesSearchForVehiclePost

@@ -56,7 +56,8 @@ class ProductCategory implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'display_name' => 'string',
+        'childs' => '\Carooline\Model\ProductCategory[]',
+'display_name' => 'string',
 'name' => 'string',
 'parent_id' => 'int',
 'full_picture_url' => 'string',
@@ -69,7 +70,8 @@ class ProductCategory implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'display_name' => null,
+        'childs' => null,
+'display_name' => null,
 'name' => null,
 'parent_id' => null,
 'full_picture_url' => null,
@@ -103,7 +105,8 @@ class ProductCategory implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'display_name' => 'display_name',
+        'childs' => 'childs',
+'display_name' => 'display_name',
 'name' => 'name',
 'parent_id' => 'parent_id',
 'full_picture_url' => 'full_picture_url',
@@ -116,7 +119,8 @@ class ProductCategory implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'display_name' => 'setDisplayName',
+        'childs' => 'setChilds',
+'display_name' => 'setDisplayName',
 'name' => 'setName',
 'parent_id' => 'setParentId',
 'full_picture_url' => 'setFullPictureUrl',
@@ -129,7 +133,8 @@ class ProductCategory implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'display_name' => 'getDisplayName',
+        'childs' => 'getChilds',
+'display_name' => 'getDisplayName',
 'name' => 'getName',
 'parent_id' => 'getParentId',
 'full_picture_url' => 'getFullPictureUrl',
@@ -194,6 +199,7 @@ class ProductCategory implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['childs'] = isset($data['childs']) ? $data['childs'] : null;
         $this->container['display_name'] = isset($data['display_name']) ? $data['display_name'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['parent_id'] = isset($data['parent_id']) ? $data['parent_id'] : null;
@@ -228,6 +234,30 @@ class ProductCategory implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets childs
+     *
+     * @return \Carooline\Model\ProductCategory[]
+     */
+    public function getChilds()
+    {
+        return $this->container['childs'];
+    }
+
+    /**
+     * Sets childs
+     *
+     * @param \Carooline\Model\ProductCategory[] $childs childs
+     *
+     * @return $this
+     */
+    public function setChilds($childs)
+    {
+        $this->container['childs'] = $childs;
+
+        return $this;
+    }
 
     /**
      * Gets display_name

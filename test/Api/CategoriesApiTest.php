@@ -105,6 +105,14 @@ class CategoriesApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(2246, $result->getId());
         $this->assertEquals("Pièces / Filtre / Filtre à air", $result->getDisplayName());
         
+        
+        $result = $categoriesApi->categoriesIdGet(3611, true);
+        $this->assertInstanceOf(\Carooline\Model\ProductCategory::class, $result);
+        $this->assertCount(2, $result->getChilds());
+        foreach ($result->getChilds() as $childCategory) {
+            $this->assertInstanceOf(\Carooline\Model\ProductCategory::class, $childCategory);
+            $this->assertCount(1, $childCategory->getChilds());
+        }
     }
 
 
