@@ -164,11 +164,16 @@ class ProductsApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testProductsIdGet()
     {
-        $result = $this->productApi->productsIdGet(74891);
+        $result = $this->productApi->productsIdGet(73039);
         $this->assertInstanceOf(\Carooline\Model\Product::class, $result);
-        $this->assertEquals(74891, $result->getId());
-        $this->assertEquals("Filtre à air", $result->getName());
-        $this->assertEquals("BOSCH", $result->getManufacturer()->getName());
+        $this->assertEquals(73039, $result->getId());
+        $this->assertEquals("Batterie de démarrage StrongPRO HVR", $result->getName());
+        $this->assertEquals("FULMEN", $result->getManufacturer()->getName());
+        $this->assertCount(2, $result->getAllPictureUrls());
+        foreach ($result->getAllPictureUrls() as $productImageUrl) {
+            $this->assertStringContainsStringIgnoringCase("media.carooline.com", $productImageUrl);
+        }
+        $this->assertStringContainsStringIgnoringCase("Fulmen Heavy Expert HVR", $result->getDescription());
     }
 
     /**

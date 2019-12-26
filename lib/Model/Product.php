@@ -76,6 +76,7 @@ class Product implements ModelInterface, ArrayAccess
 'id' => 'int',
 'short_codes' => 'string',
 'sale_ok' => 'bool',
+'description' => 'string',
 'tire_diameter' => 'string',
 'real_qty_available' => 'float',
 'name' => 'string',
@@ -84,6 +85,7 @@ class Product implements ModelInterface, ArrayAccess
 'tire_speed' => 'string',
 'tire_eu_adherence' => 'string',
 'tire_height' => 'string',
+'all_picture_urls' => 'string[]',
 'tire_load' => 'string',
 'linked_vehicle_types' => '\Carooline\Model\ProductLinkedVehicleTypes[]',
 'equiv_references_list' => '\Carooline\Model\ProductOeReferencesList[]',
@@ -118,6 +120,7 @@ class Product implements ModelInterface, ArrayAccess
 'id' => null,
 'short_codes' => null,
 'sale_ok' => null,
+'description' => null,
 'tire_diameter' => null,
 'real_qty_available' => 'float',
 'name' => null,
@@ -126,6 +129,7 @@ class Product implements ModelInterface, ArrayAccess
 'tire_speed' => null,
 'tire_eu_adherence' => null,
 'tire_height' => null,
+'all_picture_urls' => null,
 'tire_load' => null,
 'linked_vehicle_types' => null,
 'equiv_references_list' => null,
@@ -181,6 +185,7 @@ class Product implements ModelInterface, ArrayAccess
 'id' => 'id',
 'short_codes' => 'short_codes',
 'sale_ok' => 'sale_ok',
+'description' => 'description',
 'tire_diameter' => 'tire_diameter',
 'real_qty_available' => 'real_qty_available',
 'name' => 'name',
@@ -189,6 +194,7 @@ class Product implements ModelInterface, ArrayAccess
 'tire_speed' => 'tire_speed',
 'tire_eu_adherence' => 'tire_eu_adherence',
 'tire_height' => 'tire_height',
+'all_picture_urls' => 'all_picture_urls',
 'tire_load' => 'tire_load',
 'linked_vehicle_types' => 'linked_vehicle_types',
 'equiv_references_list' => 'equiv_references_list',
@@ -223,6 +229,7 @@ class Product implements ModelInterface, ArrayAccess
 'id' => 'setId',
 'short_codes' => 'setShortCodes',
 'sale_ok' => 'setSaleOk',
+'description' => 'setDescription',
 'tire_diameter' => 'setTireDiameter',
 'real_qty_available' => 'setRealQtyAvailable',
 'name' => 'setName',
@@ -231,6 +238,7 @@ class Product implements ModelInterface, ArrayAccess
 'tire_speed' => 'setTireSpeed',
 'tire_eu_adherence' => 'setTireEuAdherence',
 'tire_height' => 'setTireHeight',
+'all_picture_urls' => 'setAllPictureUrls',
 'tire_load' => 'setTireLoad',
 'linked_vehicle_types' => 'setLinkedVehicleTypes',
 'equiv_references_list' => 'setEquivReferencesList',
@@ -265,6 +273,7 @@ class Product implements ModelInterface, ArrayAccess
 'id' => 'getId',
 'short_codes' => 'getShortCodes',
 'sale_ok' => 'getSaleOk',
+'description' => 'getDescription',
 'tire_diameter' => 'getTireDiameter',
 'real_qty_available' => 'getRealQtyAvailable',
 'name' => 'getName',
@@ -273,6 +282,7 @@ class Product implements ModelInterface, ArrayAccess
 'tire_speed' => 'getTireSpeed',
 'tire_eu_adherence' => 'getTireEuAdherence',
 'tire_height' => 'getTireHeight',
+'all_picture_urls' => 'getAllPictureUrls',
 'tire_load' => 'getTireLoad',
 'linked_vehicle_types' => 'getLinkedVehicleTypes',
 'equiv_references_list' => 'getEquivReferencesList',
@@ -359,6 +369,7 @@ class Product implements ModelInterface, ArrayAccess
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['short_codes'] = isset($data['short_codes']) ? $data['short_codes'] : null;
         $this->container['sale_ok'] = isset($data['sale_ok']) ? $data['sale_ok'] : null;
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
         $this->container['tire_diameter'] = isset($data['tire_diameter']) ? $data['tire_diameter'] : null;
         $this->container['real_qty_available'] = isset($data['real_qty_available']) ? $data['real_qty_available'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
@@ -367,6 +378,7 @@ class Product implements ModelInterface, ArrayAccess
         $this->container['tire_speed'] = isset($data['tire_speed']) ? $data['tire_speed'] : null;
         $this->container['tire_eu_adherence'] = isset($data['tire_eu_adherence']) ? $data['tire_eu_adherence'] : null;
         $this->container['tire_height'] = isset($data['tire_height']) ? $data['tire_height'] : null;
+        $this->container['all_picture_urls'] = isset($data['all_picture_urls']) ? $data['all_picture_urls'] : null;
         $this->container['tire_load'] = isset($data['tire_load']) ? $data['tire_load'] : null;
         $this->container['linked_vehicle_types'] = isset($data['linked_vehicle_types']) ? $data['linked_vehicle_types'] : null;
         $this->container['equiv_references_list'] = isset($data['equiv_references_list']) ? $data['equiv_references_list'] : null;
@@ -890,6 +902,30 @@ class Product implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string $description description
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
      * Gets tire_diameter
      *
      * @return string
@@ -1077,6 +1113,30 @@ class Product implements ModelInterface, ArrayAccess
     public function setTireHeight($tire_height)
     {
         $this->container['tire_height'] = $tire_height;
+
+        return $this;
+    }
+
+    /**
+     * Gets all_picture_urls
+     *
+     * @return string[]
+     */
+    public function getAllPictureUrls()
+    {
+        return $this->container['all_picture_urls'];
+    }
+
+    /**
+     * Sets all_picture_urls
+     *
+     * @param string[] $all_picture_urls all_picture_urls
+     *
+     * @return $this
+     */
+    public function setAllPictureUrls($all_picture_urls)
+    {
+        $this->container['all_picture_urls'] = $all_picture_urls;
 
         return $this;
     }
