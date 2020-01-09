@@ -28,17 +28,19 @@
 namespace Carooline;
 
 use GuzzleHttp\Client;
-use Carooline\Configuration;
-use Carooline\ApiException;
-use Carooline\ObjectSerializer;
 use Carooline\Api\AuthApi;
+use Carooline\Model\Order;
+use Carooline\ApiException;
+use Carooline\Configuration;
 use Carooline\Api\OrdersApi;
+use Carooline\ObjectSerializer;
 use Carooline\Model\LoginRequest;
-use Carooline\Model\OrderCreateRequestOrderLine;
 use Carooline\Model\OrderCreateRequest;
 use Carooline\Model\OrderUpdateRequest;
 use Carooline\Model\OrderSearchResponse;
-use Carooline\Model\Order;
+use Carooline\Model\OrderSetDeliveryRequest;
+use Carooline\Model\OrderCreateRequestOrderLine;
+
 
 /**
  * OrdersApiTest Class Doc Comment
@@ -262,5 +264,28 @@ class OrdersApiTest extends \PHPUnit\Framework\TestCase
         $result = $this->orderApi->ordersIdPut(71, $body);
         $this->assertInstanceOf(Order::class, $result);
         $this->assertStringContainsStringIgnoringCase("TESTREF123", $result->getClientOrderRef());
+    }
+
+
+    /**
+     * Test case for ordersIdConfirmPost
+     *
+     * Confirm the Order. The state will be updated and the Order line are then frozen..
+     *
+     */
+    public function testOrdersIdSetDelivery()
+    {
+        $body = new OrderSetDeliveryRequest([
+            'delivery_carrier_id' => 5,
+            'amount_untaxed' => 9.32
+        ]);
+        $order_id = 263;
+        $result = $this->orderApi->ordersIdSetDeliveryPost($order_id, $body);
+        $this->assertInstanceOf(Order::class, $result);
+        foreach ($result->getOrderLine() as $orderLine) {
+            if ($orderLine->getIsDelivery() == true) {
+                $this->assertEquals(9.32, $orderLine->getPriceUnit());
+            }
+        }
     }
 }

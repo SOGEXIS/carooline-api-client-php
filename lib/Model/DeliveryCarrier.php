@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderLine
+ * DeliveryCarrier
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ use \ArrayAccess;
 use \Carooline\ObjectSerializer;
 
 /**
- * OrderLine Class Doc Comment
+ * DeliveryCarrier Class Doc Comment
  *
  * @category Class
  * @package  Carooline
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class OrderLine implements ModelInterface, ArrayAccess
+class DeliveryCarrier implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class OrderLine implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'OrderLine';
+    protected static $swaggerModelName = 'DeliveryCarrier';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,16 +56,10 @@ class OrderLine implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'is_delivery' => 'bool',
-'product_id' => 'int',
-'name' => 'string',
-'sequence' => 'int',
-'order_id' => 'float',
-'tax' => 'float',
-'price_unit' => 'float',
-'price_subtotal' => 'float',
+        'delivery_product_id' => 'int',
+'partner_id' => 'int',
 'id' => 'int',
-'quantity' => 'float'    ];
+'name' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -73,16 +67,10 @@ class OrderLine implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'is_delivery' => null,
-'product_id' => null,
-'name' => null,
-'sequence' => null,
-'order_id' => 'float',
-'tax' => 'float',
-'price_unit' => 'float',
-'price_subtotal' => 'float',
+        'delivery_product_id' => null,
+'partner_id' => null,
 'id' => null,
-'quantity' => 'float'    ];
+'name' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -111,16 +99,10 @@ class OrderLine implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'is_delivery' => 'is_delivery',
-'product_id' => 'product_id',
-'name' => 'name',
-'sequence' => 'sequence',
-'order_id' => 'order_id',
-'tax' => 'tax',
-'price_unit' => 'price_unit',
-'price_subtotal' => 'price_subtotal',
+        'delivery_product_id' => 'delivery_product_id',
+'partner_id' => 'partner_id',
 'id' => 'id',
-'quantity' => 'quantity'    ];
+'name' => 'name'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -128,16 +110,10 @@ class OrderLine implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'is_delivery' => 'setIsDelivery',
-'product_id' => 'setProductId',
-'name' => 'setName',
-'sequence' => 'setSequence',
-'order_id' => 'setOrderId',
-'tax' => 'setTax',
-'price_unit' => 'setPriceUnit',
-'price_subtotal' => 'setPriceSubtotal',
+        'delivery_product_id' => 'setDeliveryProductId',
+'partner_id' => 'setPartnerId',
 'id' => 'setId',
-'quantity' => 'setQuantity'    ];
+'name' => 'setName'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -145,16 +121,10 @@ class OrderLine implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'is_delivery' => 'getIsDelivery',
-'product_id' => 'getProductId',
-'name' => 'getName',
-'sequence' => 'getSequence',
-'order_id' => 'getOrderId',
-'tax' => 'getTax',
-'price_unit' => 'getPriceUnit',
-'price_subtotal' => 'getPriceSubtotal',
+        'delivery_product_id' => 'getDeliveryProductId',
+'partner_id' => 'getPartnerId',
 'id' => 'getId',
-'quantity' => 'getQuantity'    ];
+'name' => 'getName'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -214,16 +184,10 @@ class OrderLine implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['is_delivery'] = isset($data['is_delivery']) ? $data['is_delivery'] : null;
-        $this->container['product_id'] = isset($data['product_id']) ? $data['product_id'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['sequence'] = isset($data['sequence']) ? $data['sequence'] : null;
-        $this->container['order_id'] = isset($data['order_id']) ? $data['order_id'] : null;
-        $this->container['tax'] = isset($data['tax']) ? $data['tax'] : null;
-        $this->container['price_unit'] = isset($data['price_unit']) ? $data['price_unit'] : null;
-        $this->container['price_subtotal'] = isset($data['price_subtotal']) ? $data['price_subtotal'] : null;
+        $this->container['delivery_product_id'] = isset($data['delivery_product_id']) ? $data['delivery_product_id'] : null;
+        $this->container['partner_id'] = isset($data['partner_id']) ? $data['partner_id'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
     }
 
     /**
@@ -235,9 +199,6 @@ class OrderLine implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['order_id'] === null) {
-            $invalidProperties[] = "'order_id' can't be null";
-        }
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
@@ -257,193 +218,49 @@ class OrderLine implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets is_delivery
-     *
-     * @return bool
-     */
-    public function getIsDelivery()
-    {
-        return $this->container['is_delivery'];
-    }
-
-    /**
-     * Sets is_delivery
-     *
-     * @param bool $is_delivery is_delivery
-     *
-     * @return $this
-     */
-    public function setIsDelivery($is_delivery)
-    {
-        $this->container['is_delivery'] = $is_delivery;
-
-        return $this;
-    }
-
-    /**
-     * Gets product_id
+     * Gets delivery_product_id
      *
      * @return int
      */
-    public function getProductId()
+    public function getDeliveryProductId()
     {
-        return $this->container['product_id'];
+        return $this->container['delivery_product_id'];
     }
 
     /**
-     * Sets product_id
+     * Sets delivery_product_id
      *
-     * @param int $product_id product_id
+     * @param int $delivery_product_id delivery_product_id
      *
      * @return $this
      */
-    public function setProductId($product_id)
+    public function setDeliveryProductId($delivery_product_id)
     {
-        $this->container['product_id'] = $product_id;
+        $this->container['delivery_product_id'] = $delivery_product_id;
 
         return $this;
     }
 
     /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets sequence
+     * Gets partner_id
      *
      * @return int
      */
-    public function getSequence()
+    public function getPartnerId()
     {
-        return $this->container['sequence'];
+        return $this->container['partner_id'];
     }
 
     /**
-     * Sets sequence
+     * Sets partner_id
      *
-     * @param int $sequence sequence
+     * @param int $partner_id partner_id
      *
      * @return $this
      */
-    public function setSequence($sequence)
+    public function setPartnerId($partner_id)
     {
-        $this->container['sequence'] = $sequence;
-
-        return $this;
-    }
-
-    /**
-     * Gets order_id
-     *
-     * @return float
-     */
-    public function getOrderId()
-    {
-        return $this->container['order_id'];
-    }
-
-    /**
-     * Sets order_id
-     *
-     * @param float $order_id order_id
-     *
-     * @return $this
-     */
-    public function setOrderId($order_id)
-    {
-        $this->container['order_id'] = $order_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets tax
-     *
-     * @return float
-     */
-    public function getTax()
-    {
-        return $this->container['tax'];
-    }
-
-    /**
-     * Sets tax
-     *
-     * @param float $tax tax
-     *
-     * @return $this
-     */
-    public function setTax($tax)
-    {
-        $this->container['tax'] = $tax;
-
-        return $this;
-    }
-
-    /**
-     * Gets price_unit
-     *
-     * @return float
-     */
-    public function getPriceUnit()
-    {
-        return $this->container['price_unit'];
-    }
-
-    /**
-     * Sets price_unit
-     *
-     * @param float $price_unit price_unit
-     *
-     * @return $this
-     */
-    public function setPriceUnit($price_unit)
-    {
-        $this->container['price_unit'] = $price_unit;
-
-        return $this;
-    }
-
-    /**
-     * Gets price_subtotal
-     *
-     * @return float
-     */
-    public function getPriceSubtotal()
-    {
-        return $this->container['price_subtotal'];
-    }
-
-    /**
-     * Sets price_subtotal
-     *
-     * @param float $price_subtotal price_subtotal
-     *
-     * @return $this
-     */
-    public function setPriceSubtotal($price_subtotal)
-    {
-        $this->container['price_subtotal'] = $price_subtotal;
+        $this->container['partner_id'] = $partner_id;
 
         return $this;
     }
@@ -473,25 +290,25 @@ class OrderLine implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets quantity
+     * Gets name
      *
-     * @return float
+     * @return string
      */
-    public function getQuantity()
+    public function getName()
     {
-        return $this->container['quantity'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets quantity
+     * Sets name
      *
-     * @param float $quantity quantity
+     * @param string $name name
      *
      * @return $this
      */
-    public function setQuantity($quantity)
+    public function setName($name)
     {
-        $this->container['quantity'] = $quantity;
+        $this->container['name'] = $name;
 
         return $this;
     }
