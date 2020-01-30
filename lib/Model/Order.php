@@ -57,19 +57,23 @@ class Order implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'print_href' => 'string',
+'consignee_id' => 'int',
+'amount_untaxed' => 'float',
+'name' => 'string',
+'partner_shipping_id' => 'int',
 'order_line' => '\Carooline\Model\OrderLine[]',
+'mobile' => 'string',
+'amount_tax' => 'float',
+'invoice_ids' => '\Carooline\Model\OrderInvoiceIds[]',
+'state' => 'string',
+'carrier' => '\Carooline\Model\OrderCarrier',
 'payment_transaction' => '\Carooline\Model\OrderPaymentTransaction',
 'client_order_ref' => 'string',
+'partner_invoice_id' => 'int',
 'partner' => '\Carooline\Model\Partner',
 'date_order' => 'string',
 'id' => 'int',
-'amount_total' => 'float',
-'amount_untaxed' => 'float',
-'name' => 'string',
-'mobile' => 'string',
-'amount_tax' => 'float',
-'state' => 'string',
-'carrier' => '\Carooline\Model\OrderCarrier'    ];
+'amount_total' => 'float'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -78,19 +82,23 @@ class Order implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'print_href' => null,
+'consignee_id' => null,
+'amount_untaxed' => 'float',
+'name' => null,
+'partner_shipping_id' => null,
 'order_line' => null,
+'mobile' => null,
+'amount_tax' => 'float',
+'invoice_ids' => null,
+'state' => null,
+'carrier' => null,
 'payment_transaction' => null,
 'client_order_ref' => null,
+'partner_invoice_id' => null,
 'partner' => null,
 'date_order' => null,
 'id' => null,
-'amount_total' => 'float',
-'amount_untaxed' => 'float',
-'name' => null,
-'mobile' => null,
-'amount_tax' => 'float',
-'state' => null,
-'carrier' => null    ];
+'amount_total' => 'float'    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -120,19 +128,23 @@ class Order implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'print_href' => 'print_href',
+'consignee_id' => 'consignee_id',
+'amount_untaxed' => 'amount_untaxed',
+'name' => 'name',
+'partner_shipping_id' => 'partner_shipping_id',
 'order_line' => 'order_line',
+'mobile' => 'mobile',
+'amount_tax' => 'amount_tax',
+'invoice_ids' => 'invoice_ids',
+'state' => 'state',
+'carrier' => 'carrier',
 'payment_transaction' => 'payment_transaction',
 'client_order_ref' => 'client_order_ref',
+'partner_invoice_id' => 'partner_invoice_id',
 'partner' => 'partner',
 'date_order' => 'date_order',
 'id' => 'id',
-'amount_total' => 'amount_total',
-'amount_untaxed' => 'amount_untaxed',
-'name' => 'name',
-'mobile' => 'mobile',
-'amount_tax' => 'amount_tax',
-'state' => 'state',
-'carrier' => 'carrier'    ];
+'amount_total' => 'amount_total'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -141,19 +153,23 @@ class Order implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'print_href' => 'setPrintHref',
+'consignee_id' => 'setConsigneeId',
+'amount_untaxed' => 'setAmountUntaxed',
+'name' => 'setName',
+'partner_shipping_id' => 'setPartnerShippingId',
 'order_line' => 'setOrderLine',
+'mobile' => 'setMobile',
+'amount_tax' => 'setAmountTax',
+'invoice_ids' => 'setInvoiceIds',
+'state' => 'setState',
+'carrier' => 'setCarrier',
 'payment_transaction' => 'setPaymentTransaction',
 'client_order_ref' => 'setClientOrderRef',
+'partner_invoice_id' => 'setPartnerInvoiceId',
 'partner' => 'setPartner',
 'date_order' => 'setDateOrder',
 'id' => 'setId',
-'amount_total' => 'setAmountTotal',
-'amount_untaxed' => 'setAmountUntaxed',
-'name' => 'setName',
-'mobile' => 'setMobile',
-'amount_tax' => 'setAmountTax',
-'state' => 'setState',
-'carrier' => 'setCarrier'    ];
+'amount_total' => 'setAmountTotal'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -162,19 +178,23 @@ class Order implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'print_href' => 'getPrintHref',
+'consignee_id' => 'getConsigneeId',
+'amount_untaxed' => 'getAmountUntaxed',
+'name' => 'getName',
+'partner_shipping_id' => 'getPartnerShippingId',
 'order_line' => 'getOrderLine',
+'mobile' => 'getMobile',
+'amount_tax' => 'getAmountTax',
+'invoice_ids' => 'getInvoiceIds',
+'state' => 'getState',
+'carrier' => 'getCarrier',
 'payment_transaction' => 'getPaymentTransaction',
 'client_order_ref' => 'getClientOrderRef',
+'partner_invoice_id' => 'getPartnerInvoiceId',
 'partner' => 'getPartner',
 'date_order' => 'getDateOrder',
 'id' => 'getId',
-'amount_total' => 'getAmountTotal',
-'amount_untaxed' => 'getAmountUntaxed',
-'name' => 'getName',
-'mobile' => 'getMobile',
-'amount_tax' => 'getAmountTax',
-'state' => 'getState',
-'carrier' => 'getCarrier'    ];
+'amount_total' => 'getAmountTotal'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -235,19 +255,23 @@ class Order implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['print_href'] = isset($data['print_href']) ? $data['print_href'] : null;
+        $this->container['consignee_id'] = isset($data['consignee_id']) ? $data['consignee_id'] : null;
+        $this->container['amount_untaxed'] = isset($data['amount_untaxed']) ? $data['amount_untaxed'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['partner_shipping_id'] = isset($data['partner_shipping_id']) ? $data['partner_shipping_id'] : null;
         $this->container['order_line'] = isset($data['order_line']) ? $data['order_line'] : null;
+        $this->container['mobile'] = isset($data['mobile']) ? $data['mobile'] : null;
+        $this->container['amount_tax'] = isset($data['amount_tax']) ? $data['amount_tax'] : null;
+        $this->container['invoice_ids'] = isset($data['invoice_ids']) ? $data['invoice_ids'] : null;
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        $this->container['carrier'] = isset($data['carrier']) ? $data['carrier'] : null;
         $this->container['payment_transaction'] = isset($data['payment_transaction']) ? $data['payment_transaction'] : null;
         $this->container['client_order_ref'] = isset($data['client_order_ref']) ? $data['client_order_ref'] : null;
+        $this->container['partner_invoice_id'] = isset($data['partner_invoice_id']) ? $data['partner_invoice_id'] : null;
         $this->container['partner'] = isset($data['partner']) ? $data['partner'] : null;
         $this->container['date_order'] = isset($data['date_order']) ? $data['date_order'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['amount_total'] = isset($data['amount_total']) ? $data['amount_total'] : null;
-        $this->container['amount_untaxed'] = isset($data['amount_untaxed']) ? $data['amount_untaxed'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['mobile'] = isset($data['mobile']) ? $data['mobile'] : null;
-        $this->container['amount_tax'] = isset($data['amount_tax']) ? $data['amount_tax'] : null;
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        $this->container['carrier'] = isset($data['carrier']) ? $data['carrier'] : null;
     }
 
     /**
@@ -305,6 +329,102 @@ class Order implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets consignee_id
+     *
+     * @return int
+     */
+    public function getConsigneeId()
+    {
+        return $this->container['consignee_id'];
+    }
+
+    /**
+     * Sets consignee_id
+     *
+     * @param int $consignee_id consignee_id
+     *
+     * @return $this
+     */
+    public function setConsigneeId($consignee_id)
+    {
+        $this->container['consignee_id'] = $consignee_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets amount_untaxed
+     *
+     * @return float
+     */
+    public function getAmountUntaxed()
+    {
+        return $this->container['amount_untaxed'];
+    }
+
+    /**
+     * Sets amount_untaxed
+     *
+     * @param float $amount_untaxed amount_untaxed
+     *
+     * @return $this
+     */
+    public function setAmountUntaxed($amount_untaxed)
+    {
+        $this->container['amount_untaxed'] = $amount_untaxed;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string $name name
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets partner_shipping_id
+     *
+     * @return int
+     */
+    public function getPartnerShippingId()
+    {
+        return $this->container['partner_shipping_id'];
+    }
+
+    /**
+     * Sets partner_shipping_id
+     *
+     * @param int $partner_shipping_id partner_shipping_id
+     *
+     * @return $this
+     */
+    public function setPartnerShippingId($partner_shipping_id)
+    {
+        $this->container['partner_shipping_id'] = $partner_shipping_id;
+
+        return $this;
+    }
+
+    /**
      * Gets order_line
      *
      * @return \Carooline\Model\OrderLine[]
@@ -324,6 +444,126 @@ class Order implements ModelInterface, ArrayAccess
     public function setOrderLine($order_line)
     {
         $this->container['order_line'] = $order_line;
+
+        return $this;
+    }
+
+    /**
+     * Gets mobile
+     *
+     * @return string
+     */
+    public function getMobile()
+    {
+        return $this->container['mobile'];
+    }
+
+    /**
+     * Sets mobile
+     *
+     * @param string $mobile mobile
+     *
+     * @return $this
+     */
+    public function setMobile($mobile)
+    {
+        $this->container['mobile'] = $mobile;
+
+        return $this;
+    }
+
+    /**
+     * Gets amount_tax
+     *
+     * @return float
+     */
+    public function getAmountTax()
+    {
+        return $this->container['amount_tax'];
+    }
+
+    /**
+     * Sets amount_tax
+     *
+     * @param float $amount_tax amount_tax
+     *
+     * @return $this
+     */
+    public function setAmountTax($amount_tax)
+    {
+        $this->container['amount_tax'] = $amount_tax;
+
+        return $this;
+    }
+
+    /**
+     * Gets invoice_ids
+     *
+     * @return \Carooline\Model\OrderInvoiceIds[]
+     */
+    public function getInvoiceIds()
+    {
+        return $this->container['invoice_ids'];
+    }
+
+    /**
+     * Sets invoice_ids
+     *
+     * @param \Carooline\Model\OrderInvoiceIds[] $invoice_ids invoice_ids
+     *
+     * @return $this
+     */
+    public function setInvoiceIds($invoice_ids)
+    {
+        $this->container['invoice_ids'] = $invoice_ids;
+
+        return $this;
+    }
+
+    /**
+     * Gets state
+     *
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param string $state state
+     *
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets carrier
+     *
+     * @return \Carooline\Model\OrderCarrier
+     */
+    public function getCarrier()
+    {
+        return $this->container['carrier'];
+    }
+
+    /**
+     * Sets carrier
+     *
+     * @param \Carooline\Model\OrderCarrier $carrier carrier
+     *
+     * @return $this
+     */
+    public function setCarrier($carrier)
+    {
+        $this->container['carrier'] = $carrier;
 
         return $this;
     }
@@ -372,6 +612,30 @@ class Order implements ModelInterface, ArrayAccess
     public function setClientOrderRef($client_order_ref)
     {
         $this->container['client_order_ref'] = $client_order_ref;
+
+        return $this;
+    }
+
+    /**
+     * Gets partner_invoice_id
+     *
+     * @return int
+     */
+    public function getPartnerInvoiceId()
+    {
+        return $this->container['partner_invoice_id'];
+    }
+
+    /**
+     * Sets partner_invoice_id
+     *
+     * @param int $partner_invoice_id partner_invoice_id
+     *
+     * @return $this
+     */
+    public function setPartnerInvoiceId($partner_invoice_id)
+    {
+        $this->container['partner_invoice_id'] = $partner_invoice_id;
 
         return $this;
     }
@@ -468,150 +732,6 @@ class Order implements ModelInterface, ArrayAccess
     public function setAmountTotal($amount_total)
     {
         $this->container['amount_total'] = $amount_total;
-
-        return $this;
-    }
-
-    /**
-     * Gets amount_untaxed
-     *
-     * @return float
-     */
-    public function getAmountUntaxed()
-    {
-        return $this->container['amount_untaxed'];
-    }
-
-    /**
-     * Sets amount_untaxed
-     *
-     * @param float $amount_untaxed amount_untaxed
-     *
-     * @return $this
-     */
-    public function setAmountUntaxed($amount_untaxed)
-    {
-        $this->container['amount_untaxed'] = $amount_untaxed;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets mobile
-     *
-     * @return string
-     */
-    public function getMobile()
-    {
-        return $this->container['mobile'];
-    }
-
-    /**
-     * Sets mobile
-     *
-     * @param string $mobile mobile
-     *
-     * @return $this
-     */
-    public function setMobile($mobile)
-    {
-        $this->container['mobile'] = $mobile;
-
-        return $this;
-    }
-
-    /**
-     * Gets amount_tax
-     *
-     * @return float
-     */
-    public function getAmountTax()
-    {
-        return $this->container['amount_tax'];
-    }
-
-    /**
-     * Sets amount_tax
-     *
-     * @param float $amount_tax amount_tax
-     *
-     * @return $this
-     */
-    public function setAmountTax($amount_tax)
-    {
-        $this->container['amount_tax'] = $amount_tax;
-
-        return $this;
-    }
-
-    /**
-     * Gets state
-     *
-     * @return string
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     *
-     * @param string $state state
-     *
-     * @return $this
-     */
-    public function setState($state)
-    {
-        $this->container['state'] = $state;
-
-        return $this;
-    }
-
-    /**
-     * Gets carrier
-     *
-     * @return \Carooline\Model\OrderCarrier
-     */
-    public function getCarrier()
-    {
-        return $this->container['carrier'];
-    }
-
-    /**
-     * Sets carrier
-     *
-     * @param \Carooline\Model\OrderCarrier $carrier carrier
-     *
-     * @return $this
-     */
-    public function setCarrier($carrier)
-    {
-        $this->container['carrier'] = $carrier;
 
         return $this;
     }

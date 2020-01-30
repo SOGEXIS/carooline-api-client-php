@@ -35,6 +35,7 @@ use Carooline\Configuration;
 use Carooline\Api\OrdersApi;
 use Carooline\ObjectSerializer;
 use Carooline\Model\LoginRequest;
+use Carooline\Model\OrderInvoiceIds;
 use Carooline\Model\OrderCreateRequest;
 use Carooline\Model\OrderUpdateRequest;
 use Carooline\Model\OrderSearchResponse;
@@ -237,9 +238,15 @@ class OrdersApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testOrdersIdGet()
     {
-        $result = $this->orderApi->ordersIdGet(71);
+        $result = $this->orderApi->ordersIdGet(221);
         $this->assertInstanceOf(Order::class, $result);
-        $this->assertStringContainsStringIgnoringCase("71", $result->getName());
+        $this->assertStringContainsStringIgnoringCase("221", $result->getName());
+        foreach ($result->getInvoiceIds() as $invoice) {
+            $this->assertInstanceOf(OrderInvoiceIds::class, $invoice);
+            $this->assertStringContainsStringIgnoringCase("FC0032", $invoice->getNumber());
+            $this->assertEquals("paid", $invoice->getState());
+        }
+        
     }
 
     /**
