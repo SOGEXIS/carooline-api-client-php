@@ -27,16 +27,14 @@
 
 namespace Carooline\Api;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\MultipartStream;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\RequestOptions;
+use Http\Client\HttpClient;
 use Carooline\ApiException;
 use Carooline\Configuration;
 use Carooline\HeaderSelector;
 use Carooline\ObjectSerializer;
+use Http\Discovery\HttpClientDiscovery;
+use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\StreamFactoryDiscovery;
 
 /**
  * CategoriesApi Class Doc Comment
@@ -62,20 +60,23 @@ class CategoriesApi
      * @var HeaderSelector
      */
     protected $headerSelector;
+    protected $messageFactory;
 
     /**
-     * @param ClientInterface $client
+     * @param HttpClient $client
      * @param Configuration   $config
      * @param HeaderSelector  $selector
      */
     public function __construct(
-        ClientInterface $client = null,
+        HttpClient $client = null,
         Configuration $config = null,
         HeaderSelector $selector = null
     ) {
-        $this->client = $client ?: new Client();
+        $this->client = $client ?: HttpClientDiscovery::find();
         $this->config = $config ?: new Configuration();
+        $this->messageFactory = MessageFactoryDiscovery::find();
         $this->headerSelector = $selector ?: new HeaderSelector();
+        $this->streamFactory = StreamFactoryDiscovery::find();
     }
 
     /**
@@ -122,17 +123,7 @@ class CategoriesApi
         $request = $this->categoriesGetRequest($name, $parent_id);
 
         try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
+            $response = $this->client->sendRequest($request);;
 
             $statusCode = $response->getStatusCode();
 
@@ -218,7 +209,7 @@ class CategoriesApi
         $request = $this->categoriesGetRequest($name, $parent_id);
 
         return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
+            ->sendAsync($request)
             ->then(
                 function ($response) use ($returnType) {
                     $responseBody = $response->getBody();
@@ -315,7 +306,7 @@ class CategoriesApi
                     ];
                 }
                 // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
+                $httpBody = $this->streamFactory::createStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
@@ -342,7 +333,7 @@ class CategoriesApi
         );
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
+        return $this->messageFactory->createRequest(
             'GET',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
@@ -386,17 +377,7 @@ class CategoriesApi
         $request = $this->categoriesIdGetRequest($id, $recursive_childs);
 
         try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
+            $response = $this->client->sendRequest($request);;
 
             $statusCode = $response->getStatusCode();
 
@@ -482,7 +463,7 @@ class CategoriesApi
         $request = $this->categoriesIdGetRequest($id, $recursive_childs);
 
         return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
+            ->sendAsync($request)
             ->then(
                 function ($response) use ($returnType) {
                     $responseBody = $response->getBody();
@@ -589,7 +570,7 @@ class CategoriesApi
                     ];
                 }
                 // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
+                $httpBody = $this->streamFactory::createStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
@@ -616,7 +597,7 @@ class CategoriesApi
         );
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
+        return $this->messageFactory->createRequest(
             'GET',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
@@ -659,17 +640,7 @@ class CategoriesApi
         $request = $this->categoriesSearchForVehiclePostRequest($body);
 
         try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
+            $response = $this->client->sendRequest($request);;
 
             $statusCode = $response->getStatusCode();
 
@@ -753,7 +724,7 @@ class CategoriesApi
         $request = $this->categoriesSearchForVehiclePostRequest($body);
 
         return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
+            ->sendAsync($request)
             ->then(
                 function ($response) use ($returnType) {
                     $responseBody = $response->getBody();
@@ -844,7 +815,7 @@ class CategoriesApi
                     ];
                 }
                 // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
+                $httpBody = $this->streamFactory::createStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
@@ -871,7 +842,7 @@ class CategoriesApi
         );
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
+        return $this->messageFactory->createRequest(
             'POST',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
@@ -879,22 +850,4 @@ class CategoriesApi
         );
     }
 
-    /**
-     * Create http client option
-     *
-     * @throws \RuntimeException on file opening failure
-     * @return array of http client options
-     */
-    protected function createHttpClientOption()
-    {
-        $options = [];
-        if ($this->config->getDebug()) {
-            $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
-                throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
-            }
-        }
-
-        return $options;
-    }
 }

@@ -27,7 +27,6 @@
 
 namespace Carooline;
 
-use GuzzleHttp\Client;
 use Carooline\Api\AuthApi;
 use Carooline\Configuration;
 use Carooline\ApiException;
@@ -47,7 +46,6 @@ use Carooline\Api\ForfaitsCategoriesApi;
  */
 class ForfaitsCategoriesApiTest extends \PHPUnit\Framework\TestCase
 {
-    protected static $client;
     protected static $config;
     protected $forfaitCategoriesApi;
 
@@ -56,12 +54,11 @@ class ForfaitsCategoriesApiTest extends \PHPUnit\Framework\TestCase
      */
     public static function setUpBeforeClass() : void
     {
-        self::$client = new Client();
         self::$config = new Configuration();
         self::$config->setHost($_ENV['api_host']);
 
         $authApi = new AuthApi(
-            self::$client,
+            null,
             self::$config
         );
         $body = new LoginRequest([
@@ -80,7 +77,7 @@ class ForfaitsCategoriesApiTest extends \PHPUnit\Framework\TestCase
     protected function setUp() : void
     {
         $this->forfaitCategoriesApi = new ForfaitsCategoriesApi(
-            self::$client,
+            null,
             self::$config
         );
     }

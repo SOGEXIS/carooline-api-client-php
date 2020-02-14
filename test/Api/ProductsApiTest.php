@@ -27,7 +27,6 @@
 
 namespace Carooline;
 
-use GuzzleHttp\Client;
 use Carooline\Configuration;
 use Carooline\ApiException;
 use Carooline\ObjectSerializer;
@@ -51,7 +50,6 @@ use Carooline\Model\OmniSearchProductsRequest;
 class ProductsApiTest extends \PHPUnit\Framework\TestCase
 {
 
-    protected static $client;
     protected static $config;
     protected $productApi;
     /**
@@ -59,12 +57,11 @@ class ProductsApiTest extends \PHPUnit\Framework\TestCase
      */
     public static function setUpBeforeClass() : void
     {
-        self::$client = new Client();
         self::$config = new Configuration();
         self::$config->setHost($_ENV['api_host']);
 
         $authApi = new AuthApi(
-            self::$client,
+            null,
             self::$config
         );
         $body = new LoginRequest([
@@ -83,7 +80,7 @@ class ProductsApiTest extends \PHPUnit\Framework\TestCase
     protected function setUp() : void
     {
         $this->productApi = new ProductsApi(
-            self::$client,
+            null,
             self::$config
         );
     }

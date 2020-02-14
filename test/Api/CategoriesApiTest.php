@@ -27,7 +27,6 @@
 
 namespace Carooline;
 
-use GuzzleHttp\Client;
 use Carooline\Configuration;
 use Carooline\ApiException;
 use Carooline\ObjectSerializer;
@@ -46,19 +45,17 @@ use Carooline\Model\SearchCategoriesForVehicleRequest;
  */
 class CategoriesApiTest extends \PHPUnit\Framework\TestCase
 {
-    protected static $client;
     protected static $config;
     /**
      * Setup before running any test cases
      */
     public static function setUpBeforeClass() : void
     {
-        self::$client = new Client();
         self::$config = new Configuration();
         self::$config->setHost($_ENV['api_host']);
 
         $authApi = new AuthApi(
-            self::$client,
+            null,
             self::$config
         );
         $body = new LoginRequest([
@@ -80,7 +77,7 @@ class CategoriesApiTest extends \PHPUnit\Framework\TestCase
     public function testCategoriesGet()
     {
         $categoriesApi = new CategoriesApi(
-            self::$client,
+            null,
             self::$config
         );
         $result = $categoriesApi->categoriesGet("Filtre à air");
@@ -97,7 +94,7 @@ class CategoriesApiTest extends \PHPUnit\Framework\TestCase
     public function testCategoriesIdGet()
     {
         $categoriesApi = new CategoriesApi(
-            self::$client,
+            null,
             self::$config
         );
         $result = $categoriesApi->categoriesIdGet(2246);
@@ -125,7 +122,7 @@ class CategoriesApiTest extends \PHPUnit\Framework\TestCase
     public function testCategoriesSearchForVehiclePost()
     {
         $categoriesApi = new CategoriesApi(
-            self::$client,
+            null,
             self::$config
         );
         // type_id PEUGEOT 206: 13558

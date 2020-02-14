@@ -27,16 +27,14 @@
 
 namespace Carooline\Api;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\MultipartStream;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\RequestOptions;
+use Http\Client\HttpClient;
 use Carooline\ApiException;
 use Carooline\Configuration;
 use Carooline\HeaderSelector;
 use Carooline\ObjectSerializer;
+use Http\Discovery\HttpClientDiscovery;
+use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\StreamFactoryDiscovery;
 
 /**
  * ProductsApi Class Doc Comment
@@ -63,19 +61,23 @@ class ProductsApi
      */
     protected $headerSelector;
 
+    protected $messageFactory;
+
     /**
-     * @param ClientInterface $client
+     * @param HttpClient $client
      * @param Configuration   $config
      * @param HeaderSelector  $selector
      */
     public function __construct(
-        ClientInterface $client = null,
+        HttpClient $client = null,
         Configuration $config = null,
         HeaderSelector $selector = null
     ) {
-        $this->client = $client ?: new Client();
+        $this->client = $client ?: HttpClientDiscovery::find();
         $this->config = $config ?: new Configuration();
+        $this->messageFactory = MessageFactoryDiscovery::find();
         $this->headerSelector = $selector ?: new HeaderSelector();
+        $this->streamFactory = StreamFactoryDiscovery::find();
     }
 
     /**
@@ -130,17 +132,7 @@ class ProductsApi
         $request = $this->productsGetRequest($categ_id, $manufacturer_id, $name, $ref, $page, $page_size);
 
         try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
+            $response = $this->client->sendRequest($request);
 
             $statusCode = $response->getStatusCode();
 
@@ -234,7 +226,7 @@ class ProductsApi
         $request = $this->productsGetRequest($categ_id, $manufacturer_id, $name, $ref, $page, $page_size);
 
         return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
+            ->sendAsync($request)
             ->then(
                 function ($response) use ($returnType) {
                     $responseBody = $response->getBody();
@@ -379,7 +371,7 @@ class ProductsApi
         );
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
+        return $this->messageFactory->createRequest(
             'GET',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
@@ -416,17 +408,7 @@ class ProductsApi
         $request = $this->productsGetAllAvailabilitiesPostRequest($body);
 
         try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
+            $response = $this->client->sendRequest($request);
 
             $statusCode = $response->getStatusCode();
 
@@ -510,7 +492,7 @@ class ProductsApi
         $request = $this->productsGetAllAvailabilitiesPostRequest($body);
 
         return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
+            ->sendAsync($request)
             ->then(
                 function ($response) use ($returnType) {
                     $responseBody = $response->getBody();
@@ -629,7 +611,7 @@ class ProductsApi
         );
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
+        return $this->messageFactory->createRequest(
             'POST',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
@@ -671,17 +653,7 @@ class ProductsApi
         $request = $this->productsGetForVehicleAndCategoryPostRequest($body);
 
         try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
+            $response = $this->client->sendRequest($request);
 
             $statusCode = $response->getStatusCode();
 
@@ -765,7 +737,7 @@ class ProductsApi
         $request = $this->productsGetForVehicleAndCategoryPostRequest($body);
 
         return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
+            ->sendAsync($request)
             ->then(
                 function ($response) use ($returnType) {
                     $responseBody = $response->getBody();
@@ -884,7 +856,7 @@ class ProductsApi
         );
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
+        return $this->messageFactory->createRequest(
             'POST',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
@@ -926,17 +898,7 @@ class ProductsApi
         $request = $this->productsIdGetRequest($id);
 
         try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
+            $response = $this->client->sendRequest($request);
 
             $statusCode = $response->getStatusCode();
 
@@ -1020,7 +982,7 @@ class ProductsApi
         $request = $this->productsIdGetRequest($id);
 
         return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
+            ->sendAsync($request)
             ->then(
                 function ($response) use ($returnType) {
                     $responseBody = $response->getBody();
@@ -1150,7 +1112,7 @@ class ProductsApi
         );
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
+        return $this->messageFactory->createRequest(
             'GET',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
@@ -1194,17 +1156,7 @@ class ProductsApi
         $request = $this->productsIdPutRequest($id, $body);
 
         try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
+            $response = $this->client->sendRequest($request);
 
             $statusCode = $response->getStatusCode();
 
@@ -1290,7 +1242,7 @@ class ProductsApi
         $request = $this->productsIdPutRequest($id, $body);
 
         return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
+            ->sendAsync($request)
             ->then(
                 function ($response) use ($returnType) {
                     $responseBody = $response->getBody();
@@ -1424,7 +1376,7 @@ class ProductsApi
         );
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
+        return $this->messageFactory->createRequest(
             'PUT',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
@@ -1466,17 +1418,7 @@ class ProductsApi
         $request = $this->productsOmnisearchPostRequest($body);
 
         try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
+            $response = $this->client->sendRequest($request);
 
             $statusCode = $response->getStatusCode();
 
@@ -1560,7 +1502,7 @@ class ProductsApi
         $request = $this->productsOmnisearchPostRequest($body);
 
         return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
+            ->sendAsync($request)
             ->then(
                 function ($response) use ($returnType) {
                     $responseBody = $response->getBody();
@@ -1679,7 +1621,7 @@ class ProductsApi
         );
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
+        return $this->messageFactory->createRequest(
             'POST',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
@@ -1687,22 +1629,4 @@ class ProductsApi
         );
     }
 
-    /**
-     * Create http client option
-     *
-     * @throws \RuntimeException on file opening failure
-     * @return array of http client options
-     */
-    protected function createHttpClientOption()
-    {
-        $options = [];
-        if ($this->config->getDebug()) {
-            $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
-                throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
-            }
-        }
-
-        return $options;
-    }
 }
