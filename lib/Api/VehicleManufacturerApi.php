@@ -92,14 +92,15 @@ class VehicleManufacturerApi
      * Searh manufacturer by name
      *
      * @param  string $name name (optional)
+     * @param  bool $with_products with_products (optional)
      *
      * @throws \Carooline\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Carooline\Model\VehicleManufacturerSearchResponse
      */
-    public function vehicleManufacturerGet($name = null)
+    public function vehicleManufacturerGet($name = null, $with_products = null)
     {
-        list($response) = $this->vehicleManufacturerGetWithHttpInfo($name);
+        list($response) = $this->vehicleManufacturerGetWithHttpInfo($name, $with_products);
         return $response;
     }
 
@@ -109,15 +110,16 @@ class VehicleManufacturerApi
      * Searh manufacturer by name
      *
      * @param  string $name (optional)
+     * @param  bool $with_products (optional)
      *
      * @throws \Carooline\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Carooline\Model\VehicleManufacturerSearchResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function vehicleManufacturerGetWithHttpInfo($name = null)
+    public function vehicleManufacturerGetWithHttpInfo($name = null, $with_products = null)
     {
         $returnType = '\Carooline\Model\VehicleManufacturerSearchResponse';
-        $request = $this->vehicleManufacturerGetRequest($name);
+        $request = $this->vehicleManufacturerGetRequest($name, $with_products);
 
         try {
             $options = $this->createHttpClientOption();
@@ -184,13 +186,14 @@ class VehicleManufacturerApi
      * Searh manufacturer by name
      *
      * @param  string $name (optional)
+     * @param  bool $with_products (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function vehicleManufacturerGetAsync($name = null)
+    public function vehicleManufacturerGetAsync($name = null, $with_products = null)
     {
-        return $this->vehicleManufacturerGetAsyncWithHttpInfo($name)
+        return $this->vehicleManufacturerGetAsyncWithHttpInfo($name, $with_products)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -204,14 +207,15 @@ class VehicleManufacturerApi
      * Searh manufacturer by name
      *
      * @param  string $name (optional)
+     * @param  bool $with_products (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function vehicleManufacturerGetAsyncWithHttpInfo($name = null)
+    public function vehicleManufacturerGetAsyncWithHttpInfo($name = null, $with_products = null)
     {
         $returnType = '\Carooline\Model\VehicleManufacturerSearchResponse';
-        $request = $this->vehicleManufacturerGetRequest($name);
+        $request = $this->vehicleManufacturerGetRequest($name, $with_products);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -254,11 +258,12 @@ class VehicleManufacturerApi
      * Create request for operation 'vehicleManufacturerGet'
      *
      * @param  string $name (optional)
+     * @param  bool $with_products (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function vehicleManufacturerGetRequest($name = null)
+    protected function vehicleManufacturerGetRequest($name = null, $with_products = null)
     {
 
         $resourcePath = '/vehicles/vehicle_manufacturer';
@@ -271,6 +276,10 @@ class VehicleManufacturerApi
         // query params
         if ($name !== null) {
             $queryParams['name'] = ObjectSerializer::toQueryValue($name);
+        }
+        // query params
+        if ($with_products !== null) {
+            $queryParams['with_products'] = ObjectSerializer::toQueryValue($with_products);
         }
 
 
