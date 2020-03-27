@@ -67,6 +67,7 @@ class Product implements ModelInterface, ArrayAccess
 'full_picture_url' => 'string',
 'oe_references_list' => '\Carooline\Model\ProductOeReferencesList[]',
 'tire_eu_db' => 'int',
+'product_uid' => 'string',
 'is_equivalence_to' => 'string',
 'default_code' => 'string',
 'is_equivalence_result' => 'bool',
@@ -111,6 +112,7 @@ class Product implements ModelInterface, ArrayAccess
 'full_picture_url' => null,
 'oe_references_list' => null,
 'tire_eu_db' => null,
+'product_uid' => null,
 'is_equivalence_to' => null,
 'default_code' => null,
 'is_equivalence_result' => null,
@@ -176,6 +178,7 @@ class Product implements ModelInterface, ArrayAccess
 'full_picture_url' => 'full_picture_url',
 'oe_references_list' => 'oe_references_list',
 'tire_eu_db' => 'tire_eu_db',
+'product_uid' => 'product_uid',
 'is_equivalence_to' => 'is_equivalence_to',
 'default_code' => 'default_code',
 'is_equivalence_result' => 'is_equivalence_result',
@@ -220,6 +223,7 @@ class Product implements ModelInterface, ArrayAccess
 'full_picture_url' => 'setFullPictureUrl',
 'oe_references_list' => 'setOeReferencesList',
 'tire_eu_db' => 'setTireEuDb',
+'product_uid' => 'setProductUid',
 'is_equivalence_to' => 'setIsEquivalenceTo',
 'default_code' => 'setDefaultCode',
 'is_equivalence_result' => 'setIsEquivalenceResult',
@@ -264,6 +268,7 @@ class Product implements ModelInterface, ArrayAccess
 'full_picture_url' => 'getFullPictureUrl',
 'oe_references_list' => 'getOeReferencesList',
 'tire_eu_db' => 'getTireEuDb',
+'product_uid' => 'getProductUid',
 'is_equivalence_to' => 'getIsEquivalenceTo',
 'default_code' => 'getDefaultCode',
 'is_equivalence_result' => 'getIsEquivalenceResult',
@@ -360,6 +365,7 @@ class Product implements ModelInterface, ArrayAccess
         $this->container['full_picture_url'] = isset($data['full_picture_url']) ? $data['full_picture_url'] : null;
         $this->container['oe_references_list'] = isset($data['oe_references_list']) ? $data['oe_references_list'] : null;
         $this->container['tire_eu_db'] = isset($data['tire_eu_db']) ? $data['tire_eu_db'] : null;
+        $this->container['product_uid'] = isset($data['product_uid']) ? $data['product_uid'] : null;
         $this->container['is_equivalence_to'] = isset($data['is_equivalence_to']) ? $data['is_equivalence_to'] : null;
         $this->container['default_code'] = isset($data['default_code']) ? $data['default_code'] : null;
         $this->container['is_equivalence_result'] = isset($data['is_equivalence_result']) ? $data['is_equivalence_result'] : false;
@@ -681,6 +687,30 @@ class Product implements ModelInterface, ArrayAccess
     public function setTireEuDb($tire_eu_db)
     {
         $this->container['tire_eu_db'] = $tire_eu_db;
+
+        return $this;
+    }
+
+    /**
+     * Gets product_uid
+     *
+     * @return string
+     */
+    public function getProductUid()
+    {
+        return $this->container['product_uid'];
+    }
+
+    /**
+     * Sets product_uid
+     *
+     * @param string $product_uid product_uid
+     *
+     * @return $this
+     */
+    public function setProductUid($product_uid)
+    {
+        $this->container['product_uid'] = $product_uid;
 
         return $this;
     }
