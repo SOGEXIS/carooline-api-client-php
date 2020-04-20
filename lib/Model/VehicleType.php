@@ -56,17 +56,41 @@ class VehicleType implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'model_id' => 'int',
+        'model' => 'string',
+'catalyst' => 'string',
+'gear' => 'string',
+'ccm_tax' => 'int',
+'model_id' => 'int',
+'carrosserie' => 'string',
+'ccm_lit' => 'int',
+'tecdoc_ref_nkw' => 'string',
+'brake_type' => 'string',
+'asr' => 'string',
+'brake_system' => 'string',
+'injector' => 'string',
+'ccm_tech' => 'int',
 'output_hp' => 'int',
+'voltage' => 'string',
+'motor_code_txt' => 'string',
 'date_to' => 'string',
 'active' => 'bool',
-'manufacturer_id' => 'int',
+'output_kw' => 'int',
+'id' => 'int',
+'fuel_tank' => 'string',
 'manufacturer' => 'string',
 'name' => 'string',
+'propulsion' => 'string',
 'date_from' => 'string',
-'id' => 'int',
+'subtype_txt' => 'string',
+'nb_doors' => 'string',
+'abs' => 'string',
+'engin_type' => 'string',
 'tecdoc_ref' => 'int',
-'model' => 'string'    ];
+'fuel' => 'string',
+'manufacturer_id' => 'int',
+'motor_type' => 'string',
+'nb_cylinder' => 'int',
+'valves' => 'int'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -74,17 +98,41 @@ class VehicleType implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'model_id' => null,
+        'model' => null,
+'catalyst' => null,
+'gear' => null,
+'ccm_tax' => null,
+'model_id' => null,
+'carrosserie' => null,
+'ccm_lit' => null,
+'tecdoc_ref_nkw' => null,
+'brake_type' => null,
+'asr' => null,
+'brake_system' => null,
+'injector' => null,
+'ccm_tech' => null,
 'output_hp' => null,
+'voltage' => null,
+'motor_code_txt' => null,
 'date_to' => null,
 'active' => null,
-'manufacturer_id' => null,
+'output_kw' => null,
+'id' => null,
+'fuel_tank' => null,
 'manufacturer' => null,
 'name' => null,
+'propulsion' => null,
 'date_from' => null,
-'id' => null,
+'subtype_txt' => null,
+'nb_doors' => null,
+'abs' => null,
+'engin_type' => null,
 'tecdoc_ref' => null,
-'model' => null    ];
+'fuel' => null,
+'manufacturer_id' => null,
+'motor_type' => null,
+'nb_cylinder' => null,
+'valves' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -113,17 +161,41 @@ class VehicleType implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'model_id' => 'model_id',
+        'model' => 'model',
+'catalyst' => 'catalyst',
+'gear' => 'gear',
+'ccm_tax' => 'ccm_tax',
+'model_id' => 'model_id',
+'carrosserie' => 'carrosserie',
+'ccm_lit' => 'ccm_lit',
+'tecdoc_ref_nkw' => 'tecdoc_ref_nkw',
+'brake_type' => 'brake_type',
+'asr' => 'asr',
+'brake_system' => 'brake_system',
+'injector' => 'injector',
+'ccm_tech' => 'ccm_tech',
 'output_hp' => 'output_hp',
+'voltage' => 'voltage',
+'motor_code_txt' => 'motor_code_txt',
 'date_to' => 'date_to',
 'active' => 'active',
-'manufacturer_id' => 'manufacturer_id',
+'output_kw' => 'output_kw',
+'id' => 'id',
+'fuel_tank' => 'fuel_tank',
 'manufacturer' => 'manufacturer',
 'name' => 'name',
+'propulsion' => 'propulsion',
 'date_from' => 'date_from',
-'id' => 'id',
+'subtype_txt' => 'subtype_txt',
+'nb_doors' => 'nb_doors',
+'abs' => 'abs',
+'engin_type' => 'engin_type',
 'tecdoc_ref' => 'tecdoc_ref',
-'model' => 'model'    ];
+'fuel' => 'fuel',
+'manufacturer_id' => 'manufacturer_id',
+'motor_type' => 'motor_type',
+'nb_cylinder' => 'nb_cylinder',
+'valves' => 'valves'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -131,17 +203,41 @@ class VehicleType implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'model_id' => 'setModelId',
+        'model' => 'setModel',
+'catalyst' => 'setCatalyst',
+'gear' => 'setGear',
+'ccm_tax' => 'setCcmTax',
+'model_id' => 'setModelId',
+'carrosserie' => 'setCarrosserie',
+'ccm_lit' => 'setCcmLit',
+'tecdoc_ref_nkw' => 'setTecdocRefNkw',
+'brake_type' => 'setBrakeType',
+'asr' => 'setAsr',
+'brake_system' => 'setBrakeSystem',
+'injector' => 'setInjector',
+'ccm_tech' => 'setCcmTech',
 'output_hp' => 'setOutputHp',
+'voltage' => 'setVoltage',
+'motor_code_txt' => 'setMotorCodeTxt',
 'date_to' => 'setDateTo',
 'active' => 'setActive',
-'manufacturer_id' => 'setManufacturerId',
+'output_kw' => 'setOutputKw',
+'id' => 'setId',
+'fuel_tank' => 'setFuelTank',
 'manufacturer' => 'setManufacturer',
 'name' => 'setName',
+'propulsion' => 'setPropulsion',
 'date_from' => 'setDateFrom',
-'id' => 'setId',
+'subtype_txt' => 'setSubtypeTxt',
+'nb_doors' => 'setNbDoors',
+'abs' => 'setAbs',
+'engin_type' => 'setEnginType',
 'tecdoc_ref' => 'setTecdocRef',
-'model' => 'setModel'    ];
+'fuel' => 'setFuel',
+'manufacturer_id' => 'setManufacturerId',
+'motor_type' => 'setMotorType',
+'nb_cylinder' => 'setNbCylinder',
+'valves' => 'setValves'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -149,17 +245,41 @@ class VehicleType implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'model_id' => 'getModelId',
+        'model' => 'getModel',
+'catalyst' => 'getCatalyst',
+'gear' => 'getGear',
+'ccm_tax' => 'getCcmTax',
+'model_id' => 'getModelId',
+'carrosserie' => 'getCarrosserie',
+'ccm_lit' => 'getCcmLit',
+'tecdoc_ref_nkw' => 'getTecdocRefNkw',
+'brake_type' => 'getBrakeType',
+'asr' => 'getAsr',
+'brake_system' => 'getBrakeSystem',
+'injector' => 'getInjector',
+'ccm_tech' => 'getCcmTech',
 'output_hp' => 'getOutputHp',
+'voltage' => 'getVoltage',
+'motor_code_txt' => 'getMotorCodeTxt',
 'date_to' => 'getDateTo',
 'active' => 'getActive',
-'manufacturer_id' => 'getManufacturerId',
+'output_kw' => 'getOutputKw',
+'id' => 'getId',
+'fuel_tank' => 'getFuelTank',
 'manufacturer' => 'getManufacturer',
 'name' => 'getName',
+'propulsion' => 'getPropulsion',
 'date_from' => 'getDateFrom',
-'id' => 'getId',
+'subtype_txt' => 'getSubtypeTxt',
+'nb_doors' => 'getNbDoors',
+'abs' => 'getAbs',
+'engin_type' => 'getEnginType',
 'tecdoc_ref' => 'getTecdocRef',
-'model' => 'getModel'    ];
+'fuel' => 'getFuel',
+'manufacturer_id' => 'getManufacturerId',
+'motor_type' => 'getMotorType',
+'nb_cylinder' => 'getNbCylinder',
+'valves' => 'getValves'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -219,17 +339,41 @@ class VehicleType implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['model'] = isset($data['model']) ? $data['model'] : null;
+        $this->container['catalyst'] = isset($data['catalyst']) ? $data['catalyst'] : null;
+        $this->container['gear'] = isset($data['gear']) ? $data['gear'] : null;
+        $this->container['ccm_tax'] = isset($data['ccm_tax']) ? $data['ccm_tax'] : null;
         $this->container['model_id'] = isset($data['model_id']) ? $data['model_id'] : null;
+        $this->container['carrosserie'] = isset($data['carrosserie']) ? $data['carrosserie'] : null;
+        $this->container['ccm_lit'] = isset($data['ccm_lit']) ? $data['ccm_lit'] : null;
+        $this->container['tecdoc_ref_nkw'] = isset($data['tecdoc_ref_nkw']) ? $data['tecdoc_ref_nkw'] : null;
+        $this->container['brake_type'] = isset($data['brake_type']) ? $data['brake_type'] : null;
+        $this->container['asr'] = isset($data['asr']) ? $data['asr'] : null;
+        $this->container['brake_system'] = isset($data['brake_system']) ? $data['brake_system'] : null;
+        $this->container['injector'] = isset($data['injector']) ? $data['injector'] : null;
+        $this->container['ccm_tech'] = isset($data['ccm_tech']) ? $data['ccm_tech'] : null;
         $this->container['output_hp'] = isset($data['output_hp']) ? $data['output_hp'] : null;
+        $this->container['voltage'] = isset($data['voltage']) ? $data['voltage'] : null;
+        $this->container['motor_code_txt'] = isset($data['motor_code_txt']) ? $data['motor_code_txt'] : null;
         $this->container['date_to'] = isset($data['date_to']) ? $data['date_to'] : null;
         $this->container['active'] = isset($data['active']) ? $data['active'] : null;
-        $this->container['manufacturer_id'] = isset($data['manufacturer_id']) ? $data['manufacturer_id'] : null;
+        $this->container['output_kw'] = isset($data['output_kw']) ? $data['output_kw'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['fuel_tank'] = isset($data['fuel_tank']) ? $data['fuel_tank'] : null;
         $this->container['manufacturer'] = isset($data['manufacturer']) ? $data['manufacturer'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['propulsion'] = isset($data['propulsion']) ? $data['propulsion'] : null;
         $this->container['date_from'] = isset($data['date_from']) ? $data['date_from'] : null;
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['subtype_txt'] = isset($data['subtype_txt']) ? $data['subtype_txt'] : null;
+        $this->container['nb_doors'] = isset($data['nb_doors']) ? $data['nb_doors'] : null;
+        $this->container['abs'] = isset($data['abs']) ? $data['abs'] : null;
+        $this->container['engin_type'] = isset($data['engin_type']) ? $data['engin_type'] : null;
         $this->container['tecdoc_ref'] = isset($data['tecdoc_ref']) ? $data['tecdoc_ref'] : null;
-        $this->container['model'] = isset($data['model']) ? $data['model'] : null;
+        $this->container['fuel'] = isset($data['fuel']) ? $data['fuel'] : null;
+        $this->container['manufacturer_id'] = isset($data['manufacturer_id']) ? $data['manufacturer_id'] : null;
+        $this->container['motor_type'] = isset($data['motor_type']) ? $data['motor_type'] : null;
+        $this->container['nb_cylinder'] = isset($data['nb_cylinder']) ? $data['nb_cylinder'] : null;
+        $this->container['valves'] = isset($data['valves']) ? $data['valves'] : null;
     }
 
     /**
@@ -260,6 +404,102 @@ class VehicleType implements ModelInterface, ArrayAccess
 
 
     /**
+     * Gets model
+     *
+     * @return string
+     */
+    public function getModel()
+    {
+        return $this->container['model'];
+    }
+
+    /**
+     * Sets model
+     *
+     * @param string $model model
+     *
+     * @return $this
+     */
+    public function setModel($model)
+    {
+        $this->container['model'] = $model;
+
+        return $this;
+    }
+
+    /**
+     * Gets catalyst
+     *
+     * @return string
+     */
+    public function getCatalyst()
+    {
+        return $this->container['catalyst'];
+    }
+
+    /**
+     * Sets catalyst
+     *
+     * @param string $catalyst catalyst
+     *
+     * @return $this
+     */
+    public function setCatalyst($catalyst)
+    {
+        $this->container['catalyst'] = $catalyst;
+
+        return $this;
+    }
+
+    /**
+     * Gets gear
+     *
+     * @return string
+     */
+    public function getGear()
+    {
+        return $this->container['gear'];
+    }
+
+    /**
+     * Sets gear
+     *
+     * @param string $gear gear
+     *
+     * @return $this
+     */
+    public function setGear($gear)
+    {
+        $this->container['gear'] = $gear;
+
+        return $this;
+    }
+
+    /**
+     * Gets ccm_tax
+     *
+     * @return int
+     */
+    public function getCcmTax()
+    {
+        return $this->container['ccm_tax'];
+    }
+
+    /**
+     * Sets ccm_tax
+     *
+     * @param int $ccm_tax ccm_tax
+     *
+     * @return $this
+     */
+    public function setCcmTax($ccm_tax)
+    {
+        $this->container['ccm_tax'] = $ccm_tax;
+
+        return $this;
+    }
+
+    /**
      * Gets model_id
      *
      * @return int
@@ -284,6 +524,198 @@ class VehicleType implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets carrosserie
+     *
+     * @return string
+     */
+    public function getCarrosserie()
+    {
+        return $this->container['carrosserie'];
+    }
+
+    /**
+     * Sets carrosserie
+     *
+     * @param string $carrosserie carrosserie
+     *
+     * @return $this
+     */
+    public function setCarrosserie($carrosserie)
+    {
+        $this->container['carrosserie'] = $carrosserie;
+
+        return $this;
+    }
+
+    /**
+     * Gets ccm_lit
+     *
+     * @return int
+     */
+    public function getCcmLit()
+    {
+        return $this->container['ccm_lit'];
+    }
+
+    /**
+     * Sets ccm_lit
+     *
+     * @param int $ccm_lit ccm_lit
+     *
+     * @return $this
+     */
+    public function setCcmLit($ccm_lit)
+    {
+        $this->container['ccm_lit'] = $ccm_lit;
+
+        return $this;
+    }
+
+    /**
+     * Gets tecdoc_ref_nkw
+     *
+     * @return string
+     */
+    public function getTecdocRefNkw()
+    {
+        return $this->container['tecdoc_ref_nkw'];
+    }
+
+    /**
+     * Sets tecdoc_ref_nkw
+     *
+     * @param string $tecdoc_ref_nkw tecdoc_ref_nkw
+     *
+     * @return $this
+     */
+    public function setTecdocRefNkw($tecdoc_ref_nkw)
+    {
+        $this->container['tecdoc_ref_nkw'] = $tecdoc_ref_nkw;
+
+        return $this;
+    }
+
+    /**
+     * Gets brake_type
+     *
+     * @return string
+     */
+    public function getBrakeType()
+    {
+        return $this->container['brake_type'];
+    }
+
+    /**
+     * Sets brake_type
+     *
+     * @param string $brake_type brake_type
+     *
+     * @return $this
+     */
+    public function setBrakeType($brake_type)
+    {
+        $this->container['brake_type'] = $brake_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets asr
+     *
+     * @return string
+     */
+    public function getAsr()
+    {
+        return $this->container['asr'];
+    }
+
+    /**
+     * Sets asr
+     *
+     * @param string $asr asr
+     *
+     * @return $this
+     */
+    public function setAsr($asr)
+    {
+        $this->container['asr'] = $asr;
+
+        return $this;
+    }
+
+    /**
+     * Gets brake_system
+     *
+     * @return string
+     */
+    public function getBrakeSystem()
+    {
+        return $this->container['brake_system'];
+    }
+
+    /**
+     * Sets brake_system
+     *
+     * @param string $brake_system brake_system
+     *
+     * @return $this
+     */
+    public function setBrakeSystem($brake_system)
+    {
+        $this->container['brake_system'] = $brake_system;
+
+        return $this;
+    }
+
+    /**
+     * Gets injector
+     *
+     * @return string
+     */
+    public function getInjector()
+    {
+        return $this->container['injector'];
+    }
+
+    /**
+     * Sets injector
+     *
+     * @param string $injector injector
+     *
+     * @return $this
+     */
+    public function setInjector($injector)
+    {
+        $this->container['injector'] = $injector;
+
+        return $this;
+    }
+
+    /**
+     * Gets ccm_tech
+     *
+     * @return int
+     */
+    public function getCcmTech()
+    {
+        return $this->container['ccm_tech'];
+    }
+
+    /**
+     * Sets ccm_tech
+     *
+     * @param int $ccm_tech ccm_tech
+     *
+     * @return $this
+     */
+    public function setCcmTech($ccm_tech)
+    {
+        $this->container['ccm_tech'] = $ccm_tech;
+
+        return $this;
+    }
+
+    /**
      * Gets output_hp
      *
      * @return int
@@ -303,6 +735,54 @@ class VehicleType implements ModelInterface, ArrayAccess
     public function setOutputHp($output_hp)
     {
         $this->container['output_hp'] = $output_hp;
+
+        return $this;
+    }
+
+    /**
+     * Gets voltage
+     *
+     * @return string
+     */
+    public function getVoltage()
+    {
+        return $this->container['voltage'];
+    }
+
+    /**
+     * Sets voltage
+     *
+     * @param string $voltage voltage
+     *
+     * @return $this
+     */
+    public function setVoltage($voltage)
+    {
+        $this->container['voltage'] = $voltage;
+
+        return $this;
+    }
+
+    /**
+     * Gets motor_code_txt
+     *
+     * @return string
+     */
+    public function getMotorCodeTxt()
+    {
+        return $this->container['motor_code_txt'];
+    }
+
+    /**
+     * Sets motor_code_txt
+     *
+     * @param string $motor_code_txt motor_code_txt
+     *
+     * @return $this
+     */
+    public function setMotorCodeTxt($motor_code_txt)
+    {
+        $this->container['motor_code_txt'] = $motor_code_txt;
 
         return $this;
     }
@@ -356,25 +836,73 @@ class VehicleType implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets manufacturer_id
+     * Gets output_kw
      *
      * @return int
      */
-    public function getManufacturerId()
+    public function getOutputKw()
     {
-        return $this->container['manufacturer_id'];
+        return $this->container['output_kw'];
     }
 
     /**
-     * Sets manufacturer_id
+     * Sets output_kw
      *
-     * @param int $manufacturer_id manufacturer_id
+     * @param int $output_kw output_kw
      *
      * @return $this
      */
-    public function setManufacturerId($manufacturer_id)
+    public function setOutputKw($output_kw)
     {
-        $this->container['manufacturer_id'] = $manufacturer_id;
+        $this->container['output_kw'] = $output_kw;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int $id id
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets fuel_tank
+     *
+     * @return string
+     */
+    public function getFuelTank()
+    {
+        return $this->container['fuel_tank'];
+    }
+
+    /**
+     * Sets fuel_tank
+     *
+     * @param string $fuel_tank fuel_tank
+     *
+     * @return $this
+     */
+    public function setFuelTank($fuel_tank)
+    {
+        $this->container['fuel_tank'] = $fuel_tank;
 
         return $this;
     }
@@ -428,6 +956,30 @@ class VehicleType implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets propulsion
+     *
+     * @return string
+     */
+    public function getPropulsion()
+    {
+        return $this->container['propulsion'];
+    }
+
+    /**
+     * Sets propulsion
+     *
+     * @param string $propulsion propulsion
+     *
+     * @return $this
+     */
+    public function setPropulsion($propulsion)
+    {
+        $this->container['propulsion'] = $propulsion;
+
+        return $this;
+    }
+
+    /**
      * Gets date_from
      *
      * @return string
@@ -452,25 +1004,97 @@ class VehicleType implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets id
+     * Gets subtype_txt
      *
-     * @return int
+     * @return string
      */
-    public function getId()
+    public function getSubtypeTxt()
     {
-        return $this->container['id'];
+        return $this->container['subtype_txt'];
     }
 
     /**
-     * Sets id
+     * Sets subtype_txt
      *
-     * @param int $id id
+     * @param string $subtype_txt subtype_txt
      *
      * @return $this
      */
-    public function setId($id)
+    public function setSubtypeTxt($subtype_txt)
     {
-        $this->container['id'] = $id;
+        $this->container['subtype_txt'] = $subtype_txt;
+
+        return $this;
+    }
+
+    /**
+     * Gets nb_doors
+     *
+     * @return string
+     */
+    public function getNbDoors()
+    {
+        return $this->container['nb_doors'];
+    }
+
+    /**
+     * Sets nb_doors
+     *
+     * @param string $nb_doors nb_doors
+     *
+     * @return $this
+     */
+    public function setNbDoors($nb_doors)
+    {
+        $this->container['nb_doors'] = $nb_doors;
+
+        return $this;
+    }
+
+    /**
+     * Gets abs
+     *
+     * @return string
+     */
+    public function getAbs()
+    {
+        return $this->container['abs'];
+    }
+
+    /**
+     * Sets abs
+     *
+     * @param string $abs abs
+     *
+     * @return $this
+     */
+    public function setAbs($abs)
+    {
+        $this->container['abs'] = $abs;
+
+        return $this;
+    }
+
+    /**
+     * Gets engin_type
+     *
+     * @return string
+     */
+    public function getEnginType()
+    {
+        return $this->container['engin_type'];
+    }
+
+    /**
+     * Sets engin_type
+     *
+     * @param string $engin_type engin_type
+     *
+     * @return $this
+     */
+    public function setEnginType($engin_type)
+    {
+        $this->container['engin_type'] = $engin_type;
 
         return $this;
     }
@@ -500,25 +1124,121 @@ class VehicleType implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets model
+     * Gets fuel
      *
      * @return string
      */
-    public function getModel()
+    public function getFuel()
     {
-        return $this->container['model'];
+        return $this->container['fuel'];
     }
 
     /**
-     * Sets model
+     * Sets fuel
      *
-     * @param string $model model
+     * @param string $fuel fuel
      *
      * @return $this
      */
-    public function setModel($model)
+    public function setFuel($fuel)
     {
-        $this->container['model'] = $model;
+        $this->container['fuel'] = $fuel;
+
+        return $this;
+    }
+
+    /**
+     * Gets manufacturer_id
+     *
+     * @return int
+     */
+    public function getManufacturerId()
+    {
+        return $this->container['manufacturer_id'];
+    }
+
+    /**
+     * Sets manufacturer_id
+     *
+     * @param int $manufacturer_id manufacturer_id
+     *
+     * @return $this
+     */
+    public function setManufacturerId($manufacturer_id)
+    {
+        $this->container['manufacturer_id'] = $manufacturer_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets motor_type
+     *
+     * @return string
+     */
+    public function getMotorType()
+    {
+        return $this->container['motor_type'];
+    }
+
+    /**
+     * Sets motor_type
+     *
+     * @param string $motor_type motor_type
+     *
+     * @return $this
+     */
+    public function setMotorType($motor_type)
+    {
+        $this->container['motor_type'] = $motor_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets nb_cylinder
+     *
+     * @return int
+     */
+    public function getNbCylinder()
+    {
+        return $this->container['nb_cylinder'];
+    }
+
+    /**
+     * Sets nb_cylinder
+     *
+     * @param int $nb_cylinder nb_cylinder
+     *
+     * @return $this
+     */
+    public function setNbCylinder($nb_cylinder)
+    {
+        $this->container['nb_cylinder'] = $nb_cylinder;
+
+        return $this;
+    }
+
+    /**
+     * Gets valves
+     *
+     * @return int
+     */
+    public function getValves()
+    {
+        return $this->container['valves'];
+    }
+
+    /**
+     * Sets valves
+     *
+     * @param int $valves valves
+     *
+     * @return $this
+     */
+    public function setValves($valves)
+    {
+        $this->container['valves'] = $valves;
 
         return $this;
     }

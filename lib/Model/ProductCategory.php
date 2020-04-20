@@ -56,12 +56,13 @@ class ProductCategory implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'childs' => '\Carooline\Model\ProductCategory[]',
+        'parent_id' => 'int',
+'childs' => '\Carooline\Model\ProductCategory[]',
 'display_name' => 'string',
 'name' => 'string',
-'parent_id' => 'int',
 'full_picture_url' => 'string',
 'active' => 'bool',
+'website_not_tecdoc' => 'bool',
 'id' => 'int'    ];
 
     /**
@@ -70,12 +71,13 @@ class ProductCategory implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'childs' => null,
+        'parent_id' => null,
+'childs' => null,
 'display_name' => null,
 'name' => null,
-'parent_id' => null,
 'full_picture_url' => null,
 'active' => null,
+'website_not_tecdoc' => null,
 'id' => null    ];
 
     /**
@@ -105,12 +107,13 @@ class ProductCategory implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'childs' => 'childs',
+        'parent_id' => 'parent_id',
+'childs' => 'childs',
 'display_name' => 'display_name',
 'name' => 'name',
-'parent_id' => 'parent_id',
 'full_picture_url' => 'full_picture_url',
 'active' => 'active',
+'website_not_tecdoc' => 'website_not_tecdoc',
 'id' => 'id'    ];
 
     /**
@@ -119,12 +122,13 @@ class ProductCategory implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'childs' => 'setChilds',
+        'parent_id' => 'setParentId',
+'childs' => 'setChilds',
 'display_name' => 'setDisplayName',
 'name' => 'setName',
-'parent_id' => 'setParentId',
 'full_picture_url' => 'setFullPictureUrl',
 'active' => 'setActive',
+'website_not_tecdoc' => 'setWebsiteNotTecdoc',
 'id' => 'setId'    ];
 
     /**
@@ -133,12 +137,13 @@ class ProductCategory implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'childs' => 'getChilds',
+        'parent_id' => 'getParentId',
+'childs' => 'getChilds',
 'display_name' => 'getDisplayName',
 'name' => 'getName',
-'parent_id' => 'getParentId',
 'full_picture_url' => 'getFullPictureUrl',
 'active' => 'getActive',
+'website_not_tecdoc' => 'getWebsiteNotTecdoc',
 'id' => 'getId'    ];
 
     /**
@@ -199,12 +204,13 @@ class ProductCategory implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['parent_id'] = isset($data['parent_id']) ? $data['parent_id'] : null;
         $this->container['childs'] = isset($data['childs']) ? $data['childs'] : null;
         $this->container['display_name'] = isset($data['display_name']) ? $data['display_name'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['parent_id'] = isset($data['parent_id']) ? $data['parent_id'] : null;
         $this->container['full_picture_url'] = isset($data['full_picture_url']) ? $data['full_picture_url'] : null;
         $this->container['active'] = isset($data['active']) ? $data['active'] : null;
+        $this->container['website_not_tecdoc'] = isset($data['website_not_tecdoc']) ? $data['website_not_tecdoc'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
     }
 
@@ -234,6 +240,30 @@ class ProductCategory implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets parent_id
+     *
+     * @return int
+     */
+    public function getParentId()
+    {
+        return $this->container['parent_id'];
+    }
+
+    /**
+     * Sets parent_id
+     *
+     * @param int $parent_id parent_id
+     *
+     * @return $this
+     */
+    public function setParentId($parent_id)
+    {
+        $this->container['parent_id'] = $parent_id;
+
+        return $this;
+    }
 
     /**
      * Gets childs
@@ -308,30 +338,6 @@ class ProductCategory implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets parent_id
-     *
-     * @return int
-     */
-    public function getParentId()
-    {
-        return $this->container['parent_id'];
-    }
-
-    /**
-     * Sets parent_id
-     *
-     * @param int $parent_id parent_id
-     *
-     * @return $this
-     */
-    public function setParentId($parent_id)
-    {
-        $this->container['parent_id'] = $parent_id;
-
-        return $this;
-    }
-
-    /**
      * Gets full_picture_url
      *
      * @return string
@@ -375,6 +381,30 @@ class ProductCategory implements ModelInterface, ArrayAccess
     public function setActive($active)
     {
         $this->container['active'] = $active;
+
+        return $this;
+    }
+
+    /**
+     * Gets website_not_tecdoc
+     *
+     * @return bool
+     */
+    public function getWebsiteNotTecdoc()
+    {
+        return $this->container['website_not_tecdoc'];
+    }
+
+    /**
+     * Sets website_not_tecdoc
+     *
+     * @param bool $website_not_tecdoc website_not_tecdoc
+     *
+     * @return $this
+     */
+    public function setWebsiteNotTecdoc($website_not_tecdoc)
+    {
+        $this->container['website_not_tecdoc'] = $website_not_tecdoc;
 
         return $this;
     }
